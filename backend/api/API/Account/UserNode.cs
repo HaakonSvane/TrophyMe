@@ -8,7 +8,7 @@ namespace api.API.Account;
 public static class UserNode
 {
     [DataLoader]
-    internal static async Task<IReadOnlyDictionary<string, User>> GetUserByIdAsync(
+    internal static async Task<IReadOnlyDictionary<string, User>> GetUsersByIdsAsync(
         IReadOnlyList<string> ids,
         IUserRepository repository,
         CancellationToken cancellationToken)
