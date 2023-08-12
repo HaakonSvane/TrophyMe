@@ -10,7 +10,12 @@ public class TrophyHttpRequestInterceptor : DefaultHttpRequestInterceptor
         CancellationToken cancellationToken)
     {
         string? userId = context.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-        requestBuilder.SetProperty("UserId", userId);
+        string? userName = context.User.FindFirst(ClaimTypes.Name)?.Value;
+        
+        if (userId is not null && userName is not null){
+            requestBuilder.SetProperty("User", new TokenUser(userName, userId));    
+        }
+        
         return base.OnCreateAsync(context, requestExecutor, requestBuilder, cancellationToken);
     }
 }
