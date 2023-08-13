@@ -6,16 +6,16 @@ namespace api.Transport;
 
 public class TrophyHttpRequestInterceptor : DefaultHttpRequestInterceptor
 {
-    public override ValueTask OnCreateAsync(HttpContext context, IRequestExecutor requestExecutor, IQueryRequestBuilder requestBuilder,
+    public override ValueTask OnCreateAsync(HttpContext context, IRequestExecutor requestExecutor,
+        IQueryRequestBuilder requestBuilder,
         CancellationToken cancellationToken)
     {
-        string? userId = context.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-        string? userName = context.User.FindFirst(ClaimTypes.Name)?.Value;
-        
-        if (userId is not null && userName is not null){
-            requestBuilder.SetProperty("User", new TokenUser(userName, userId));    
-        }
-        
+        var userId = context.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        var userName = context.User.FindFirst(ClaimTypes.Name)?.Value;
+
+        if (userId is not null && userName is not null)
+            requestBuilder.SetProperty("User", new TokenUser(userName, userId));
+
         return base.OnCreateAsync(context, requestExecutor, requestBuilder, cancellationToken);
     }
 }

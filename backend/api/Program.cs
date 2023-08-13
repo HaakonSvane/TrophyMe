@@ -12,11 +12,11 @@ public class Program
     public static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
-     
-        IConfiguration config  = new ConfigurationBuilder()
+
+        IConfiguration config = new ConfigurationBuilder()
             .SetBasePath(builder.Environment.ContentRootPath)
-            .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-            .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true)
+            .AddJsonFile("appsettings.json", true, true)
+            .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", true)
             .AddUserSecrets(Assembly.GetExecutingAssembly(), true)
             .AddEnvironmentVariables()
             .Build();
@@ -26,21 +26,19 @@ public class Program
         connectionStringBuilder.Port = config.GetValue<int>("Database:Port");
         connectionStringBuilder.Username = config["Database:User"];
         connectionStringBuilder.Password = config["Database:Password"];
-        
+
         builder.Services.AddDbContextPool<TrophyDbContext>(options =>
             options
                 .LogTo(Console.WriteLine)
                 .UseNpgsql(connectionStringBuilder.ConnectionString));
-                
-        
+
+
         var authBuilder = builder.Services.AddAuthentication();
 
         if (builder.Environment.IsDevelopment())
-        {
             authBuilder.AddScheme<FakeAuthHandlerOptions, FakeAuthHandler>(FakeAuthHandler.AuthenticationScheme,
                 _ => { });
-        }
-        
+
         builder.Services
             .AddScoped<IUserRepository, UserRepository>();
 
@@ -55,7 +53,7 @@ public class Program
 
         var app = builder.Build();
 
-        app.UseAuthentication();        
+        app.UseAuthentication();
         app.MapGraphQL();
         app.Run();
     }

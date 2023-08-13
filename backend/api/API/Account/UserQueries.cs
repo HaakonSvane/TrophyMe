@@ -20,7 +20,7 @@ public static class UserQueries
             User newUser = new()
             {
                 FirstName = user.Name,
-                Id = user.Id,
+                Id = user.Id
             };
             return await userRepository.CreateUserAsync(newUser, cancellationToken);
         }

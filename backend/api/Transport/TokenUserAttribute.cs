@@ -2,5 +2,7 @@ namespace api.Transport;
 
 public class TokenUserAttribute : GlobalStateAttribute
 {
-    public TokenUserAttribute() : base("User"){}
+    public TokenUserAttribute() : base("User")
+    {
+    }
 }
