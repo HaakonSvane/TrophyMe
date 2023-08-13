@@ -16,5 +16,6 @@ public class User
 
     public ICollection<Trophy> Trophies { get; set; } = default!;
 
+    [GraphQLIgnore]
     public ICollection<UserGroup> UserGroups { get; set; } = default!;
 }
