@@ -7,7 +7,7 @@ namespace api.API.Group;
 public class GroupNode
 {
     [DataLoader]
-    internal static async Task<IReadOnlyDictionary<string, IEnumerable<Database.Models.Group>>> GetGroupsByUserIdsAsync(
+    internal static async Task<ILookup<string, Database.Models.Group>> GetGroupsByUserIdsAsync(
         IReadOnlyList<string> ids, IGroupRepository repository, CancellationToken cancellationToken)
     {
         return await repository.GetGroupsForUsersIds(ids, cancellationToken);

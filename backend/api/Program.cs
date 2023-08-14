@@ -29,7 +29,6 @@ public class Program
 
         builder.Services.AddDbContextPool<TrophyDbContext>(options =>
             options
-                .LogTo(Console.WriteLine)
                 .UseNpgsql(connectionStringBuilder.ConnectionString));
 
 
@@ -40,7 +39,8 @@ public class Program
                 _ => { });
 
         builder.Services
-            .AddScoped<IUserRepository, UserRepository>();
+            .AddScoped<IUserRepository, UserRepository>()
+            .AddScoped<IGroupRepository, GroupRepository>();
 
         builder.Services
             .AddGraphQLServer()

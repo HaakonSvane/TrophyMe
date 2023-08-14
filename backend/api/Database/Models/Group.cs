@@ -15,7 +15,7 @@ public class Group
 
     [ForeignKey("AdminId")] public User Admin { get; set; }
 
-    public ICollection<UserGroup> UserGroups { get; set; }
+    public ICollection<UserGroup> UserGroups { get; set; } = new List<UserGroup>();
 
     public required DateTimeOffset CreatedDate { get; set; }
 }

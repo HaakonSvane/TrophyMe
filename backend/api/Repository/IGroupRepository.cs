@@ -4,6 +4,6 @@ namespace api.Repository;
 
 public interface IGroupRepository
 {
-    public Task<IReadOnlyDictionary<string, IEnumerable<Group>>> GetGroupsForUsersIds(IReadOnlyList<string> ids,
+    public Task<ILookup<string, Group>> GetGroupsForUsersIds(IReadOnlyList<string> ids,
         CancellationToken cancellationToken);
 }
