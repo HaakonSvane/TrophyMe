@@ -1,8 +1,10 @@
 using System.Reflection;
+using api.API.Middleware;
 using api.Database;
 using api.Repository;
 using api.Transport;
 using Microsoft.EntityFrameworkCore;
+using HotChocolate.Execution;
 using Npgsql;
 
 namespace api;
@@ -45,11 +47,15 @@ public class Program
         builder.Services
             .AddGraphQLServer()
             .RegisterService<IUserRepository>(ServiceKind.Resolver)
+            .RegisterService<IGroupRepository>(ServiceKind.Resolver)
             .AddAuthorization()
             .AddTypes()
             .AddGlobalObjectIdentification()
-            .AddMutationConventions()
-            .AddHttpRequestInterceptor<TrophyHttpRequestInterceptor>();
+            .AddMutationConventions(applyToAllMutations: true)
+            .AddQueryFieldToMutationPayloads()
+            .AddHttpRequestInterceptor<TrophyHttpRequestInterceptor>()
+            .UseRequest<UserMiddleware>()
+            .UseDefaultPipeline();
 
         var app = builder.Build();
 

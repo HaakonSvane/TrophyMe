@@ -4,10 +4,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace api.Repository;
 
-public class UserRepository : IUserRepository
+public sealed class UserRepository : IUserRepository
 {
     private readonly TrophyDbContext _context;
-
+    
     public UserRepository(TrophyDbContext context)
     {
         _context = context;
@@ -27,9 +27,31 @@ public class UserRepository : IUserRepository
             .ToDictionaryAsync(user => user.Id, user => user, cancellationToken);
     }
 
-    public async Task<User> CreateUserAsync(User user, CancellationToken cancellationToken)
+    public async Task<User> CreateUserAsync(string userId, CancellationToken cancellationToken)
     {
-        var results = await _context.Users.AddAsync(user, cancellationToken);
+        var results = await _context.Users.AddAsync(new User() {Id = userId}, cancellationToken);
+        await _context.SaveChangesAsync(cancellationToken);
         return results.Entity;
+    }
+
+    public async Task<UserProfile> CreateUserProfileAsync(
+        string userId,
+        UserProfile userProfile,
+        CancellationToken cancellationToken)
+    {
+        userProfile.User = null;
+        userProfile.UserId = userId;
+        await _context.AddAsync(userProfile, cancellationToken);
+        await _context.SaveChangesAsync(cancellationToken);
+        return userProfile;
+    }
+
+    public async Task<IReadOnlyDictionary<string, UserProfile>> GetUserProfilesByIdsAsync(
+        IReadOnlyList<string> ids,
+        CancellationToken cancellationToken)
+    {
+        return await _context.UserProfiles
+            .Where(userProfile => ids.Contains(userProfile.UserId))
+            .ToDictionaryAsync(userProfile => userProfile.UserId, userProfile => userProfile, cancellationToken);
     }
 }

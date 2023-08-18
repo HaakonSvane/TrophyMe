@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
 namespace api.Database.Models;
@@ -8,13 +9,9 @@ public class User
 {
     [Key] public required string Id { get; set; }
 
-    public required string FirstName { get; set; }
-
-    public string? LastName { get; set; }
-
-    //public byte[] ProfileImage { get; set; }
-
-    public ICollection<Trophy> Trophies { get; set; } = default!;
+    public ICollection<Trophy> Trophies { get; set; } = new List<Trophy>();
+    
+    public UserProfile? UserProfile { get; set; }
 
     [GraphQLIgnore] public ICollection<UserGroup> UserGroups { get; set; } = new List<UserGroup>();
 }

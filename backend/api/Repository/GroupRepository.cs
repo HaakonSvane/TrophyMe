@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace api.Repository;
 
-public class GroupRepository : IGroupRepository
+public sealed class GroupRepository : IGroupRepository
 {
     private readonly TrophyDbContext _context;
 

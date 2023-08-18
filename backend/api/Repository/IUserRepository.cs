@@ -9,5 +9,9 @@ public interface IUserRepository
     public Task<IReadOnlyDictionary<string, User>> GetUsersByIdsAsync(IReadOnlyList<string> ids,
         CancellationToken cancellationToken);
 
-    public Task<User> CreateUserAsync(User user, CancellationToken cancellationToken);
+    public Task<User> CreateUserAsync(string userId, CancellationToken cancellationToken);
+
+    public Task<UserProfile> CreateUserProfileAsync(string userId, UserProfile userProfile, CancellationToken cancellationToken);
+    
+    public Task<IReadOnlyDictionary<string, UserProfile>> GetUserProfilesByIdsAsync(IReadOnlyList<string> ids, CancellationToken cancellationToken);
 }

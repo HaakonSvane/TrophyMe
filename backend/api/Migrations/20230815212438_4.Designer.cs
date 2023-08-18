@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using api.Database;
@@ -11,9 +12,11 @@ using api.Database;
 namespace api.Migrations
 {
     [DbContext(typeof(TrophyDbContext))]
-    partial class TrophyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230815212438_4")]
+    partial class _4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -139,9 +142,15 @@ namespace api.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("text");
 
+                    b.Property<int?>("UserProfileId")
+                        .HasColumnType("integer");
+
                     b.HasKey("Id");
 
                     b.HasIndex("Id");
+
+                    b.HasIndex("UserProfileId")
+                        .IsUnique();
 
                     b.ToTable("Users");
                 });
@@ -166,8 +175,11 @@ namespace api.Migrations
 
             modelBuilder.Entity("api.Database.Models.UserProfile", b =>
                 {
-                    b.Property<string>("UserId")
-                        .HasColumnType("text");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("FirstName")
                         .IsRequired()
@@ -183,9 +195,13 @@ namespace api.Migrations
                     b.Property<string>("MiddleName")
                         .HasColumnType("text");
 
-                    b.HasKey("UserId");
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("text");
 
-                    b.ToTable("UserProfiles");
+                    b.HasKey("Id");
+
+                    b.ToTable("UserProfile");
                 });
 
             modelBuilder.Entity("api.Database.Models.Challenge", b =>
@@ -248,6 +264,15 @@ namespace api.Migrations
                     b.Navigation("Receiver");
                 });
 
+            modelBuilder.Entity("api.Database.Models.User", b =>
+                {
+                    b.HasOne("api.Database.Models.UserProfile", "UserProfile")
+                        .WithOne("User")
+                        .HasForeignKey("api.Database.Models.User", "UserProfileId");
+
+                    b.Navigation("UserProfile");
+                });
+
             modelBuilder.Entity("api.Database.Models.UserGroup", b =>
                 {
                     b.HasOne("api.Database.Models.Group", "Group")
@@ -267,17 +292,6 @@ namespace api.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("api.Database.Models.UserProfile", b =>
-                {
-                    b.HasOne("api.Database.Models.User", "User")
-                        .WithOne("UserProfile")
-                        .HasForeignKey("api.Database.Models.UserProfile", "UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("api.Database.Models.Group", b =>
                 {
                     b.Navigation("UserGroups");
@@ -288,8 +302,12 @@ namespace api.Migrations
                     b.Navigation("Trophies");
 
                     b.Navigation("UserGroups");
+                });
 
-                    b.Navigation("UserProfile");
+            modelBuilder.Entity("api.Database.Models.UserProfile", b =>
+                {
+                    b.Navigation("User")
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

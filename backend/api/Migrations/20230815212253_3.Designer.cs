@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using api.Database;
@@ -11,9 +12,11 @@ using api.Database;
 namespace api.Migrations
 {
     [DbContext(typeof(TrophyDbContext))]
-    partial class TrophyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230815212253_3")]
+    partial class _3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -139,9 +142,14 @@ namespace api.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("text");
 
+                    b.Property<int?>("UserProfileId")
+                        .HasColumnType("integer");
+
                     b.HasKey("Id");
 
                     b.HasIndex("Id");
+
+                    b.HasIndex("UserProfileId");
 
                     b.ToTable("Users");
                 });
@@ -166,8 +174,11 @@ namespace api.Migrations
 
             modelBuilder.Entity("api.Database.Models.UserProfile", b =>
                 {
-                    b.Property<string>("UserId")
-                        .HasColumnType("text");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("FirstName")
                         .IsRequired()
@@ -183,9 +194,15 @@ namespace api.Migrations
                     b.Property<string>("MiddleName")
                         .HasColumnType("text");
 
-                    b.HasKey("UserId");
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("text");
 
-                    b.ToTable("UserProfiles");
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserProfile");
                 });
 
             modelBuilder.Entity("api.Database.Models.Challenge", b =>
@@ -248,6 +265,15 @@ namespace api.Migrations
                     b.Navigation("Receiver");
                 });
 
+            modelBuilder.Entity("api.Database.Models.User", b =>
+                {
+                    b.HasOne("api.Database.Models.UserProfile", "UserProfile")
+                        .WithMany()
+                        .HasForeignKey("UserProfileId");
+
+                    b.Navigation("UserProfile");
+                });
+
             modelBuilder.Entity("api.Database.Models.UserGroup", b =>
                 {
                     b.HasOne("api.Database.Models.Group", "Group")
@@ -270,8 +296,8 @@ namespace api.Migrations
             modelBuilder.Entity("api.Database.Models.UserProfile", b =>
                 {
                     b.HasOne("api.Database.Models.User", "User")
-                        .WithOne("UserProfile")
-                        .HasForeignKey("api.Database.Models.UserProfile", "UserId")
+                        .WithMany()
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -288,8 +314,6 @@ namespace api.Migrations
                     b.Navigation("Trophies");
 
                     b.Navigation("UserGroups");
-
-                    b.Navigation("UserProfile");
                 });
 #pragma warning restore 612, 618
         }

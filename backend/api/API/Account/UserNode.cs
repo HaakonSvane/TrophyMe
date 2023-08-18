@@ -14,6 +14,13 @@ public static class UserNode
     {
         return await dataLoader.LoadAsync(user.Id, cancellationToken);
     }
+    
+    public static async Task<UserProfile?> GetUserProfileAsync([Parent] User user,
+        IUserProfilesByIdsDataLoader dataLoader,
+        CancellationToken cancellationToken)
+    {
+        return await dataLoader.LoadAsync(user.Id, cancellationToken);
+    }
 
     [DataLoader]
     internal static async Task<IReadOnlyDictionary<string, User>> GetUsersByIdsAsync(
@@ -22,5 +29,14 @@ public static class UserNode
         CancellationToken cancellationToken)
     {
         return await repository.GetUsersByIdsAsync(ids, cancellationToken);
+    }
+    
+    [DataLoader]
+    internal static async Task<IReadOnlyDictionary<string, UserProfile>> GetUserProfilesByIdsAsync(
+        IReadOnlyList<string> ids,
+        IUserRepository repository,
+        CancellationToken cancellationToken)
+    {
+        return await repository.GetUserProfilesByIdsAsync(ids, cancellationToken);
     }
 }

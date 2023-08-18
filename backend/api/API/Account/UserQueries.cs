@@ -15,16 +15,7 @@ public static class UserQueries
     {
         if (user is null) return null;
         var dbUser = await dataLoader.LoadAsync(user.Id, cancellationToken);
-        if (dbUser is null)
-        {
-            User newUser = new()
-            {
-                FirstName = user.Name,
-                Id = user.Id
-            };
-            return await userRepository.CreateUserAsync(newUser, cancellationToken);
-        }
-
+        
         return dbUser;
     }
 
