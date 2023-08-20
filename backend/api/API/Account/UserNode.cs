@@ -40,4 +40,13 @@ public static class UserNode
     {
         return await repository.GetUserProfilesByIdsAsync(ids, cancellationToken);
     }
+    
+    [DataLoader]
+    internal static async Task<ILookup<int, User>> GetUsersByGroupIdsAsync(
+        IReadOnlyList<int> ids,
+        IUserRepository repository,
+        CancellationToken cancellationToken)
+    {
+        return await repository.GetUsersByGroupIdsAsync(ids, cancellationToken);
+    }
 }

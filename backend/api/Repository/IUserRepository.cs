@@ -14,4 +14,6 @@ public interface IUserRepository
     public Task<UserProfile> CreateUserProfileAsync(string userId, UserProfile userProfile, CancellationToken cancellationToken);
     
     public Task<IReadOnlyDictionary<string, UserProfile>> GetUserProfilesByIdsAsync(IReadOnlyList<string> ids, CancellationToken cancellationToken);
+    
+    public Task<ILookup<int, User>> GetUsersByGroupIdsAsync(IReadOnlyList<int> ids, CancellationToken cancellationToken);
 }

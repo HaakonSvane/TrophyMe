@@ -54,6 +54,7 @@ public sealed class GroupRepository : IGroupRepository
         {
             Group = group,
             UserId = adminUserId,
+            JoinedAt = DateTimeOffset.Now.ToUniversalTime()
         };
         
         await _context.Groups.AddAsync(group, cancellationToken);

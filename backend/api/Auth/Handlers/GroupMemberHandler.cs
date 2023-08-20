@@ -1,6 +1,7 @@
 using System.Text.Json;
 using api.API.Group;
 using api.Auth.Requirements;
+using api.Database.Models;
 using api.Transport;
 using HotChocolate.Resolvers;
 using Microsoft.AspNetCore.Authorization;
@@ -25,13 +26,19 @@ public class GroupMemberHandler : AuthorizationHandler<GroupMemberRequirement, I
                 context.Fail();
                 return;
             }
-            if (!(middlewareContext.Result is JsonElement middlewareContextResult))
+            if (!(middlewareContext.Result is Group requestGroup))
             {
                 context.Succeed(requirement);
                 return;
             }
+            
             var cancellationToken = middlewareContext.RequestAborted;
-            var groups = await dataLoader.LoadAsync(tokenUser.Id, cancellationToken);
+            var myGroups = await dataLoader.LoadAsync(tokenUser.Id, cancellationToken);
+            if (myGroups.Any(group => group.Id == requestGroup.Id))
+            {
+                context.Succeed(requirement);
+                return;
+            }
             
         }
 

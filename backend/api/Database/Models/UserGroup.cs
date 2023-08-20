@@ -12,5 +12,5 @@ public class UserGroup
 
     [ForeignKey("GroupId")] public Group Group { get; set; }
 
-    public DateTimeOffset JoinedAt { get; set; }
+    public required DateTimeOffset JoinedAt { get; set; }
 }

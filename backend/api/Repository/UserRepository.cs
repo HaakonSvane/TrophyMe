@@ -54,4 +54,13 @@ public sealed class UserRepository : IUserRepository
             .Where(userProfile => ids.Contains(userProfile.UserId))
             .ToDictionaryAsync(userProfile => userProfile.UserId, userProfile => userProfile, cancellationToken);
     }
+
+    public async Task<ILookup<int, User>> GetUsersByGroupIdsAsync(IReadOnlyList<int> ids, CancellationToken cancellationToken)
+    {
+        var userGroups = await _context.UserGroups
+            .Where(userGroup => ids.Contains(userGroup.GroupId))
+            .Include(userGroup => userGroup.User)
+            .ToListAsync(cancellationToken);
+        return userGroups.ToLookup(userGroup => userGroup.GroupId, userGroup => userGroup.User);
+    }
 }
