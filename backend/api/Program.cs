@@ -1,10 +1,13 @@
 using System.Reflection;
 using api.API.Middleware;
+using api.Auth.Handlers;
+using api.Auth.Requirements;
 using api.Database;
 using api.Repository;
 using api.Transport;
 using Microsoft.EntityFrameworkCore;
 using HotChocolate.Execution;
+using Microsoft.AspNetCore.Authorization;
 using Npgsql;
 
 namespace api;
@@ -39,10 +42,16 @@ public class Program
         if (builder.Environment.IsDevelopment())
             authBuilder.AddScheme<FakeAuthHandlerOptions, FakeAuthHandler>(FakeAuthHandler.AuthenticationScheme,
                 _ => { });
-
+        
+        builder.Services.AddAuthorization(config => 
+            config.AddPolicy("IsGroupMember", policy => policy.Requirements.Add(new GroupMemberRequirement()))
+            );
+        
         builder.Services
             .AddScoped<IUserRepository, UserRepository>()
             .AddScoped<IGroupRepository, GroupRepository>();
+
+        builder.Services.AddSingleton<IAuthorizationHandler, GroupMemberHandler>();
 
         builder.Services
             .AddGraphQLServer()
@@ -59,7 +68,10 @@ public class Program
 
         var app = builder.Build();
 
-        app.UseAuthentication();
+        app
+            .UseAuthentication()
+            .UseAuthorization();
+        
         app.MapGraphQL();
         app.Run();
     }

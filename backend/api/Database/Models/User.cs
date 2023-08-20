@@ -1,5 +1,5 @@
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+using HotChocolate.Authorization;
 using Microsoft.EntityFrameworkCore;
 
 namespace api.Database.Models;

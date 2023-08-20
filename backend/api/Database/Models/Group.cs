@@ -14,7 +14,8 @@ public class Group
     public string AdminId { get; set; }
 
     [ForeignKey("AdminId")] public User Admin { get; set; }
-
+    
+    [GraphQLIgnore]
     public ICollection<UserGroup> UserGroups { get; set; } = new List<UserGroup>();
 
     public required DateTimeOffset CreatedDate { get; set; }

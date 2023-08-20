@@ -1,10 +1,11 @@
 using api.API.Group;
 using api.Database.Models;
 using api.Repository;
+using HotChocolate.Authorization;
 
 namespace api.API.Account;
 
-[Node]
+[Authorize]
 [ExtendObjectType(typeof(User))]
 public static class UserNode
 {
