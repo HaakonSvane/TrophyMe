@@ -10,6 +10,7 @@ public class TrophyDbContext : DbContext
     }
 
     public DbSet<Group> Groups { get; set; } = default!;
+    public DbSet<GroupInvite> GroupInvites { get; set; } = default!;
     public DbSet<Trophy> Trophies { get; set; } = default!;
     public DbSet<User> Users { get; set; } = default!;
     public DbSet<UserProfile> UserProfiles { get; set; } = default!;
@@ -22,5 +23,6 @@ public class TrophyDbContext : DbContext
         modelBuilder
             .Entity<UserGroup>()
             .HasKey(userGroup => new { userGroup.UserId, userGroup.GroupId });
+        
     }
 }

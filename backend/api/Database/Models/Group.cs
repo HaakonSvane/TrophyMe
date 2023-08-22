@@ -10,8 +10,13 @@ public class Group
     public required string Name { get; set; }
 
     public string? Description { get; set; }
+    
+    public string? ImageId { get; set; }
 
     public string AdminId { get; set; }
+    
+    
+    public GroupInvite? Invite { get; set; } 
 
     [ForeignKey("AdminId")] public User Admin { get; set; }
     

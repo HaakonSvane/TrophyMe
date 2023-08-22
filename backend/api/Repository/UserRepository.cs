@@ -29,9 +29,13 @@ public sealed class UserRepository : IUserRepository
 
     public async Task<User> CreateUserAsync(string userId, CancellationToken cancellationToken)
     {
-        var results = await _context.Users.AddAsync(new User() {Id = userId}, cancellationToken);
+        var user = new User()
+        {
+            Id = userId,
+        };
+        _context.Users.Upsert(user);
         await _context.SaveChangesAsync(cancellationToken);
-        return results.Entity;
+        return user;
     }
 
     public async Task<UserProfile> CreateUserProfileAsync(

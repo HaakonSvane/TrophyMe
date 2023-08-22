@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using api.Database;
@@ -11,9 +12,11 @@ using api.Database;
 namespace api.Migrations
 {
     [DbContext(typeof(TrophyDbContext))]
-    partial class TrophyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230820130848_groupInvite")]
+    partial class groupInvite
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -122,9 +125,6 @@ namespace api.Migrations
                         .IsRequired()
                         .HasMaxLength(8)
                         .HasColumnType("character varying(8)");
-
-                    b.Property<DateTimeOffset>("NextAllowedResetDate")
-                        .HasColumnType("timestamp with time zone");
 
                     b.HasKey("GroupId");
 

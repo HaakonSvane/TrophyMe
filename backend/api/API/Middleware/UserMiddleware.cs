@@ -24,6 +24,7 @@ internal sealed class UserMiddleware
                 await _next(context);
                 return;
             }
+            
             var cancellationToken = context.RequestAborted;
             try
             {
