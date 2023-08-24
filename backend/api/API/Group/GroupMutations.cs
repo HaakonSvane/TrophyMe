@@ -42,6 +42,9 @@ public static class GroupMutations
     
     [Error(typeof(NoInviteException))]
     [Error(typeof(NoUserException))]
+    [Error(typeof(InviteExpiredException))]
+    [Error(typeof(GroupNotFoundException))]
+    [Error(typeof(AlreadyMemberException))]
     public static async Task<api.Database.Models.Group> JoinGroupAsync(
         [TokenUser] TokenUser? tokenUser,
         string inviteCode,
@@ -79,6 +82,7 @@ public static class GroupMutations
         {
             throw new AlreadyMemberException();
         }
+        groupsByUserIdsDataLoader.Clear();
         return await groupRepository.AddUserToGroup(tokenUser.Id, group, cancellationToken);
     }
         

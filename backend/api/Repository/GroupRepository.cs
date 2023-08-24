@@ -127,6 +127,7 @@ public sealed class GroupRepository : IGroupRepository
             JoinedAt = DateTimeOffset.UtcNow,
         };
         await _context.UserGroups.AddAsync(userGroup, cancellationToken);
+        await _context.SaveChangesAsync(cancellationToken);
         return group;
     }
 }

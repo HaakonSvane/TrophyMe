@@ -6,7 +6,6 @@ using api.Database;
 using api.Repository;
 using api.Transport;
 using Microsoft.EntityFrameworkCore;
-using HotChocolate.Execution;
 using Microsoft.AspNetCore.Authorization;
 using Npgsql;
 
