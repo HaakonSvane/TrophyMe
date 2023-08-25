@@ -92,6 +92,7 @@ public static class GroupMutations
         [TokenUser] TokenUser? tokenUser,
         string name,
         string description,
+        api.Database.Models.Group.RuleType? decisionModel,
         IGroupRepository groupRepository,
         CancellationToken cancellationToken)
     {
@@ -104,7 +105,8 @@ public static class GroupMutations
         {
             Name = name,
             Description = description,
-            CreatedDate = DateTimeOffset.Now.ToUniversalTime()
+            CreatedDate = DateTimeOffset.Now.ToUniversalTime(),
+            DecisionModel = decisionModel ?? api.Database.Models.Group.RuleType.Democracy,
         };
         return await groupRepository.CreateGroupAsync(tokenUser.Id, group, cancellationToken);
     }

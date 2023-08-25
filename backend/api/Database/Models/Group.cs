@@ -5,6 +5,12 @@ namespace api.Database.Models;
 
 public class Group
 {
+    public enum RuleType
+    {
+        Democracy,
+        Dictatoriship
+    }
+    
     [Key] public int Id { get; set; }
 
     public required string Name { get; set; }
@@ -17,6 +23,8 @@ public class Group
     
     
     public GroupInvite? Invite { get; set; } 
+    
+    public required RuleType DecisionModel { get; set; }
 
     [ForeignKey("AdminId")] public User Admin { get; set; }
     
