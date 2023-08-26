@@ -53,21 +53,22 @@ public class GameRepository : IGameRepository
             .Where(game => ids.Contains(game.Id))
             .ToDictionaryAsync(game => game.Id, cancellationToken);
     }
-    
 
-    public async Task<Trophy> CreateTrophyAsync(Trophy trophy, CancellationToken cancellationToken)
+    public async Task<Trophy> CreateTrophyAsync(Trophy trophy, TrophyRequest request, IReadOnlyList<TrophyRequestApproval> approvals,
+        CancellationToken cancellationToken)
     {
+        await _context.TrophyRequestApprovals.AddRangeAsync(approvals, cancellationToken);
+        await _context.TrophyRequests.AddAsync(request, cancellationToken);
         await _context.Trophies.AddAsync(trophy, cancellationToken);
         await _context.SaveChangesAsync(cancellationToken);
         return trophy;
     }
 
-    public async Task<ILookup<int, Trophy>> GetTrophiesByGameIdsAsync(IReadOnlyList<int> gameIds, CancellationToken cancellationToken)
+    public async Task<IReadOnlyDictionary<int, TrophyRequest>> GetTrophyRequestsByTrophyIdsAsync(IReadOnlyList<int> trophyIds, CancellationToken cancellationToken)
     {
-        var trophies = await _context.Trophies
-            .Where(trophy => gameIds.Contains(trophy.GameId))
-            .ToListAsync(cancellationToken);
-        
-        return trophies.ToLookup(trophy => trophy.GameId, trophy => trophy);
+        return await _context.TrophyRequests
+            .Where(request => trophyIds.Contains(request.TrophyId))
+            .Include(request => request.Approvals)
+            .ToDictionaryAsync(request => request.TrophyId, cancellationToken);
     }
 }

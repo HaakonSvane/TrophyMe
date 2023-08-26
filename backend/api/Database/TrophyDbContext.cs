@@ -11,13 +11,15 @@ public class TrophyDbContext : DbContext
 
     public DbSet<Group> Groups { get; set; } = default!;
     public DbSet<GroupInvite> GroupInvites { get; set; } = default!;
-    public DbSet<Trophy> Trophies { get; set; } = default!;
     public DbSet<User> Users { get; set; } = default!;
     public DbSet<UserProfile> UserProfiles { get; set; } = default!;
     public DbSet<UserGroup> UserGroups { get; set; } = default!;
     public DbSet<Game> Games { get; set; } = default!;
-    public DbSet<Challenge> Challenges { get; set; } = default!;
-
+    public DbSet<Trophy> Trophies { get; set; } = default!;
+    public DbSet<TrophyRequest> TrophyRequests { get; set; } = default!;
+    
+    public DbSet<TrophyRequestApproval> TrophyRequestApprovals { get; set; } = default!;
+    
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder

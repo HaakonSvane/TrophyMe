@@ -87,7 +87,7 @@ public static class GroupMutations
     }
         
     
-    [Error(typeof(NoUserException))]
+    [Error<NoUserException>]
     public static async Task<api.Database.Models.Group> CreateGroupAsync(
         [TokenUser] TokenUser? tokenUser,
         string name,

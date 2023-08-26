@@ -2,6 +2,7 @@ using api.API.Errors;
 using api.API.Group;
 using api.Repository;
 using api.Transport;
+using api.Database.Models;
 
 namespace api.API.Games;
 
@@ -10,11 +11,11 @@ public static class GameMutations
 {
     [Error<NoUserException>]
     [Error<GroupNotFoundException>]
-    public static async Task<api.Database.Models.Game> CreateGameAsync(
+    public static async Task<Game> CreateGameAsync(
         [TokenUser] TokenUser? tokenUser,
         [ID] int groupId,
         string name,
-        string trophy,
+        string symbol,
         string? description,
         string? additionalInfo,
         IGroupsByIdsDataLoader groupsByIdsDataLoader,
@@ -34,10 +35,10 @@ public static class GameMutations
             throw new GroupNotFoundException(serializedId);
         }
 
-        var newGame = new api.Database.Models.Game()
+        var newGame = new Game()
         {
             Name = name,
-            Emoji = trophy,
+            Emoji = symbol,
             Description = description,
             AdditionalInfo = additionalInfo,
         };

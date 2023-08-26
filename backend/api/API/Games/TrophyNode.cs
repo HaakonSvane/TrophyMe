@@ -3,9 +3,26 @@ using api.Repository;
 
 namespace api.API.Games;
 
-[ExtendObjectType<api.Database.Models.Trophy>]
+[ExtendObjectType<Trophy>]
 public static class TrophyNode
 {
+    public static async Task<bool> IsAwarded(
+        [Parent] Trophy trophy,
+        ITrophyRequestsByTrophyIdsDataLoader dataLoader,
+        CancellationToken cancellationToken)
+    {
+        var requests = await dataLoader.LoadAsync(trophy.Id, cancellationToken);
+        return requests.Approvals.All(approval => approval.IsApproved);
+    }
+    
+    public static async Task<api.Database.Models.TrophyRequest> GetRequestAsync(
+        [Parent] Trophy trophy,
+        ITrophyRequestsByTrophyIdsDataLoader dataLoader,
+        CancellationToken cancellationToken)
+    {
+        return await dataLoader.LoadAsync(trophy.Id, cancellationToken);
+    }
+    
     [DataLoader]
     internal static async Task<ILookup<int, Trophy>> GetTrophiesByGroupIds(
         IReadOnlyList<int> groupIds,

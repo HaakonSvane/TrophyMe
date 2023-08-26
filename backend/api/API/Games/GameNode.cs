@@ -3,7 +3,7 @@ using api.Repository;
 namespace api.API.Games;
 
 [ExtendObjectType<Database.Models.Game>]
-public static class Game
+public static class GameNode
 {
     
     [DataLoader]

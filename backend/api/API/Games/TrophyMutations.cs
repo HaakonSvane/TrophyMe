@@ -16,8 +16,8 @@ public static class TrophyMutations
     [Error<GroupNotFoundException>]
     public static async Task<Trophy> CreateTrophyRequest(
         [TokenUser] TokenUser? tokenUser,
-        string userId,
-        int gameId,
+        [ID] string userId,
+        [ID] int gameId,
         string? description,
         IGamesByIdsDataLoader gamesByIdsDataLoader,
         IUsersByGroupIdsDataLoader usersByGroupIdsDataLoader,
@@ -64,7 +64,7 @@ public static class TrophyMutations
             Description = description,
         };
 
-        var request = new TrophyRequest()
+        var request = new api.Database.Models.TrophyRequest()
         {
             Trophy = trophy,
         };
@@ -99,7 +99,7 @@ public static class TrophyMutations
         {
             trophy.AwardedDate = DateTimeOffset.UtcNow;
         }
-        return await gameRepository.CreateTrophyAsync(trophy, cancellationToken);
+        return await gameRepository.CreateTrophyAsync(trophy, request, approvals, cancellationToken);
 
     }
 }
