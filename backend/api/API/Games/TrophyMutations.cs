@@ -100,6 +100,47 @@ public static class TrophyMutations
             trophy.AwardedDate = DateTimeOffset.UtcNow;
         }
         return await gameRepository.CreateTrophyAsync(trophy, request, approvals, cancellationToken);
+    }
 
+    [Error<NoUserException>]
+    [Error<NoTrophyRequestException>]
+    [Error<NoApprovalRequiredException>]
+    public static async Task<Trophy> ApproveTrophy(
+        [TokenUser] TokenUser? tokenUser,
+        [ID] int trophyId,
+        ITrophyRequestsByTrophyIdsDataLoader trophyRequestsByTrophyIdsDataLoader,
+        ITrophiesByIdsDataLoader trophiesByIdsDataLoader,
+        IGameRepository repository,
+        CancellationToken cancellationToken)
+    {
+        if (tokenUser is null)
+        {
+            throw new NoUserException();
+        }
+        
+        var request = await trophyRequestsByTrophyIdsDataLoader.LoadAsync(trophyId, cancellationToken);
+
+        if (request is null)
+        {
+            throw new NoTrophyRequestException(trophyId.ToString());
+        }
+        
+        var myApproval = request.Approvals.FirstOrDefault(approval => approval.UserId == tokenUser.Id);
+        if (myApproval is null || myApproval.IsApproved)
+        {
+            throw new NoApprovalRequiredException();
+        }
+
+        myApproval.IsApproved = true;
+        
+        if (request.Approvals.All(approval => approval.IsApproved))
+        {
+            var trophy = await trophiesByIdsDataLoader.LoadAsync(trophyId, cancellationToken);
+            trophy.AwardedDate = DateTimeOffset.UtcNow;
+            await repository.UpdateTrophy(trophy, cancellationToken);
+        }
+
+        await repository.UpdateTrophyRequest(request, cancellationToken);
+        return await trophiesByIdsDataLoader.LoadAsync(trophyId, cancellationToken);
     }
 }

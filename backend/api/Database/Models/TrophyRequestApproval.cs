@@ -1,10 +1,10 @@
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace api.Database.Models;
 
 public class TrophyRequestApproval
 {
+    [ID(nameof(User))]
     public string UserId { get; set; }
     
     [ForeignKey("UserId")]

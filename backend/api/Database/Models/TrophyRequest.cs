@@ -8,6 +8,7 @@ public class TrophyRequest
     
     public int Id { get; set; }
     
+    [ID(nameof(Trophy))]
     [Key]
     [ForeignKey("Trophy")]
     public int TrophyId { get; set; }

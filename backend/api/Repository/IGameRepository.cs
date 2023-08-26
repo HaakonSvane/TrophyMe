@@ -11,4 +11,6 @@ public interface IGameRepository
     Task<IReadOnlyDictionary<int, Game>> GetGamesByIdsAsync(IReadOnlyList<int> ids, CancellationToken cancellationToken);
     Task<Trophy> CreateTrophyAsync(Trophy trophy, TrophyRequest request, IReadOnlyList<TrophyRequestApproval> approvals, CancellationToken cancellationToken);
     Task<IReadOnlyDictionary<int, TrophyRequest>> GetTrophyRequestsByTrophyIdsAsync(IReadOnlyList<int> trophyIds, CancellationToken cancellationToken);
+    Task<TrophyRequest> UpdateTrophyRequest(TrophyRequest request, CancellationToken cancellationToken);
+    Task<Trophy> UpdateTrophy(Trophy trophy, CancellationToken cancellationToken);
 }

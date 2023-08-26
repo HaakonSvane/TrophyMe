@@ -22,9 +22,9 @@ public class FakeAuthHandler : AuthenticationHandler<FakeAuthHandlerOptions>
     {
         var claims = new List<Claim>
         {
-            new(ClaimTypes.NameIdentifier, "321"),
-            new(ClaimTypes.Name, "Developer Dudette"),
-            new(ClaimTypes.Email, "dev2@trophydev.com"),
+            new(ClaimTypes.NameIdentifier, "123"),
+            new(ClaimTypes.Name, "Developer Dude"),
+            new(ClaimTypes.Email, "dev@trophydev.com"),
             new(ClaimTypes.Role, "Admin")
         };
         var identity = new ClaimsIdentity(claims, AuthenticationScheme);

@@ -1,3 +1,4 @@
+using api.API.Errors;
 using api.Database;
 using api.Database.Models;
 using Microsoft.EntityFrameworkCore;
@@ -70,5 +71,17 @@ public class GameRepository : IGameRepository
             .Where(request => trophyIds.Contains(request.TrophyId))
             .Include(request => request.Approvals)
             .ToDictionaryAsync(request => request.TrophyId, cancellationToken);
+    }
+
+    public async Task<TrophyRequest> UpdateTrophyRequest(TrophyRequest request, CancellationToken cancellationToken)
+    {
+        await _context.SaveChangesAsync(cancellationToken);
+        return request;
+    }
+
+    public async Task<Trophy> UpdateTrophy(Trophy trophy, CancellationToken cancellationToken)
+    {
+        await _context.SaveChangesAsync(cancellationToken);
+        return trophy;
     }
 }

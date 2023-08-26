@@ -9,9 +9,9 @@
 
     <ItemGroup>
         <PackageReference Include="FlexLabs.EntityFrameworkCore.Upsert" Version="7.0.0" />
-        <PackageReference Include="HotChocolate.AspNetCore" Version="13.4.0"/>
-        <PackageReference Include="HotChocolate.AspNetCore.Authorization" Version="13.4.0"/>
-        <PackageReference Include="HotChocolate.Types.Analyzers" Version="13.4.0" PrivateAssets="all"/>
+        <PackageReference Include="HotChocolate.AspNetCore" Version="13.5.1" />
+        <PackageReference Include="HotChocolate.AspNetCore.Authorization" Version="13.5.1" />
+        <PackageReference Include="HotChocolate.Types.Analyzers" Version="13.5.1" PrivateAssets="all" />
         <PackageReference Include="MediatR" Version="12.1.1"/>
         <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="7.0.10"/>
         <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.10"/>
