@@ -45,10 +45,11 @@ public class Program
         builder.Services.AddAuthorization(config => 
             config.AddPolicy("IsGroupMember", policy => policy.Requirements.Add(new GroupMemberRequirement()))
             );
-        
+
         builder.Services
             .AddScoped<IUserRepository, UserRepository>()
-            .AddScoped<IGroupRepository, GroupRepository>();
+            .AddScoped<IGroupRepository, GroupRepository>()
+            .AddScoped<IGameRepository, GameRepository>();
 
         builder.Services.AddSingleton<IAuthorizationHandler, GroupMemberHandler>();
 
@@ -56,6 +57,7 @@ public class Program
             .AddGraphQLServer()
             .RegisterService<IUserRepository>(ServiceKind.Resolver)
             .RegisterService<IGroupRepository>(ServiceKind.Resolver)
+            .RegisterService<IGameRepository>(ServiceKind.Resolver)
             .AddAuthorization()
             .AddTypes()
             .AddGlobalObjectIdentification()

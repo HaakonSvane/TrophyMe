@@ -31,5 +31,7 @@ public class Group
     [GraphQLIgnore]
     public ICollection<UserGroup> UserGroups { get; set; } = new List<UserGroup>();
 
+    public ICollection<Game> Games { get; set; } = new List<Game>();
+
     public required DateTimeOffset CreatedDate { get; set; }
 }

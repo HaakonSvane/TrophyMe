@@ -23,6 +23,10 @@ public class TrophyDbContext : DbContext
         modelBuilder
             .Entity<UserGroup>()
             .HasKey(userGroup => new { userGroup.UserId, userGroup.GroupId });
-        
+
+        modelBuilder
+            .Entity<TrophyRequestApproval>()
+            .HasKey(approval => new { approval.UserId, approval.RequestId });
+
     }
 }
