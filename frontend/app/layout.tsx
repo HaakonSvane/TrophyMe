@@ -2,7 +2,6 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { PropsWithChildren } from "react";
 import { MainComponent } from "./MainComponent";
-import { HeaderComponent } from "./HeaderComponents";
 
 export const metadata: Metadata = {
   title: "Create Next App",
