@@ -1,7 +1,7 @@
 import { UnderlineNav, UnderlineNavItemProps } from "@primer/react/drafts";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { FiHome, FiUsers, FiBarChart2 } from "react-icons/fi";
+import { HiHome, HiUsers, HiChartBar } from "react-icons/hi2";
 
 const UnderLineNavItem = ({
   href,
@@ -25,13 +25,13 @@ const UnderLineNavItem = ({
 export const Navigator = () => (
   <div className="flex-1">
     <UnderlineNav aria-label="MainNavigator">
-      <UnderLineNavItem icon={FiHome} href="/">
+      <UnderLineNavItem icon={HiHome} href="/">
         Home
       </UnderLineNavItem>
-      <UnderLineNavItem icon={FiUsers} href="/groups">
+      <UnderLineNavItem icon={HiUsers} href="/groups">
         Groups
       </UnderLineNavItem>
-      <UnderLineNavItem icon={FiBarChart2} href="/stats">
+      <UnderLineNavItem icon={HiChartBar} href="/stats">
         Stats
       </UnderLineNavItem>
     </UnderlineNav>

@@ -11,6 +11,7 @@ const config: Config = {
     extend: {
       colors: {
         window: colors.window,
+        box: colors.box,
       },
     },
   },
