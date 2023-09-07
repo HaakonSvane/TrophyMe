@@ -4,7 +4,7 @@ import { ActionMenu, Header as PrimerHeader } from "@primer/react";
 import { useRef, useState } from "react";
 import { UserMenu } from "./UserMenu";
 import { Logo } from "./Logo";
-import { Container } from "./Contianer";
+import { Container } from "./Container";
 import { Navigator } from "./Navigator";
 import { UserButton } from "../buttons/UserButton";
 

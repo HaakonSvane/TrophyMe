@@ -6,6 +6,9 @@ import { PageHeader } from "@primer/react/drafts";
 import { SectionHeader } from "./_components/labels/SectionHeader";
 import { PropsWithChildren } from "react";
 import { MyTimeline } from "./_components/dashboard/MyTimeline";
+import { loadSerializableQuery } from "./_relay/loadSerializableQuery";
+import { DashboardGroup } from "./_components/dashboard/DashboardGroup";
+import { graphql, useLazyLoadQuery } from "react-relay";
 
 const Section = (props: PropsWithChildren<{ title: string }>) => (
   <div>
@@ -16,7 +19,20 @@ const Section = (props: PropsWithChildren<{ title: string }>) => (
   </div>
 );
 
-const Test = () => {
+const DashboardQuery = graphql`
+  query pageQuery {
+    me {
+      groups {
+        id
+        ...DashboardGroupFragment
+      }
+    }
+  }
+`;
+
+const Page = () => {
+  const data = useLazyLoadQuery<any>(DashboardQuery, {});
+  const groups = data.groups;
   return (
     <>
       <PageHeader>
@@ -27,15 +43,9 @@ const Test = () => {
 
       <div className="grid gap-16">
         <Section title="groups">
-          <OutlinedBox title="First group">
-            <Text>This is some content!</Text>
-          </OutlinedBox>
-          <OutlinedBox title="Second group">
-            <Text>This is some content!</Text>
-          </OutlinedBox>
-          <OutlinedBox title="Third group">
-            <Text>This is some content!</Text>
-          </OutlinedBox>
+          {groups.map((group) => (
+            <DashboardGroup key={group.id} group={group} />
+          ))}
         </Section>
 
         <Section title="recent activity">
@@ -46,4 +56,4 @@ const Test = () => {
   );
 };
 
-export default Test;
+export default Page;

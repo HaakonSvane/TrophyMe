@@ -6,6 +6,7 @@ import { Header } from "./_components/header";
 import { merge } from "@primer/react";
 import { Poppins } from "next/font/google";
 import { RelayEnvironmentProvider } from "react-relay";
+import { getCurrentEnvironment } from "./_relay/environment";
 
 const poppins = Poppins({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800"],
@@ -18,8 +19,9 @@ export const MainComponent = ({ children }: PropsWithChildren) => {
       normal: `${poppins.style.fontFamily}`,
     },
   });
+  const relayEnvironment = getCurrentEnvironment();
   return (
-    <RelayEnvironmentProvider>
+    <RelayEnvironmentProvider environment={relayEnvironment}>
       <ThemeProvider
         colorMode="night"
         nightScheme="dark_dimmed"

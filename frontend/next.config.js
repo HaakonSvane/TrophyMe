@@ -2,7 +2,11 @@
 const nextConfig = {
     compiler: {
         // see https://styled-components.com/docs/tooling#babel-plugin for more info on the options.
-        styledComponents: true
+        styledComponents: true,
+        relay: {
+          src: "./app",
+          language: "typescript",
+        },
       },
 }
 
