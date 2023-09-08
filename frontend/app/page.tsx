@@ -1,14 +1,12 @@
 "use client";
 
-import { Text } from "@primer/react";
-import { OutlinedBox } from "./_components/containers/OutlinedBox";
 import { PageHeader } from "@primer/react/drafts";
 import { SectionHeader } from "./_components/labels/SectionHeader";
 import { PropsWithChildren } from "react";
 import { MyTimeline } from "./_components/dashboard/MyTimeline";
-import { loadSerializableQuery } from "./_relay/loadSerializableQuery";
 import { DashboardGroup } from "./_components/dashboard/DashboardGroup";
 import { graphql, useLazyLoadQuery } from "react-relay";
+import { pageQuery as PageQueryType } from "./__generated__/pageQuery.graphql";
 
 const Section = (props: PropsWithChildren<{ title: string }>) => (
   <div>
@@ -31,8 +29,7 @@ const DashboardQuery = graphql`
 `;
 
 const Page = () => {
-  const data = useLazyLoadQuery<any>(DashboardQuery, {});
-  const groups = data.groups;
+  const data = useLazyLoadQuery<PageQueryType>(DashboardQuery, {});
   return (
     <>
       <PageHeader>
@@ -43,7 +40,7 @@ const Page = () => {
 
       <div className="grid gap-16">
         <Section title="groups">
-          {groups.map((group) => (
+          {data.me.groups.map((group) => (
             <DashboardGroup key={group.id} group={group} />
           ))}
         </Section>

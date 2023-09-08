@@ -1,3 +1,4 @@
+import { toast } from "react-hot-toast";
 import {
   Environment,
   Network,
@@ -42,22 +43,21 @@ export async function networkFetch(
         variables,
       }),
     });
-  } catch {
-    throw new Error("something went wrong");
+    const json = await response.json();
+    if (Array.isArray(json.errors)) {
+      console.error(json.errors);
+      throw new Error(
+        `Error fetching GraphQL query: '${
+          request.name
+        }' with variables '${JSON.stringify(variables)}':\n${JSON.stringify(
+          json.errors
+        )}`
+      );
+    }
+    return json;
+  } catch (ex) {
+    throw new Error(ex);
   }
-  const json = await response.json();
-
-  if (Array.isArray(json.errors)) {
-    console.error(json.errors);
-    throw new Error(
-      `Error fetching GraphQL query: '${
-        request.name
-      }' with variables '${JSON.stringify(variables)}':\n${JSON.stringify(
-        json.errors
-      )}`
-    );
-  }
-  return json;
 }
 
 export const responseCache: QueryResponseCache | null = IS_SERVER

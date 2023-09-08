@@ -12,6 +12,10 @@ const config: Config = {
       colors: {
         window: colors.window,
         box: colors.box,
+        success: colors.success,
+        danger: colors.danger,
+        attention: colors.attention,
+        servere: colors.servere,
       },
     },
   },
