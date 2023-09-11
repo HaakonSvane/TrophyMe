@@ -1,4 +1,4 @@
-import { toast } from "react-hot-toast";
+import { space } from "postcss/lib/list";
 import {
   Environment,
   Network,
@@ -30,34 +30,31 @@ export async function networkFetch(
       "Failed to find the server BASE_URL string from environment."
     );
   }
-  try {
-    const response = await fetch(BASE_URL, {
-      headers: {
-        Accept: "application/json",
-        Authorization: `bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-      method: "POST",
-      body: JSON.stringify({
-        query: request.text,
-        variables,
-      }),
-    });
-    const json = await response.json();
-    if (Array.isArray(json.errors)) {
-      console.error(json.errors);
-      throw new Error(
-        `Error fetching GraphQL query: '${
-          request.name
-        }' with variables '${JSON.stringify(variables)}':\n${JSON.stringify(
-          json.errors
-        )}`
-      );
-    }
-    return json;
-  } catch (ex) {
-    throw new Error(ex);
+  const body = JSON.stringify({
+    query: request.text,
+    variables,
+  });
+  const response = await fetch(BASE_URL, {
+    headers: {
+      Accept: "application/json",
+      Authorization: `bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+    method: "POST",
+    body,
+  });
+  const json = await response.json();
+  if (Array.isArray(json.errors)) {
+    console.error(json.errors);
+    throw new Error(
+      `Error fetching GraphQL query: '${
+        request.name
+      }' with variables '${JSON.stringify(variables)}':\n${JSON.stringify(
+        json.errors
+      )}`
+    );
   }
+  return json;
 }
 
 export const responseCache: QueryResponseCache | null = IS_SERVER

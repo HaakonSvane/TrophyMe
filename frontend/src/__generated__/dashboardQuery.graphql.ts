@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<00469212cb03d7e42ba54be97be56801>>
+ * @generated SignedSource<<9c0b7884360000e7b8697f46258d911e>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -10,8 +10,8 @@
 
 import { ConcreteRequest, Query } from 'relay-runtime';
 import { FragmentRefs } from "relay-runtime";
-export type pageQuery$variables = {};
-export type pageQuery$data = {
+export type dashboardQuery$variables = {};
+export type dashboardQuery$data = {
   readonly me: {
     readonly groups: ReadonlyArray<{
       readonly id: string;
@@ -19,9 +19,9 @@ export type pageQuery$data = {
     }>;
   };
 };
-export type pageQuery = {
-  response: pageQuery$data;
-  variables: pageQuery$variables;
+export type dashboardQuery = {
+  response: dashboardQuery$data;
+  variables: dashboardQuery$variables;
 };
 
 const node: ConcreteRequest = (function(){
@@ -37,7 +37,7 @@ return {
     "argumentDefinitions": [],
     "kind": "Fragment",
     "metadata": null,
-    "name": "pageQuery",
+    "name": "dashboardQuery",
     "selections": [
       {
         "alias": null,
@@ -75,7 +75,7 @@ return {
   "operation": {
     "argumentDefinitions": [],
     "kind": "Operation",
-    "name": "pageQuery",
+    "name": "dashboardQuery",
     "selections": [
       {
         "alias": null,
@@ -111,16 +111,16 @@ return {
     ]
   },
   "params": {
-    "cacheID": "078dcae19080a6a52be2a6d27e36fbeb",
+    "cacheID": "d5f8d373ddae51e0d27516fa607873c9",
     "id": null,
     "metadata": {},
-    "name": "pageQuery",
+    "name": "dashboardQuery",
     "operationKind": "query",
-    "text": "query pageQuery {\n  me {\n    groups {\n      id\n      ...DashboardGroupFragment\n    }\n    id\n  }\n}\n\nfragment DashboardGroupFragment on Group {\n  name\n}\n"
+    "text": "query dashboardQuery {\n  me {\n    groups {\n      id\n      ...DashboardGroupFragment\n    }\n    id\n  }\n}\n\nfragment DashboardGroupFragment on Group {\n  name\n}\n"
   }
 };
 })();
 
-(node as any).hash = "1c6be807cbd77d8e1661329fbff3f165";
+(node as any).hash = "fc570373d827319981fa303b52f7476a";
 
 export default node;

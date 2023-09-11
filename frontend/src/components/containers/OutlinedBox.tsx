@@ -1,4 +1,4 @@
-import { Box, Text, Label } from "@primer/react";
+import { Box, Label } from "@primer/react";
 import { PropsWithChildren } from "react";
 
 type OutlinedBoxProps = {

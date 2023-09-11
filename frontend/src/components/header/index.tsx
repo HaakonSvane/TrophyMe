@@ -6,7 +6,7 @@ import { UserMenu } from "./UserMenu";
 import { Logo } from "./Logo";
 import { Container } from "./Container";
 import { Navigator } from "./Navigator";
-import { UserButton } from "../buttons/UserButton";
+import { UserButton } from "@/components/buttons/UserButton";
 
 export const Header = () => {
   const [isActionMenuOpen, setIsActionMenuOpen] = useState<boolean>(false);

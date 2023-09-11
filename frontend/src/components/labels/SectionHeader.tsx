@@ -1,4 +1,4 @@
-import { useGradient } from "@/app/_hooks/useGradient";
+import { useGradient } from "@/hooks/useGradient";
 import { Heading } from "@primer/react";
 import { useRef } from "react";
 
