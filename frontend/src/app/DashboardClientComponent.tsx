@@ -5,7 +5,6 @@ import DashboardQueryNode, {
 } from "@/generated/dashboardQuery.graphql";
 import { SerializablePreloadedQuery } from "@/relay/loadSerializableQuery";
 import { useSerializablePreloadedQuery } from "@/relay/useSerializablePreloadedQuery";
-import { ErrorBoundary } from "react-error-boundary";
 import { useRelayEnvironment } from "react-relay";
 
 type DashboardClientComponentProps = {

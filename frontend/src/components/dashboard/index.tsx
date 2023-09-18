@@ -2,16 +2,11 @@
 
 import { PageHeader } from "@primer/react/drafts";
 import { Section } from "./Section";
-import { DashboardGroup } from "./DashboardGroup";
-import {
-  PreloadedQuery,
-  graphql,
-  usePreloadedQuery,
-  useRelayEnvironment,
-} from "react-relay";
+import { PreloadedQuery, graphql, usePreloadedQuery } from "react-relay";
 import { dashboardQuery } from "@/generated/dashboardQuery.graphql";
 import { MyTimeline } from "./MyTimeline";
 import { Suspense } from "react";
+import { DashboardGroup } from "./DashboardGroup";
 
 const DashboardQuery = graphql`
   query dashboardQuery {

@@ -1,4 +1,3 @@
-import { space } from "postcss/lib/list";
 import {
   Environment,
   Network,
@@ -30,19 +29,22 @@ export async function networkFetch(
       "Failed to find the server BASE_URL string from environment."
     );
   }
+
   const body = JSON.stringify({
     query: request.text,
     variables,
   });
-  const response = await fetch(BASE_URL, {
+  const requestInit: RequestInit = {
+    method: "POST",
     headers: {
-      Accept: "application/json",
+      Accept:
+        "application/graphql-response+json; charset=utf-8, application/json; charset=utf-8",
       Authorization: `bearer ${token}`,
       "Content-Type": "application/json",
     },
-    method: "POST",
     body,
-  });
+  };
+  const response = await fetch(BASE_URL, requestInit);
   const json = await response.json();
   if (Array.isArray(json.errors)) {
     console.error(json.errors);
