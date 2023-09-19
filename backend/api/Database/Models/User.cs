@@ -8,6 +8,8 @@ namespace api.Database.Models;
 public class User
 {
     [Key] public required string Id { get; set; }
+    
+    public required string Username { get; set; }
 
     public ICollection<Trophy> Trophies { get; set; } = new List<Trophy>();
     

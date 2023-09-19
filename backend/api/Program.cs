@@ -74,6 +74,12 @@ public class Program
             .UseAuthorization();
         
         app.MapGraphQL();
+        
+        if (args.Length > 0)
+        {
+            app.RunWithGraphQLCommandsAsync(args);
+            return;
+        }
         app.Run();
     }
 }

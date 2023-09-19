@@ -1,5 +1,6 @@
 using api.Database;
 using api.Database.Models;
+using api.Utilities;
 using Microsoft.EntityFrameworkCore;
 
 namespace api.Repository;
@@ -32,6 +33,7 @@ public sealed class UserRepository : IUserRepository
         var user = new User()
         {
             Id = userId,
+            Username = UsernameGenerator.Generate(),
         };
         _context.Users.Upsert(user);
         await _context.SaveChangesAsync(cancellationToken);
