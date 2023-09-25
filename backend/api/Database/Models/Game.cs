@@ -15,8 +15,7 @@ public class Game
 
     [GraphQLName("symbol")]
     public required string Emoji { get; set; }
-
-    [GraphQLIgnore]
+    
     public int ParentGroupId { get; set; }
     
     [GraphQLIgnore]

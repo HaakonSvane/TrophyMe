@@ -57,6 +57,7 @@ type Game implements Node {
   description: String
   additionalInfo: String
   symbol: String!
+  groupId: String!
 }
 
 type Group implements Node @authorize(policy: "IsGroupMember", apply: AFTER_RESOLVER) {

@@ -1,11 +1,20 @@
+using api.Database.Models;
 using api.Repository;
 
 namespace api.API.Games;
 
-[ExtendObjectType<Database.Models.Game>]
+[ExtendObjectType<Game>]
 public static class GameNode
 {
-    
+    [BindMember(nameof(Game.ParentGroupId))]
+    public static string GetGroupId(
+        [Parent] Game game,
+        [Service] IIdSerializer idSerializer)
+    {
+        var serializedId = idSerializer.Serialize(null,nameof(Group), game.ParentGroupId);
+        return serializedId ?? "";
+    }
+
     [DataLoader]
     internal static async Task<ILookup<int, Database.Models.Game>> GetGamesByGroupIdsAsync(
         IReadOnlyList<int> groupIds,

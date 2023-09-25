@@ -75,11 +75,11 @@ public class Program
         
         app.MapGraphQL();
         
-        if (args.Length > 0)
+        /*if (args.Length > 0)
         {
             app.RunWithGraphQLCommandsAsync(args);
             return;
-        }
+        }*/
         app.Run();
     }
 }

@@ -35,7 +35,7 @@ public static class GroupNode
         return await dataLoader.LoadAsync(group.Id, cancellationToken);
     } 
     
-    public static async Task<IEnumerable<Database.Models.User>> GetMembersAsync(
+    public static async Task<IEnumerable<User>> GetMembersAsync(
         [Parent] Database.Models.Group group,
         IUsersByGroupIdsDataLoader dataloader,
         CancellationToken cancellationToken)

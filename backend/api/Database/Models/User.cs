@@ -1,5 +1,5 @@
 using System.ComponentModel.DataAnnotations;
-using HotChocolate.Authorization;
+using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
 namespace api.Database.Models;
@@ -7,7 +7,9 @@ namespace api.Database.Models;
 [Index(nameof(Id))]
 public class User
 {
-    [Key] public required string Id { get; set; }
+    [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.None)]
+    public required string Id { get; init; }
     
     public required string Username { get; set; }
 
