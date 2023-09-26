@@ -44,6 +44,9 @@ export async function networkFetch(
     },
     body,
   };
+  // const sleep = (delay: number) =>
+  //   new Promise((resolve) => setTimeout(resolve, delay));
+  // await sleep(3000);
   const response = await fetch(BASE_URL, requestInit);
   const json = await response.json();
   if (Array.isArray(json.errors)) {

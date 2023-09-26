@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<9c0b7884360000e7b8697f46258d911e>>
+ * @generated SignedSource<<7ab1001f3bd770665b7712650ea14ac5>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -30,6 +30,13 @@ var v0 = {
   "args": null,
   "kind": "ScalarField",
   "name": "id",
+  "storageKey": null
+},
+v1 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "name",
   "storageKey": null
 };
 return {
@@ -94,11 +101,95 @@ return {
             "plural": true,
             "selections": [
               (v0/*: any*/),
+              (v1/*: any*/),
               {
                 "alias": null,
                 "args": null,
-                "kind": "ScalarField",
-                "name": "name",
+                "concreteType": "User",
+                "kind": "LinkedField",
+                "name": "members",
+                "plural": true,
+                "selections": [
+                  (v0/*: any*/),
+                  {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "username",
+                    "storageKey": null
+                  },
+                  {
+                    "alias": null,
+                    "args": null,
+                    "concreteType": "UserProfile",
+                    "kind": "LinkedField",
+                    "name": "userProfile",
+                    "plural": false,
+                    "selections": [
+                      {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "firstName",
+                        "storageKey": null
+                      },
+                      {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "lastName",
+                        "storageKey": null
+                      }
+                    ],
+                    "storageKey": null
+                  },
+                  {
+                    "alias": null,
+                    "args": null,
+                    "concreteType": "Trophy",
+                    "kind": "LinkedField",
+                    "name": "trophies",
+                    "plural": true,
+                    "selections": [
+                      (v0/*: any*/),
+                      {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "awardedDate",
+                        "storageKey": null
+                      },
+                      {
+                        "alias": null,
+                        "args": null,
+                        "concreteType": "Game",
+                        "kind": "LinkedField",
+                        "name": "game",
+                        "plural": false,
+                        "selections": [
+                          {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "groupId",
+                            "storageKey": null
+                          },
+                          (v0/*: any*/),
+                          {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "symbol",
+                            "storageKey": null
+                          },
+                          (v1/*: any*/)
+                        ],
+                        "storageKey": null
+                      }
+                    ],
+                    "storageKey": null
+                  }
+                ],
                 "storageKey": null
               }
             ],
@@ -111,12 +202,12 @@ return {
     ]
   },
   "params": {
-    "cacheID": "d5f8d373ddae51e0d27516fa607873c9",
+    "cacheID": "8a0c9680d98ea71ddcc255ade56358c3",
     "id": null,
     "metadata": {},
     "name": "dashboardQuery",
     "operationKind": "query",
-    "text": "query dashboardQuery {\n  me {\n    groups {\n      id\n      ...DashboardGroupFragment\n    }\n    id\n  }\n}\n\nfragment DashboardGroupFragment on Group {\n  name\n}\n"
+    "text": "query dashboardQuery {\n  me {\n    groups {\n      id\n      ...DashboardGroupFragment\n    }\n    id\n  }\n}\n\nfragment DashboardGroupFragment on Group {\n  id\n  name\n  members {\n    id\n    ...MemberRowFragment\n  }\n}\n\nfragment MemberRowFragment on User {\n  username\n  userProfile {\n    firstName\n    lastName\n  }\n  ...TrophyStackFragment\n}\n\nfragment TrophyAvatarFragment on Trophy {\n  game {\n    symbol\n    name\n    id\n  }\n}\n\nfragment TrophyStackFragment on User {\n  trophies {\n    id\n    awardedDate\n    game {\n      groupId\n      id\n    }\n    ...TrophyAvatarFragment\n  }\n}\n"
   }
 };
 })();
