@@ -25,7 +25,7 @@ const UnderLineNavItem = ({
 export const Navigator = () => (
   <div className="flex-1">
     <UnderlineNav aria-label="MainNavigator">
-      <UnderLineNavItem icon={HiHome} href="/">
+      <UnderLineNavItem icon={HiHome} href="/dashboard">
         Home
       </UnderLineNavItem>
       <UnderLineNavItem icon={HiUsers} href="/groups">

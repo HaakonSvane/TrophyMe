@@ -1,3 +1,4 @@
+import { MidScreenContent } from "@/components/containers/MidScreenContent";
 import { SectionHeader } from "../labels/SectionHeader";
 import { Details, Text } from "@primer/react";
 
@@ -8,8 +9,8 @@ type FatalErrorProps = {
 export const FatalError = ({ error }: FatalErrorProps) => {
   const niceError = error?.toString();
   return (
-    <div className="h-screen flex">
-      <div className="m-auto grid gap-8">
+    <MidScreenContent>
+      <div className="grid gap-8">
         <div>
           <SectionHeader title="fatal application error :(" />
           <Text as="p">
@@ -27,6 +28,6 @@ export const FatalError = ({ error }: FatalErrorProps) => {
           </div>
         )}
       </div>
-    </div>
+    </MidScreenContent>
   );
 };

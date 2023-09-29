@@ -23,6 +23,7 @@
       "@/components/*": ["./src/components/*"],
       "@/hooks/*": ["./src/hooks/*"],
       "@/relay/*": ["./src/relay/*"],
+      "@/lib/*": ["./src/lib/*"],
       "@/generated/*": ["./src/__generated__/*"]
     }
   },

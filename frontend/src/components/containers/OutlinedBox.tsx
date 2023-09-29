@@ -1,4 +1,4 @@
-import { Box, Label } from "@primer/react";
+import { Box, BoxProps, Label } from "@primer/react";
 import { PropsWithChildren } from "react";
 
 type OutlinedBoxProps = {
@@ -9,10 +9,11 @@ type OutlinedBoxProps = {
 export const OutlinedBox = ({
   title,
   children,
-}: PropsWithChildren<OutlinedBoxProps>) => {
+  className,
+}: PropsWithChildren<OutlinedBoxProps & BoxProps>) => {
   return (
     <Box
-      className="px-4 md:px-6"
+      className={`px-4 md:px-6 ${className}`}
       as={title ? "fieldset" : undefined}
       sx={{
         borderColor: "border.default",

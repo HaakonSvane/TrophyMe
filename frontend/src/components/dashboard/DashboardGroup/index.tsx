@@ -1,10 +1,9 @@
 import { graphql, useFragment } from "react-relay";
-import { Text } from "@primer/react";
 import { OutlinedBox } from "@/components/containers/OutlinedBox";
-import { DashboardGroupFragment$key } from "src/__generated__/DashboardGroupFragment.graphql";
+import { DashboardGroupFragment$key } from "@/generated/DashboardGroupFragment.graphql";
 import { MemberRow } from "./MemberRow";
 
-const GroupFragment = graphql`
+const DashboardFragment = graphql`
   fragment DashboardGroupFragment on Group {
     id
     name
@@ -20,7 +19,7 @@ type DashboardGroupProps = {
 };
 
 export const DashboardGroup = ({ queryReference }: DashboardGroupProps) => {
-  const data = useFragment(GroupFragment, queryReference);
+  const data = useFragment(DashboardFragment, queryReference);
   return (
     <OutlinedBox title={data.name}>
       <div style={{ flexDirection: "row" }}>

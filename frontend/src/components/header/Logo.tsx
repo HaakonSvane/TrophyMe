@@ -13,7 +13,7 @@ export const Logo = () => {
         wordSpacing: 5,
       }}
     >
-      troji
+      troji.me
     </Heading>
   );
 };
