@@ -1,3 +1,4 @@
+"use client";
 import { useGradient } from "@/hooks/useGradient";
 import { Heading } from "@primer/react";
 import { useRef } from "react";
@@ -27,14 +28,6 @@ export const SectionHeader = ({ title }: SectionHeaderProps) => {
         transition: "all ease-in-out 0.2s",
         fontWeight: "800",
       }}
-      //   style={{
-      //     background: `linear-gradient(${90}deg, ${"white"})`,
-      //     backgroundClip: "text",
-      //     WebkitBackgroundClip: "text",
-      //     WebkitTextFillColor: "transparent",
-      //     color: "transparent",
-      //     transition: "all ease-in-out 0.2s",
-      //   }}
     >
       {title}
     </Heading>

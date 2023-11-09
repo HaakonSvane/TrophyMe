@@ -1,8 +1,6 @@
-"use client";
-
 import { MidScreenContent } from "@/components/containers/MidScreenContent";
 import { SectionHeader } from "@/components/labels/SectionHeader";
-import { Button, Text } from "@primer/react";
+import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
 const LandingPage = () => {
@@ -10,13 +8,13 @@ const LandingPage = () => {
     <MidScreenContent className="justify-center">
       <SectionHeader title="TROJI.ME" />
       <div className="flex flex-col gap-8">
-        <Text>
+        <p>
           Welcome to Troji.me! This is a website where you can track your wins
           and losses in games and compete with your friends.
-        </Text>
-        <Text>To begin, please sign in. It's free!</Text>
-        <Button as={Link} href={"/auth/signIn"} variant="primary">
-          Sign in
+        </p>
+        <p>To begin, please sign in. It's free!</p>
+        <Button asChild>
+          <Link href={"/auth/signIn"}>Sign in</Link>
         </Button>
       </div>
     </MidScreenContent>

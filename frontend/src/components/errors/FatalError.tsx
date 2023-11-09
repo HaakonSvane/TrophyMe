@@ -1,6 +1,5 @@
 import { MidScreenContent } from "@/components/containers/MidScreenContent";
 import { SectionHeader } from "../labels/SectionHeader";
-import { Details, Text } from "@primer/react";
 
 type FatalErrorProps = {
   error?: any;
@@ -13,18 +12,12 @@ export const FatalError = ({ error }: FatalErrorProps) => {
       <div className="grid gap-8">
         <div>
           <SectionHeader title="fatal application error :(" />
-          <Text as="p">
-            Whoops! It seems the application has met with a terrible fate
-          </Text>
-          <Text as="p">Contact a grown up if the problem persists</Text>
+          <p>Whoops! It seems the application has met with a terrible fate</p>
+          <p>Contact a grown up if the problem persists</p>
         </div>
         {error && (
           <div>
-            <Details>
-              <Text as="p" className="font-mono text-sm">
-                {niceError}
-              </Text>
-            </Details>
+            <small>{niceError}</small>
           </div>
         )}
       </div>
