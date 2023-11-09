@@ -9,8 +9,8 @@ import {
   Store,
   RecordSource,
 } from "relay-runtime";
+import { graphQlQuery } from "src/app/api/graphql/query/graphQlQuery";
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 const IS_SERVER = typeof window === "undefined";
 const CACHE_TTL = 5 * 1000;
 
@@ -18,36 +18,19 @@ export async function networkFetch(
   request: RequestParameters,
   variables: Variables
 ): Promise<GraphQLResponse> {
-  const token = "testing";
-  if (!token) {
-    throw new Error(
-      "This app requires the user to authenticate before making network requests."
-    );
-  }
-  if (!BASE_URL) {
-    throw new Error(
-      "Failed to find the server BASE_URL string from environment."
-    );
-  }
-
   const body = JSON.stringify({
     query: request.text,
     variables,
   });
-  const requestInit: RequestInit = {
-    method: "POST",
-    headers: {
-      Accept:
-        "application/graphql-response+json; charset=utf-8, application/json; charset=utf-8",
-      Authorization: `bearer ${token}`,
-      "Content-Type": "application/json",
-    },
-    body,
-  };
-  // const sleep = (delay: number) =>
-  //   new Promise((resolve) => setTimeout(resolve, delay));
-  // await sleep(3000);
-  const response = await fetch(BASE_URL, requestInit);
+  let response: Response;
+  if (IS_SERVER) {
+    response = await graphQlQuery(body);
+  } else {
+    response = await fetch(`/api/graphql/query`);
+  }
+  if (!response.ok) {
+    throw new Error(`Network fetch error: ${response.status}`);
+  }
   const json = await response.json();
   if (Array.isArray(json.errors)) {
     console.error(json.errors);

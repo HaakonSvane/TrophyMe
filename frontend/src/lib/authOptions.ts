@@ -9,7 +9,7 @@ export const authOptions: AuthOptions = {
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID ?? "",
       clientSecret: process.env.GOOGLE_CLIENT_SECRET ?? "",
-      profile(profile, tokens) {
+      profile(profile) {
         return {
           id: `G-${profile.sub}`,
           name: profile.name,
@@ -18,4 +18,20 @@ export const authOptions: AuthOptions = {
       },
     }),
   ],
+  callbacks: {
+    async jwt({ token, account }) {
+      if (account) {
+        token.idToken = account.id_token;
+      }
+      return token;
+    },
+
+    async session({ session, token }) {
+      if (!token.idToken) {
+        return session;
+      }
+      session.idToken = token.idToken;
+      return session;
+    },
+  },
 };
