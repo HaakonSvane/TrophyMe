@@ -2,6 +2,15 @@
 const nextConfig = {
     reactStrictMode: true,
     swcMinify: true,
+    images: {
+      remotePatterns: [
+        {
+          protocol: "https",
+          hostname: "avatars.githubusercontent.com",
+          port: "",
+        }
+      ]
+    },
     compiler: {
         // see https://styled-components.com/docs/tooling#babel-plugin for more info on the options.
         styledComponents: true,

@@ -1,12 +1,12 @@
 "use client";
 
-import { PageHeader } from "@primer/react/drafts";
-import { Section } from "./Section";
 import { PreloadedQuery, graphql, usePreloadedQuery } from "react-relay";
 import { dashboardQuery } from "@/generated/dashboardQuery.graphql";
-import { MyTimeline } from "./MyTimeline";
 import { Suspense } from "react";
+import { PageHeader } from "@/components/labels/PageHeader";
+import { MyTimeline } from "./MyTimeline";
 import { DashboardGroup } from "./DashboardGroup";
+import { Section } from "./Section";
 
 const DashboardQuery = graphql`
   query dashboardQuery {
@@ -27,11 +27,7 @@ export const Dashboard = ({ queryRef }: DashboardProps) => {
   const data = usePreloadedQuery(DashboardQuery, queryRef);
   return (
     <Suspense fallback="Loading client side...">
-      <PageHeader>
-        <PageHeader.TitleArea>
-          <PageHeader.Title>Haakon Hafsahl Svane</PageHeader.Title>
-        </PageHeader.TitleArea>
-      </PageHeader>
+      <PageHeader>Haakon Hafsahl Svane</PageHeader>
 
       <div className="grid gap-16">
         <Section title="groups">

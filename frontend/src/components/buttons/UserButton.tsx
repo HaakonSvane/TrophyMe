@@ -1,5 +1,7 @@
-import { Avatar, Button, ButtonProps } from "@primer/react";
+import { Button, ButtonProps } from "@/components/ui/button";
 import { forwardRef } from "react";
+import { cn } from "@/lib/utils";
+import Image from "next/image";
 
 type UserButtonProps = {
   userId: string;
@@ -12,21 +14,18 @@ export const UserButton = forwardRef<
   return (
     <Button
       ref={ref}
-      size="large"
-      variant="invisible"
+      variant="ghost"
       aria-label="See user actions"
-      sx={{
-        justifyContent: "center",
-        alignItems: "center",
-        width: 50,
-        height: 50,
-        minWidth: 0,
-        borderRadius: "50%",
-      }}
+      className={cn("w-12 h-12 rounded-full p-2")}
       onClick={onClick}
       {...rest}
     >
-      <Avatar size={32} src="https://avatars.githubusercontent.com/primer" />
+      <Image
+        alt="This is you!"
+        width={28}
+        height={28}
+        src="https://avatars.githubusercontent.com/primer"
+      />
     </Button>
   );
 });

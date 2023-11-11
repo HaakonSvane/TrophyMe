@@ -5,6 +5,7 @@ import { getCurrentEnvironment } from "@/relay/environment";
 import { ErrorBoundary, FallbackProps } from "react-error-boundary";
 import { FatalError } from "@/components/errors/FatalError";
 import { SessionProvider } from "next-auth/react";
+import { ThemeProvider as NextThemesProvider } from "next-themes";
 
 export const MainComponent = ({ children }: PropsWithChildren) => {
   const fallbackRender = ({ error }: FallbackProps) => (
@@ -15,9 +16,15 @@ export const MainComponent = ({ children }: PropsWithChildren) => {
   return (
     <SessionProvider>
       <RelayEnvironmentProvider environment={relayEnvironment}>
-        <ErrorBoundary fallbackRender={fallbackRender}>
-          {children}
-        </ErrorBoundary>
+        <NextThemesProvider
+          attribute="class"
+          defaultTheme="dark"
+          disableTransitionOnChange
+        >
+          <ErrorBoundary fallbackRender={fallbackRender}>
+            {children}
+          </ErrorBoundary>
+        </NextThemesProvider>
       </RelayEnvironmentProvider>
     </SessionProvider>
   );

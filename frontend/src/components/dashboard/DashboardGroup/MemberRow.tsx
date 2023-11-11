@@ -1,6 +1,11 @@
 import { TrophyStack } from "@/components/trophies/TrophyStack";
 import { MemberRowFragment$key } from "@/generated/MemberRowFragment.graphql";
-import { Tooltip, Text } from "@primer/react";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { graphql, useFragment } from "react-relay";
 
 const DashboardGroupMemberRowFragment = graphql`
@@ -24,22 +29,26 @@ export const MemberRow = ({ queryReference, groupId }: MemberRowProps) => {
 
   const UserNameText = () => (
     <div className="px-1 py-1">
-      <Text>{data.username}</Text>
+      <p>{data.username}</p>
     </div>
   );
+
+  const name: Name | undefined = data.userProfile
+    ? new Name(data.userProfile)
+    : undefined;
+
   return (
     <div className="flex flex-auto flex-row justify-between">
-      <>
-        {data.userProfile ? (
-          <Tooltip
-            aria-label={`${data.userProfile.firstName} ${data.userProfile.lastName}`}
-          >
-            {UserNameText()}
+      {name ? (
+        <TooltipProvider>
+          <Tooltip aria-label={`${name.fullName}`}>
+            <TooltipTrigger>{UserNameText()}</TooltipTrigger>
+            <TooltipContent>{name.fullName}</TooltipContent>
           </Tooltip>
-        ) : (
-          UserNameText()
-        )}
-      </>
+        </TooltipProvider>
+      ) : (
+        UserNameText()
+      )}
       <div>
         <TrophyStack groupId={groupId} queryReference={data} />
       </div>

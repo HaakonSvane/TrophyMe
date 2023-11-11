@@ -1,6 +1,5 @@
 "use client";
 import { useGradient } from "@/hooks/useGradient";
-import { Heading } from "@primer/react";
 import { useRef } from "react";
 
 type SectionHeaderProps = {
@@ -15,21 +14,5 @@ export const SectionHeader = ({ title }: SectionHeaderProps) => {
     "#110b57",
   ]);
 
-  return (
-    <Heading
-      as="h3"
-      ref={headingRef}
-      sx={{
-        background: `linear-gradient(0deg, ${gradientColors})`,
-        WebkitTextFillColor: "transparent",
-        WebkitBackgroundClip: "text",
-        backgroundClip: "text",
-        wordSpacing: 5,
-        transition: "all ease-in-out 0.2s",
-        fontWeight: "800",
-      }}
-    >
-      {title}
-    </Heading>
-  );
+  return <h1 ref={headingRef}>{title}</h1>;
 };

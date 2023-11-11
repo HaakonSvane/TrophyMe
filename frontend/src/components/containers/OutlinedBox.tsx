@@ -1,5 +1,5 @@
-import { Box, BoxProps, Label } from "@primer/react";
-import { PropsWithChildren } from "react";
+import React, { PropsWithChildren } from "react";
+import { Card } from "../ui/card";
 
 type OutlinedBoxProps = {
   title?: string;
@@ -10,12 +10,11 @@ export const OutlinedBox = ({
   title,
   children,
   className,
-}: PropsWithChildren<OutlinedBoxProps & BoxProps>) => {
+}: PropsWithChildren<OutlinedBoxProps> & React.HTMLProps<HTMLDivElement>) => {
   return (
-    <Box
+    <Card
       className={`px-4 md:px-6 ${className}`}
-      as={title ? "fieldset" : undefined}
-      sx={{
+      style={{
         borderColor: "border.default",
         borderWidth: 1,
         borderRadius: 8,
@@ -24,12 +23,10 @@ export const OutlinedBox = ({
     >
       {title && (
         <legend>
-          <Label size="large" sx={{ backgroundColor: "menu.bgActive" }}>
-            {title}
-          </Label>
+          <small>{title}</small>
         </legend>
       )}
       {children}
-    </Box>
+    </Card>
   );
 };

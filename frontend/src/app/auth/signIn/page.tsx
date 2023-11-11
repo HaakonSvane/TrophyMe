@@ -1,7 +1,6 @@
-"use client";
 import Image from "next/image";
 import { MidScreenContent } from "@/components/containers/MidScreenContent";
-import { Box, Spinner } from "@primer/react";
+import { Spinner } from "@/components/ui/spinner";
 import { SectionHeader } from "@/components/labels/SectionHeader";
 import { OutlinedBox } from "@/components/containers/OutlinedBox";
 import { Suspense } from "react";
@@ -18,22 +17,8 @@ const SignInPage = () => {
   return (
     <div>
       <MidScreenContent style={{ gap: 8 }}>
-        <Box
-          sx={{
-            borderBottomWidth: 1,
-            borderBottomStyle: "solid",
-            borderColor: "border.default",
-            pb: 3,
-          }}
-        >
-          <Image
-            src="/trojiLogo.png"
-            alt="Troji Logo"
-            width={200}
-            height={200}
-          />
-          <Logo />
-        </Box>
+        <Image src="/trojiLogo.png" alt="Troji Logo" width={200} height={200} />
+        <Logo />
 
         <SectionHeader title="Sign in" />
         <OutlinedBox className="py-8">

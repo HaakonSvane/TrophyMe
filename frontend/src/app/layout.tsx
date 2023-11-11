@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 const poppins = Poppins({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800"],
   subsets: ["latin"],
-  variable: "--poppins",
+  variable: "--font-sans",
 });
 
 const RootLayout = ({ children }: PropsWithChildren) => {
@@ -21,7 +21,7 @@ const RootLayout = ({ children }: PropsWithChildren) => {
     <html lang="en" suppressHydrationWarning>
       <body
         className={cn(
-          "min-h-screen bg-background poppins antialiased",
+          "min-h-screen bg-background font-sans antialiased",
           poppins.variable
         )}
       >

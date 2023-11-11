@@ -1,6 +1,5 @@
-"use client";
 import { signIn, type ClientSafeProvider } from "next-auth/react";
-import { Button } from "@primer/react";
+import { Button } from "@/components/ui/button";
 import { AiOutlineGoogle, AiOutlineQuestion } from "react-icons/ai";
 
 const getIconForProviderName = (name: string) => {
@@ -10,6 +9,13 @@ const getIconForProviderName = (name: string) => {
     default:
       AiOutlineQuestion;
   }
+};
+type ProviderIconProps = {
+  name: string;
+};
+const ProviderIcon = ({ name }: ProviderIconProps) => {
+  const Icon = getIconForProviderName(name.toLowerCase());
+  return <Icon />;
 };
 
 export type ProviderButtonProps = {
@@ -24,10 +30,10 @@ export const ProviderButton = ({
   return (
     <Button
       aria-label={`Sign in with ${provider.name}`}
-      size="large"
-      block
       onClick={() => signIn(provider.id, { callbackUrl })}
-      leadingIcon={getIconForProviderName(provider.name.toLowerCase())}
-    >{`Sign in with ${provider.name}`}</Button>
+      leadingIcon={<ProviderIcon name={provider.name} />}
+    >
+      {`Sign in with ${provider.name}`}
+    </Button>
   );
 };

@@ -1,9 +1,7 @@
-import { Heading } from "@primer/react";
-
 export const Logo = () => {
   return (
-    <Heading
-      sx={{
+    <h1
+      style={{
         background:
           "-webkit-gradient(linear,left top, left bottom,from(#ffd597),to(#e77d8d))",
         WebkitTextFillColor: "transparent",
@@ -14,6 +12,6 @@ export const Logo = () => {
       }}
     >
       troji.me
-    </Heading>
+    </h1>
   );
 };

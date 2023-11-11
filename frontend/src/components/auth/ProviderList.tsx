@@ -2,7 +2,7 @@
 import { suspendablePromise } from "@/lib/suspendablePromise";
 import { getProviders } from "next-auth/react";
 import { ProviderButton } from "./ProviderButton";
-import { useParams, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 
 const providerResource = suspendablePromise(getProviders());
 
