@@ -1,9 +1,16 @@
 import { MidScreenContent } from "@/components/containers/MidScreenContent";
 import { SectionHeader } from "@/components/labels/SectionHeader";
 import { Button } from "@/components/ui/button";
+import { authOptions } from "@/lib/authOptions";
+import { getServerSession } from "next-auth";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
-const LandingPage = () => {
+const LandingPage = async () => {
+  const session = await getServerSession(authOptions);
+  if (session?.idToken) {
+    redirect("/dashboard");
+  }
   return (
     <MidScreenContent className="justify-center">
       <SectionHeader title="TROJI.ME" />

@@ -8,6 +8,7 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
+import { Button } from "../ui/button";
 
 export const Header = () => {
   return (
@@ -16,7 +17,7 @@ export const Header = () => {
         <Navigator />
       </div>
       <DropdownMenu>
-        <DropdownMenuTrigger>
+        <DropdownMenuTrigger asChild>
           <UserButton />
         </DropdownMenuTrigger>
         <DropdownMenuContent>

@@ -1,6 +1,7 @@
 import { signIn, type ClientSafeProvider } from "next-auth/react";
-import { Button } from "@/components/ui/button";
+import { Button, ButtonProps } from "@/components/ui/button";
 import { AiOutlineGoogle, AiOutlineQuestion } from "react-icons/ai";
+import { HTMLProps } from "react";
 
 const getIconForProviderName = (name: string) => {
   switch (name) {
@@ -26,9 +27,12 @@ export type ProviderButtonProps = {
 export const ProviderButton = ({
   provider,
   callbackUrl,
-}: ProviderButtonProps) => {
+  ...rest
+}: ProviderButtonProps & ButtonProps) => {
   return (
     <Button
+      {...rest}
+      variant="secondary"
       aria-label={`Sign in with ${provider.name}`}
       onClick={() => signIn(provider.id, { callbackUrl })}
       leadingIcon={<ProviderIcon name={provider.name} />}

@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<40be84056b013aa22330346a299bf173>>
+ * @generated SignedSource<<f678c8b9b5d5162af7412754add9f67f>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -12,7 +12,7 @@ import { Fragment, ReaderFragment } from 'relay-runtime';
 import { FragmentRefs } from "relay-runtime";
 export type TrophyStackFragment$data = {
   readonly trophies: ReadonlyArray<{
-    readonly awardedDate: any | null;
+    readonly awardedDate: any | null | undefined;
     readonly game: {
       readonly groupId: string;
     };

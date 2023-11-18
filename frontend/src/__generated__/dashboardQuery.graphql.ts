@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<7ab1001f3bd770665b7712650ea14ac5>>
+ * @generated SignedSource<<702b90576922476cb843a708bc693781>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -10,7 +10,7 @@
 
 import { ConcreteRequest, Query } from 'relay-runtime';
 import { FragmentRefs } from "relay-runtime";
-export type dashboardQuery$variables = {};
+export type dashboardQuery$variables = Record<PropertyKey, never>;
 export type dashboardQuery$data = {
   readonly me: {
     readonly groups: ReadonlyArray<{

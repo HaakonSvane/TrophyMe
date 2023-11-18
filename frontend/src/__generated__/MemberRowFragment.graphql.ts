@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<3fa417fd077728e63678bd8025dd95e3>>
+ * @generated SignedSource<<483db3beb4d7cae66b0f28d17193e15e>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -14,7 +14,7 @@ export type MemberRowFragment$data = {
   readonly userProfile: {
     readonly firstName: string;
     readonly lastName: string;
-  } | null;
+  } | null | undefined;
   readonly username: string;
   readonly " $fragmentSpreads": FragmentRefs<"TrophyStackFragment">;
   readonly " $fragmentType": "MemberRowFragment";

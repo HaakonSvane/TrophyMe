@@ -1,6 +1,6 @@
 export const Logo = () => {
   return (
-    <h1
+    <h3
       style={{
         background:
           "-webkit-gradient(linear,left top, left bottom,from(#ffd597),to(#e77d8d))",
@@ -12,6 +12,6 @@ export const Logo = () => {
       }}
     >
       troji.me
-    </h1>
+    </h3>
   );
 };

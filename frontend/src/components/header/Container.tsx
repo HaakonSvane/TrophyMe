@@ -15,7 +15,7 @@ export const Container = ({
       <div className="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-10">
         <div className="flex items-center space-x-8">
           {logo}
-          <div className="flex flex-1">{children}</div>
+          <div className="flex flex-1 items-center">{children}</div>
         </div>
       </div>
     </div>

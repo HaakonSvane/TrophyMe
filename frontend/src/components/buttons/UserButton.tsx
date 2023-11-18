@@ -1,7 +1,7 @@
 import { Button, ButtonProps } from "@/components/ui/button";
 import { forwardRef } from "react";
 import { cn } from "@/lib/utils";
-import Image from "next/image";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
 type UserButtonProps = {
   userId: string;
@@ -10,22 +10,21 @@ type UserButtonProps = {
 export const UserButton = forwardRef<
   HTMLButtonElement,
   Omit<ButtonProps, "children">
->(({ onClick, ...rest }, ref) => {
+>(({ onClick, asChild, ...rest }, ref) => {
   return (
     <Button
       ref={ref}
       variant="ghost"
       aria-label="See user actions"
-      className={cn("w-12 h-12 rounded-full p-2")}
+      className={cn("w-10 h-10 rounded-full p-2")}
       onClick={onClick}
+      asChild={false}
       {...rest}
     >
-      <Image
-        alt="This is you!"
-        width={28}
-        height={28}
-        src="https://avatars.githubusercontent.com/primer"
-      />
+      <Avatar className={cn("w-8 h-8")}>
+        <AvatarImage src="https://avatars.githubusercontent.com/primer" />
+        <AvatarFallback>CN</AvatarFallback>
+      </Avatar>
     </Button>
   );
 });

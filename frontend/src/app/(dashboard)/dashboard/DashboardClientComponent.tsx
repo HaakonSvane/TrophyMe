@@ -14,7 +14,7 @@ type DashboardClientComponentProps = {
   >;
 };
 
-export const DashboardClientComponnet = ({
+export const DashboardClientComponent = ({
   preloadedQuery,
 }: DashboardClientComponentProps) => {
   const environment = useRelayEnvironment();

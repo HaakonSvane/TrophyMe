@@ -1,5 +1,6 @@
 "use client";
 import { useGradient } from "@/hooks/useGradient";
+import { cn } from "@/lib/utils";
 import { useRef } from "react";
 
 type SectionHeaderProps = {
@@ -14,5 +15,17 @@ export const SectionHeader = ({ title }: SectionHeaderProps) => {
     "#110b57",
   ]);
 
-  return <h1 ref={headingRef}>{title}</h1>;
+  return (
+    <h2
+      ref={headingRef}
+      style={{
+        background: `linear-gradient(0deg, ${gradientColors})`,
+        wordSpacing: 5,
+        transition: "all ease-in-out 0.2s",
+      }}
+      className={cn("inline-block text-transparent !bg-clip-text")}
+    >
+      {title}
+    </h2>
+  );
 };

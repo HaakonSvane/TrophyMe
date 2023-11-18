@@ -1,5 +1,6 @@
 "use client";
 import { useGradient } from "@/hooks/useGradient";
+import { cn } from "@/lib/utils";
 import { useRef } from "react";
 
 type PageHeaderProps = {
@@ -19,13 +20,10 @@ export const PageHeader = ({ children }: PageHeaderProps) => {
       ref={headingRef}
       style={{
         background: `linear-gradient(0deg, ${gradientColors})`,
-        WebkitTextFillColor: "transparent",
-        WebkitBackgroundClip: "text",
-        backgroundClip: "text",
         wordSpacing: 5,
         transition: "all ease-in-out 0.2s",
-        fontWeight: "800",
       }}
+      className={cn("inline-block text-transparent !bg-clip-text")}
     >
       {children}
     </h1>

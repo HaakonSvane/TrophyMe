@@ -45,22 +45,22 @@
   }
  
   .dark {
-    --gradient: linear-gradient(to top left,#eeaf61,#ee5d6c);
+    --gradient: linear-gradient(to top left,#eeaf61,#ee5d6c, #110b57);
 
-    --background: 33 65% 4%;
-    --foreground: 33 10% 97.5%;
+    --background: 245 65% 4%;
+    --foreground: 245 10% 97.5%;
 
-    --muted: 33 24% 13.5%;
-    --muted-foreground: 35 10% 55%;
+    --muted: 245 24% 13.5%;
+    --muted-foreground: 245 10% 55%;
 
-    --popover: 33 25% 8%;
-    --popover-foreground: 33 10% 97.5%;
+    --popover: 245 25% 8%;
+    --popover-foreground: 245 10% 97.5%;
 
-    --card-foreground: 33 10% 97.5%;
-    --card: 33 25% 8%;
+    --card-foreground: 245 10% 97.5%;
+    --card: 245 25% 8%;
 
-    --border: 33 24% 13.5%;
-    --input: 33 24% 13.5%;
+    --border: 245 24% 13.5%;
+    --input: 245 24% 13.5%;
 
     --primary: 33 80% 60%;
     --primary-foreground: 33 10% 5%;
@@ -68,11 +68,11 @@
     --secondary: 33 24% 13.5%;
     --secondary-foreground: 33 10% 97.5%;
 
-    --accent: 33 24% 13.5%;
+    --accent: 245 24% 24.5%;
     --accent-foreground: 33 10% 97.5%;
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 33 10% 97.5%;
+    --destructive: 354 81% 65%;
+    --destructive-foreground: 0 10% 97.5%;
 
     --ring: 33 100% 50%;
  
@@ -90,7 +90,7 @@
     @apply scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl;
   }
   h2 {
-    @apply mt-10 scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0;
+    @apply mt-10 scroll-m-20 pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0;
   }
   h3 {
     @apply scroll-m-20 text-2xl font-semibold tracking-tight;

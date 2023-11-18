@@ -10,6 +10,7 @@
     "relay": "relay-compiler"
   },
   "dependencies": {
+    "@radix-ui/react-avatar": "^1.0.4",
     "@radix-ui/react-dropdown-menu": "^2.0.6",
     "@radix-ui/react-navigation-menu": "^1.1.4",
     "@radix-ui/react-slot": "^1.0.2",
@@ -20,8 +21,8 @@
     "eslint": "8.50.0",
     "eslint-config-next": "^14.0.0",
     "lucide-react": "^0.292.0",
-    "next": "^14.0.0",
-    "next-auth": "^4.24.4",
+    "next": "^14.0.2",
+    "next-auth": "^4.24.5",
     "next-themes": "^0.2.1",
     "postcss": "8.4.31",
     "react": "^18.2.0",
@@ -30,7 +31,7 @@
     "react-hook-form": "^7.46.2",
     "react-hot-toast": "^2.4.1",
     "react-icons": "^4.11.0",
-    "react-relay": "^15.0.0",
+    "react-relay": "^16.0.0",
     "styled-components": "^5.3.11",
     "tailwind-merge": "^2.0.0",
     "tailwindcss": "3.3.3",
@@ -43,6 +44,6 @@
     "@types/react-dom": "18.2.8",
     "@types/react-relay": "^14.1.6",
     "concurrently": "^8.2.1",
-    "relay-compiler": "^15.0.0"
+    "relay-compiler": "^16.0.0"
   }
 }
