@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<702b90576922476cb843a708bc693781>>
+ * @generated SignedSource<<ea93405f1e5320d534396bc1e8652ece>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -13,10 +13,7 @@ import { FragmentRefs } from "relay-runtime";
 export type dashboardQuery$variables = Record<PropertyKey, never>;
 export type dashboardQuery$data = {
   readonly me: {
-    readonly groups: ReadonlyArray<{
-      readonly id: string;
-      readonly " $fragmentSpreads": FragmentRefs<"DashboardGroupFragment">;
-    }>;
+    readonly " $fragmentSpreads": FragmentRefs<"GroupSectionFragment">;
   };
 };
 export type dashboardQuery = {
@@ -55,21 +52,9 @@ return {
         "plural": false,
         "selections": [
           {
-            "alias": null,
             "args": null,
-            "concreteType": "Group",
-            "kind": "LinkedField",
-            "name": "groups",
-            "plural": true,
-            "selections": [
-              (v0/*: any*/),
-              {
-                "args": null,
-                "kind": "FragmentSpread",
-                "name": "DashboardGroupFragment"
-              }
-            ],
-            "storageKey": null
+            "kind": "FragmentSpread",
+            "name": "GroupSectionFragment"
           }
         ],
         "storageKey": null
@@ -202,16 +187,16 @@ return {
     ]
   },
   "params": {
-    "cacheID": "8a0c9680d98ea71ddcc255ade56358c3",
+    "cacheID": "ad48ebf1d35b34b0112d4632f6891c93",
     "id": null,
     "metadata": {},
     "name": "dashboardQuery",
     "operationKind": "query",
-    "text": "query dashboardQuery {\n  me {\n    groups {\n      id\n      ...DashboardGroupFragment\n    }\n    id\n  }\n}\n\nfragment DashboardGroupFragment on Group {\n  id\n  name\n  members {\n    id\n    ...MemberRowFragment\n  }\n}\n\nfragment MemberRowFragment on User {\n  username\n  userProfile {\n    firstName\n    lastName\n  }\n  ...TrophyStackFragment\n}\n\nfragment TrophyAvatarFragment on Trophy {\n  game {\n    symbol\n    name\n    id\n  }\n}\n\nfragment TrophyStackFragment on User {\n  trophies {\n    id\n    awardedDate\n    game {\n      groupId\n      id\n    }\n    ...TrophyAvatarFragment\n  }\n}\n"
+    "text": "query dashboardQuery {\n  me {\n    ...GroupSectionFragment\n    id\n  }\n}\n\nfragment DashboardGroupFragment on Group {\n  id\n  name\n  members {\n    id\n    ...MemberRowFragment\n  }\n}\n\nfragment GroupSectionFragment on User {\n  groups {\n    id\n    ...DashboardGroupFragment\n  }\n}\n\nfragment MemberRowFragment on User {\n  username\n  userProfile {\n    firstName\n    lastName\n  }\n  ...TrophyStackFragment\n}\n\nfragment TrophyAvatarFragment on Trophy {\n  game {\n    symbol\n    name\n    id\n  }\n}\n\nfragment TrophyStackFragment on User {\n  trophies {\n    id\n    awardedDate\n    game {\n      groupId\n      id\n    }\n    ...TrophyAvatarFragment\n  }\n}\n"
   }
 };
 })();
 
-(node as any).hash = "fc570373d827319981fa303b52f7476a";
+(node as any).hash = "80e3ab627bfa14fdb910f629e916a482";
 
 export default node;

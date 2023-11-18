@@ -14,18 +14,16 @@ export const Section = ({
   trailingAdornment,
   children,
 }: PropsWithChildren<SectionProps>) => (
-  <div>
-    <div className={cn("flex flex-col gap-2")}>
-      <div>
-        <SectionHeader title={title} />
-        {trailingAdornment}
-      </div>
-      {description && (
-        <small className={cn("text-sm text-muted-foreground")}>
-          {description}
-        </small>
-      )}
-      {children}
+  <div className={cn("flex flex-col gap-2")}>
+    <div className={cn("flex flex-row")}>
+      <SectionHeader title={title} />
+      {trailingAdornment}
     </div>
+    {description && (
+      <small className={cn("text-sm text-muted-foreground")}>
+        {description}
+      </small>
+    )}
+    {children}
   </div>
 );

@@ -18,6 +18,7 @@ export const MainComponent = ({ children }: PropsWithChildren) => {
       <RelayEnvironmentProvider environment={relayEnvironment}>
         <NextThemesProvider
           attribute="class"
+          enableSystem={false}
           defaultTheme="dark"
           disableTransitionOnChange
         >
