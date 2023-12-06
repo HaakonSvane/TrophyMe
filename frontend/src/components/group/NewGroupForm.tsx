@@ -14,14 +14,58 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { graphql, useMutation } from "react-relay";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Users, Crown } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { Textarea } from "@/components/ui/textarea";
+import { NewGroupFormMutation } from "@/__generated__/NewGroupFormMutation.graphql";
+
+const NewGroupMutation = graphql`
+  mutation NewGroupFormMutation(
+    $name: String!
+    $description: String
+    $desicionModel: RuleType!
+  ) {
+    createGroup(
+      input: {
+        name: $name
+        description: $description
+        decisionModel: $desicionModel
+      }
+    ) {
+      group {
+        id
+        name
+        description
+      }
+    }
+  }
+`;
 
 export const NewGroupForm = () => {
   const form = useForm<z.infer<typeof newGroupSchema>>({
     resolver: zodResolver(newGroupSchema),
   });
 
+  const [commitMutation, isMutationInFlight] =
+    useMutation<NewGroupFormMutation>(NewGroupMutation);
+
   const onSubmit = (data: z.infer<typeof newGroupSchema>) => {
-    console.log(data);
+    commitMutation({
+      variables: {
+        name: data.name,
+        description: data.description,
+        desicionModel: data.decisionModel,
+      },
+      optimisticResponse: {},
+    });
   };
 
   return (
@@ -45,12 +89,40 @@ export const NewGroupForm = () => {
         />
         <FormField
           control={form.control}
+          name="decisionModel"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Decision model</FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select model..." />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  <SelectItem value="DEMOCRACY" leadingIcon={<Users />}>
+                    Democracy
+                  </SelectItem>
+                  <SelectItem value="DICTATORSHIP" leadingIcon={<Crown />}>
+                    Dictatorship
+                  </SelectItem>
+                </SelectContent>
+              </Select>
+              <FormDescription className={cn("flex flex-1 flex-row")}>
+                How do you want to have the group be controlled?
+              </FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
           name="description"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Description</FormLabel>
               <FormControl>
-                <Input {...field} />
+                <Textarea {...field} />
               </FormControl>
               <FormDescription>
                 Enter something descriptive to make inviting your friends
@@ -60,7 +132,13 @@ export const NewGroupForm = () => {
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        <Button
+          type="submit"
+          disabled={isMutationInFlight}
+          aria-busy={isMutationInFlight}
+        >
+          Create group
+        </Button>
       </form>
     </Form>
   );

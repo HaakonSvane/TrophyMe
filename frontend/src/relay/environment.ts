@@ -26,7 +26,7 @@ export async function networkFetch(
   if (IS_SERVER) {
     response = await graphQlQuery(body);
   } else {
-    response = await fetch(`/api/graphql/query`);
+    response = await fetch(`/api/graphql/query`, { method: "POST", body });
   }
   if (!response.ok) {
     throw new Error(`Network fetch error: ${response.status}`);
