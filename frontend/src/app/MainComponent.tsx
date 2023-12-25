@@ -8,25 +8,21 @@ import { SessionProvider } from "next-auth/react";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 
 export const MainComponent = ({ children }: PropsWithChildren) => {
-  const fallbackRender = ({ error }: FallbackProps) => (
-    <FatalError error={error} />
-  );
+    const fallbackRender = ({ error }: FallbackProps) => <FatalError error={error} />;
 
-  const relayEnvironment = getCurrentEnvironment();
-  return (
-    <SessionProvider>
-      <RelayEnvironmentProvider environment={relayEnvironment}>
-        <NextThemesProvider
-          attribute="class"
-          enableSystem={true}
-          defaultTheme="dark"
-          disableTransitionOnChange
-        >
-          <ErrorBoundary fallbackRender={fallbackRender}>
-            {children}
-          </ErrorBoundary>
-        </NextThemesProvider>
-      </RelayEnvironmentProvider>
-    </SessionProvider>
-  );
+    const relayEnvironment = getCurrentEnvironment();
+    return (
+        <SessionProvider>
+            <RelayEnvironmentProvider environment={relayEnvironment}>
+                <NextThemesProvider
+                    attribute="class"
+                    enableSystem={true}
+                    defaultTheme="dark"
+                    disableTransitionOnChange
+                >
+                    <ErrorBoundary fallbackRender={fallbackRender}>{children}</ErrorBoundary>
+                </NextThemesProvider>
+            </RelayEnvironmentProvider>
+        </SessionProvider>
+    );
 };

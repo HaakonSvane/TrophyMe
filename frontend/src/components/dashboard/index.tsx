@@ -10,28 +10,28 @@ import { GroupSection } from "./sections/GroupSection";
 import { cn } from "@/lib/utils";
 
 const DashboardQuery = graphql`
-  query dashboardQuery {
-    me {
-      ...GroupSectionFragment
+    query dashboardQuery {
+        me {
+            ...GroupSectionFragment
+        }
     }
-  }
 `;
 
 type DashboardProps = {
-  queryRef: PreloadedQuery<dashboardQuery>;
+    queryRef: PreloadedQuery<dashboardQuery>;
 };
 
 export const Dashboard = ({ queryRef }: DashboardProps) => {
-  const data = usePreloadedQuery(DashboardQuery, queryRef);
-  return (
-    <Suspense fallback="Loading client side...">
-      <PageHeader className={cn("mb-10")}>{`Welcome`}</PageHeader>
-      <div className="grid gap-16">
-        <GroupSection queryReference={data.me} />
-        <Section title="recent activity">
-          <MyTimeline />
-        </Section>
-      </div>
-    </Suspense>
-  );
+    const data = usePreloadedQuery(DashboardQuery, queryRef);
+    return (
+        <Suspense fallback="Loading client side...">
+            <PageHeader className={cn("mb-10")}>{`Welcome`}</PageHeader>
+            <div className="grid gap-16">
+                <GroupSection queryReference={data.me} />
+                <Section title="recent activity">
+                    <MyTimeline />
+                </Section>
+            </div>
+        </Suspense>
+    );
 };

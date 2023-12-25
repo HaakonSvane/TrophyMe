@@ -2,16 +2,16 @@ import NextAuth from "next-auth";
 import { JWT } from "next-auth/jwt";
 
 declare module "next-auth" {
-  interface Session {
-    idToken: string;
-  }
-  interface JWT {
-    idToken: string;
-  }
+    interface Session {
+        idToken: string;
+    }
+    interface JWT {
+        idToken: string;
+    }
 }
 
 declare module "next-auth/jwt" {
-  interface JWT {
-    idToken?: string;
-  }
+    interface JWT {
+        idToken?: string;
+    }
 }

@@ -8,27 +8,27 @@ import { ProviderList } from "@/components/auth/ProviderList";
 import { Logo } from "@/components/header/Logo";
 
 const SignInPage = () => {
-  const SignInSpinner = () => (
-    <div className="flex justify-center m-auto">
-      <Spinner />
-    </div>
-  );
+    const SignInSpinner = () => (
+        <div className="flex justify-center m-auto">
+            <Spinner />
+        </div>
+    );
 
-  return (
-    <div>
-      <MidScreenContent style={{ gap: 8 }}>
-        <Image src="/trojiLogo.png" alt="Troji Logo" width={200} height={200} />
-        <Logo />
+    return (
+        <div>
+            <MidScreenContent style={{ gap: 8 }}>
+                <Image src="/trojiLogo.png" alt="Troji Logo" width={200} height={200} />
+                <Logo />
 
-        <SectionHeader title="Sign in" />
-        <OutlinedBox className="py-8">
-          <Suspense fallback={<SignInSpinner />}>
-            <ProviderList />
-          </Suspense>
-        </OutlinedBox>
-      </MidScreenContent>
-    </div>
-  );
+                <SectionHeader title="Sign in" />
+                <OutlinedBox className="py-8">
+                    <Suspense fallback={<SignInSpinner />}>
+                        <ProviderList />
+                    </Suspense>
+                </OutlinedBox>
+            </MidScreenContent>
+        </div>
+    );
 };
 
 export default SignInPage;

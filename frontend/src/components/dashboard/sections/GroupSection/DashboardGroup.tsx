@@ -4,33 +4,29 @@ import { DashboardGroupFragment$key } from "@/generated/DashboardGroupFragment.g
 import { MemberRow } from "./MemberRow";
 
 const DashboardFragment = graphql`
-  fragment DashboardGroupFragment on Group {
-    id
-    name
-    members {
-      id
-      ...MemberRowFragment
+    fragment DashboardGroupFragment on Group {
+        id
+        name
+        members {
+            id
+            ...MemberRowFragment
+        }
     }
-  }
 `;
 
 type DashboardGroupProps = {
-  queryReference: DashboardGroupFragment$key;
+    queryReference: DashboardGroupFragment$key;
 };
 
 export const DashboardGroup = ({ queryReference }: DashboardGroupProps) => {
-  const data = useFragment(DashboardFragment, queryReference);
-  return (
-    <OutlinedBox title={data.name}>
-      <div style={{ flexDirection: "row" }}>
-        {data.members.map((member) => (
-          <MemberRow
-            groupId={data.id}
-            key={member.id}
-            queryReference={member}
-          />
-        ))}
-      </div>
-    </OutlinedBox>
-  );
+    const data = useFragment(DashboardFragment, queryReference);
+    return (
+        <OutlinedBox title={data.name}>
+            <div style={{ flexDirection: "row" }}>
+                {data.members.map(member => (
+                    <MemberRow groupId={data.id} key={member.id} queryReference={member} />
+                ))}
+            </div>
+        </OutlinedBox>
+    );
 };

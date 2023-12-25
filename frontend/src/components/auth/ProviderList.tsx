@@ -8,20 +8,20 @@ import { cn } from "@/lib/utils";
 const providerResource = suspendablePromise(getProviders());
 
 export const ProviderList = () => {
-  const searchParams = useSearchParams();
-  const from = searchParams.get("from") ?? "/dashboard";
-  const providers = providerResource.read();
-  if (!providers) return;
-  return (
-    <>
-      {Object.values(providers).map((provider) => (
-        <ProviderButton
-          key={provider.name}
-          provider={provider}
-          callbackUrl={from}
-          className={cn("w-full", "justify-center")}
-        />
-      ))}
-    </>
-  );
+    const searchParams = useSearchParams();
+    const from = searchParams.get("from") ?? "/dashboard";
+    const providers = providerResource.read();
+    if (!providers) return;
+    return (
+        <>
+            {Object.values(providers).map(provider => (
+                <ProviderButton
+                    key={provider.name}
+                    provider={provider}
+                    callbackUrl={from}
+                    className={cn("w-full", "justify-center")}
+                />
+            ))}
+        </>
+    );
 };

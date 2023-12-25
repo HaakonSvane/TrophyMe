@@ -1,18 +1,15 @@
 type MidScreenContentProps = {
-  children: React.ReactNode;
+    children: React.ReactNode;
 };
 
 export const MidScreenContent = ({
-  children,
-  className,
-  style,
+    children,
+    className,
+    style,
 }: MidScreenContentProps & React.HTMLAttributes<HTMLDivElement>) => {
-  return (
-    <div
-      className={`h-screen flex m-auto max-w-md flex-col ${className}`}
-      style={style}
-    >
-      {children}
-    </div>
-  );
+    return (
+        <div className={`h-screen flex m-auto max-w-md flex-col ${className}`} style={style}>
+            {children}
+        </div>
+    );
 };
