@@ -8,7 +8,6 @@ import { redirect } from "next/navigation";
 
 const LandingPage = async () => {
     const session = await getServerSession(authOptions);
-    console.log(session);
     if (session) {
         redirect("/dashboard");
     }

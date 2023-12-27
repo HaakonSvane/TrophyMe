@@ -17,7 +17,7 @@ export const FatalError = ({ error }: FatalErrorProps) => {
                 </div>
                 {error && (
                     <div>
-                        <small>{niceError}</small>
+                        <code>{niceError}</code>
                     </div>
                 )}
             </div>

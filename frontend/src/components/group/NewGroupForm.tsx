@@ -28,20 +28,21 @@ import { Textarea } from "@/components/ui/textarea";
 import { NewGroupFormMutation } from "@/__generated__/NewGroupFormMutation.graphql";
 
 const NewGroupMutation = graphql`
-    mutation NewGroupFormMutation($name: String!, $description: String, $desicionModel: RuleType!) {
-        createGroup(
-            input: { name: $name, description: $description, decisionModel: $desicionModel }
-        ) {
-            group {
-                id
-                name
-                description
+    mutation NewGroupFormMutation($input: CreateGroupInput!, $connections: [ID!]!) {
+        createGroup(input: $input) {
+            group @appendNode(connections: $connections, edgeTypeName: "GroupsEdge") {
+                ...DashboardGroupFragment
             }
         }
     }
 `;
 
-export const NewGroupForm = () => {
+type NewGroupFormProps = {
+    connectionId: string;
+    onSuccess?: () => void;
+};
+
+export const NewGroupForm = ({ connectionId, onSuccess }: NewGroupFormProps) => {
     const form = useForm<z.infer<typeof newGroupSchema>>({
         resolver: zodResolver(newGroupSchema),
     });
@@ -52,12 +53,11 @@ export const NewGroupForm = () => {
     const onSubmit = (data: z.infer<typeof newGroupSchema>) => {
         commitMutation({
             variables: {
-                name: data.name,
-                description: data.description,
-                desicionModel: data.decisionModel,
+                input: data,
+                connections: [connectionId],
             },
-            optimisticResponse: {},
         });
+        onSuccess?.();
     };
 
     return (

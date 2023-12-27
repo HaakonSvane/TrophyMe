@@ -1,12 +1,19 @@
-import { Header } from "@/components/header";
+import DashboardQueryNode, { pageDashboardQuery } from "@/generated/pageDashboardQuery.graphql";
+import { loadSerializableQuery } from "@/relay/loadSerializableQuery";
+import { DashboardClientMainView } from "./DashboardClientMainView";
 
-const MainSiteLayout = ({ children }: React.PropsWithChildren) => {
+const MainSiteLayout = async ({ children }: React.PropsWithChildren) => {
+    const preloadedQuery = await loadSerializableQuery<
+        typeof DashboardQueryNode,
+        pageDashboardQuery
+    >(DashboardQueryNode.params, {});
     return (
-        <>
-            <Header />
-            <div className="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-10 py-6">{children}</div>
-        </>
+        <DashboardClientMainView preloadedQuery={preloadedQuery}>
+            {children}
+        </DashboardClientMainView>
     );
 };
 
 export default MainSiteLayout;
+
+export const revalidate = 0;

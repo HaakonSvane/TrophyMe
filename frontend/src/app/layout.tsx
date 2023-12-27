@@ -4,6 +4,7 @@ import { PropsWithChildren } from "react";
 import { MainComponent } from "./MainComponent";
 import { cn } from "@/lib/utils";
 import { Poppins } from "next/font/google";
+import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
     title: "troji",
@@ -22,6 +23,7 @@ const RootLayout = ({ children }: PropsWithChildren) => {
             <body
                 className={cn("min-h-screen bg-background font-sans antialiased", poppins.variable)}
             >
+                <Toaster richColors />
                 <MainComponent>{children}</MainComponent>
             </body>
         </html>
