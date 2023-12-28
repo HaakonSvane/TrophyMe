@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<a0e41c676c27060a03766ff7e3609ad2>>
+ * @generated SignedSource<<8e6498c12bd428407c83dc0545399fdf>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -10,15 +10,15 @@
 
 import { ConcreteRequest, Query } from 'relay-runtime';
 import { FragmentRefs } from "relay-runtime";
-export type pageDashboardQuery$variables = Record<PropertyKey, never>;
-export type pageDashboardQuery$data = {
+export type GroupsPageQuery$variables = Record<PropertyKey, never>;
+export type GroupsPageQuery$data = {
   readonly me: {
-    readonly " $fragmentSpreads": FragmentRefs<"GroupSectionFragment">;
+    readonly " $fragmentSpreads": FragmentRefs<"MyGroupsFragment">;
   };
 };
-export type pageDashboardQuery = {
-  response: pageDashboardQuery$data;
-  variables: pageDashboardQuery$variables;
+export type GroupsPageQuery = {
+  response: GroupsPageQuery$data;
+  variables: GroupsPageQuery$variables;
 };
 
 const node: ConcreteRequest = (function(){
@@ -26,7 +26,7 @@ var v0 = [
   {
     "kind": "Literal",
     "name": "first",
-    "value": 50
+    "value": 10
   }
 ],
 v1 = {
@@ -48,7 +48,7 @@ return {
     "argumentDefinitions": [],
     "kind": "Fragment",
     "metadata": null,
-    "name": "pageDashboardQuery",
+    "name": "GroupsPageQuery",
     "selections": [
       {
         "alias": null,
@@ -61,7 +61,7 @@ return {
           {
             "args": null,
             "kind": "FragmentSpread",
-            "name": "GroupSectionFragment"
+            "name": "MyGroupsFragment"
           }
         ],
         "storageKey": null
@@ -74,7 +74,7 @@ return {
   "operation": {
     "argumentDefinitions": [],
     "kind": "Operation",
-    "name": "pageDashboardQuery",
+    "name": "GroupsPageQuery",
     "selections": [
       {
         "alias": null,
@@ -92,6 +92,13 @@ return {
             "name": "groups",
             "plural": false,
             "selections": [
+              {
+                "alias": null,
+                "args": null,
+                "kind": "ScalarField",
+                "name": "totalCount",
+                "storageKey": null
+              },
               {
                 "alias": null,
                 "args": null,
@@ -258,14 +265,14 @@ return {
                 ]
               }
             ],
-            "storageKey": "groups(first:50)"
+            "storageKey": "groups(first:10)"
           },
           {
             "alias": null,
             "args": (v0/*: any*/),
             "filters": null,
             "handle": "connection",
-            "key": "GroupSectionFragment_groups",
+            "key": "GroupsFragment_groups",
             "kind": "LinkedHandle",
             "name": "groups"
           },
@@ -276,16 +283,16 @@ return {
     ]
   },
   "params": {
-    "cacheID": "ca90d039fd2c0574e716a968420138d7",
+    "cacheID": "80c4ff3fabdd9fa47e16723a5cbfc0a1",
     "id": null,
     "metadata": {},
-    "name": "pageDashboardQuery",
+    "name": "GroupsPageQuery",
     "operationKind": "query",
-    "text": "query pageDashboardQuery {\n  me {\n    ...GroupSectionFragment\n    id\n  }\n}\n\nfragment DashboardGroupFragment on Group {\n  id\n  name\n  members {\n    id\n    ...MemberRowFragment\n  }\n}\n\nfragment GroupSectionFragment on User {\n  groups(first: 50) {\n    edges {\n      node {\n        id\n        ...DashboardGroupFragment\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n\nfragment MemberRowFragment on User {\n  username\n  userProfile {\n    firstName\n    lastName\n  }\n  ...TrophyStackFragment\n}\n\nfragment TrophyAvatarFragment on Trophy {\n  game {\n    symbol\n    name\n    id\n  }\n}\n\nfragment TrophyStackFragment on User {\n  trophies {\n    id\n    awardedDate\n    game {\n      groupId\n      id\n    }\n    ...TrophyAvatarFragment\n  }\n}\n"
+    "text": "query GroupsPageQuery {\n  me {\n    ...MyGroupsFragment\n    id\n  }\n}\n\nfragment GroupBoxFragment on Group {\n  id\n  name\n  members {\n    id\n    ...MemberRowFragment\n  }\n}\n\nfragment MemberRowFragment on User {\n  username\n  userProfile {\n    firstName\n    lastName\n  }\n  ...TrophyStackFragment\n}\n\nfragment MyGroupsFragment on User {\n  groups(first: 10) {\n    totalCount\n    edges {\n      node {\n        id\n        ...GroupBoxFragment\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n\nfragment TrophyAvatarFragment on Trophy {\n  game {\n    symbol\n    name\n    id\n  }\n}\n\nfragment TrophyStackFragment on User {\n  trophies {\n    id\n    awardedDate\n    game {\n      groupId\n      id\n    }\n    ...TrophyAvatarFragment\n  }\n}\n"
   }
 };
 })();
 
-(node as any).hash = "40385e32bf3e5765a9bf34268ce52433";
+(node as any).hash = "22dd25d1ba1e45040504e87b11a4f8d4";
 
 export default node;

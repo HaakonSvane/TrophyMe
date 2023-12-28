@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<431dfc9a1a16112a2891b46feb0fd036>>
+ * @generated SignedSource<<2733f3b65f678d109547b062ae95a8cf>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -23,7 +23,7 @@ export type NewGroupFormMutation$variables = {
 export type NewGroupFormMutation$data = {
   readonly createGroup: {
     readonly group: {
-      readonly " $fragmentSpreads": FragmentRefs<"DashboardGroupFragment">;
+      readonly " $fragmentSpreads": FragmentRefs<"GroupBoxFragment">;
     } | null | undefined;
   };
 };
@@ -93,7 +93,7 @@ return {
               {
                 "args": null,
                 "kind": "FragmentSpread",
-                "name": "DashboardGroupFragment"
+                "name": "GroupBoxFragment"
               }
             ],
             "storageKey": null
@@ -252,16 +252,16 @@ return {
     ]
   },
   "params": {
-    "cacheID": "d2d7cc5c18e7f342a4984e4410e04ea1",
+    "cacheID": "55ee52c5009bca1242553f95b5422f77",
     "id": null,
     "metadata": {},
     "name": "NewGroupFormMutation",
     "operationKind": "mutation",
-    "text": "mutation NewGroupFormMutation(\n  $input: CreateGroupInput!\n) {\n  createGroup(input: $input) {\n    group {\n      ...DashboardGroupFragment\n      id\n    }\n  }\n}\n\nfragment DashboardGroupFragment on Group {\n  id\n  name\n  members {\n    id\n    ...MemberRowFragment\n  }\n}\n\nfragment MemberRowFragment on User {\n  username\n  userProfile {\n    firstName\n    lastName\n  }\n  ...TrophyStackFragment\n}\n\nfragment TrophyAvatarFragment on Trophy {\n  game {\n    symbol\n    name\n    id\n  }\n}\n\nfragment TrophyStackFragment on User {\n  trophies {\n    id\n    awardedDate\n    game {\n      groupId\n      id\n    }\n    ...TrophyAvatarFragment\n  }\n}\n"
+    "text": "mutation NewGroupFormMutation(\n  $input: CreateGroupInput!\n) {\n  createGroup(input: $input) {\n    group {\n      ...GroupBoxFragment\n      id\n    }\n  }\n}\n\nfragment GroupBoxFragment on Group {\n  id\n  name\n  members {\n    id\n    ...MemberRowFragment\n  }\n}\n\nfragment MemberRowFragment on User {\n  username\n  userProfile {\n    firstName\n    lastName\n  }\n  ...TrophyStackFragment\n}\n\nfragment TrophyAvatarFragment on Trophy {\n  game {\n    symbol\n    name\n    id\n  }\n}\n\nfragment TrophyStackFragment on User {\n  trophies {\n    id\n    awardedDate\n    game {\n      groupId\n      id\n    }\n    ...TrophyAvatarFragment\n  }\n}\n"
   }
 };
 })();
 
-(node as any).hash = "170afe900b27e3fc34b06d4b4ee7606e";
+(node as any).hash = "523d9eeec230c8985951b8ab849be715";
 
 export default node;

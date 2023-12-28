@@ -9,8 +9,8 @@ import { ThemeProvider as NextThemesProvider } from "next-themes";
 
 export const MainComponent = ({ children }: PropsWithChildren) => {
     const fallbackRender = ({ error }: FallbackProps) => <FatalError error={error} />;
-
     const relayEnvironment = getCurrentEnvironment();
+
     return (
         <SessionProvider>
             <RelayEnvironmentProvider environment={relayEnvironment}>

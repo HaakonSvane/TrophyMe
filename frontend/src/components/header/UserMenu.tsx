@@ -9,30 +9,51 @@ import {
 import { User, LogOut, MessageSquarePlus } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { signOut } from "next-auth/react";
+import { graphql, useFragment } from "react-relay";
+import { UserMenuFragment$key } from "@/__generated__/UserMenuFragment.graphql";
 
-export const UserMenu = () => (
-    <>
-        <DropdownMenuArrow />
-        <DropdownMenuLabel>User menu</DropdownMenuLabel>
-        <DropdownMenuSeparator />
-        <DropdownMenuGroup>
-            <DropdownMenuItem>
-                <User className={cn("mr-4")} />
-                <span>Profile</span>
-            </DropdownMenuItem>
-            <DropdownMenuItem className={cn("text-destructive")} onClick={() => signOut()}>
-                <LogOut className={cn("mr-4")} />
-                <span>Sign out</span>
-            </DropdownMenuItem>
-        </DropdownMenuGroup>
+const UserMenuFragment = graphql`
+    fragment UserMenuFragment on User {
+        username
+        userProfile {
+            firstName
+            lastName
+        }
+    }
+`;
 
-        <DropdownMenuSeparator />
+type UserMenuProps = {
+    fragmentKey: UserMenuFragment$key;
+};
 
-        <DropdownMenuGroup>
-            <DropdownMenuItem>
-                <MessageSquarePlus className={cn("mr-4")} />
-                <span>Provide feedback</span>
-            </DropdownMenuItem>
-        </DropdownMenuGroup>
-    </>
-);
+export const UserMenu = ({ fragmentKey }: UserMenuProps) => {
+    const data = useFragment(UserMenuFragment, fragmentKey);
+    const name: Name | undefined = data.userProfile ? new Name(data.userProfile) : undefined;
+
+    return (
+        <>
+            <DropdownMenuArrow />
+            <DropdownMenuLabel>{name?.fullName ?? data.username}</DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuGroup>
+                <DropdownMenuItem>
+                    <User className={cn("mr-4")} />
+                    <span>Profile</span>
+                </DropdownMenuItem>
+                <DropdownMenuItem className={cn("text-destructive")} onClick={() => signOut()}>
+                    <LogOut className={cn("mr-4")} />
+                    <span>Sign out</span>
+                </DropdownMenuItem>
+            </DropdownMenuGroup>
+
+            <DropdownMenuSeparator />
+
+            <DropdownMenuGroup>
+                <DropdownMenuItem>
+                    <MessageSquarePlus className={cn("mr-4")} />
+                    <span>Provide feedback</span>
+                </DropdownMenuItem>
+            </DropdownMenuGroup>
+        </>
+    );
+};

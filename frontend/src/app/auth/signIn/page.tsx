@@ -5,7 +5,7 @@ import { SectionHeader } from "@/components/labels/SectionHeader";
 import { OutlinedBox } from "@/components/containers/OutlinedBox";
 import { Suspense } from "react";
 import { ProviderList } from "@/components/auth/ProviderList";
-import { Logo } from "@/components/header/Logo";
+import { Logo } from "@/components/Header/Logo";
 
 const SignInPage = () => {
     const SignInSpinner = () => (

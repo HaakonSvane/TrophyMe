@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<469719c11873db47892a2588935fc412>>
+ * @generated SignedSource<<062a0b1f46e6d21e80a8d921a561c2a2>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -10,18 +10,18 @@
 
 import { Fragment, ReaderFragment } from 'relay-runtime';
 import { FragmentRefs } from "relay-runtime";
-export type DashboardGroupFragment$data = {
+export type GroupBoxFragment$data = {
   readonly id: string;
   readonly members: ReadonlyArray<{
     readonly id: string;
     readonly " $fragmentSpreads": FragmentRefs<"MemberRowFragment">;
   }>;
   readonly name: string;
-  readonly " $fragmentType": "DashboardGroupFragment";
+  readonly " $fragmentType": "GroupBoxFragment";
 };
-export type DashboardGroupFragment$key = {
-  readonly " $data"?: DashboardGroupFragment$data;
-  readonly " $fragmentSpreads": FragmentRefs<"DashboardGroupFragment">;
+export type GroupBoxFragment$key = {
+  readonly " $data"?: GroupBoxFragment$data;
+  readonly " $fragmentSpreads": FragmentRefs<"GroupBoxFragment">;
 };
 
 const node: ReaderFragment = (function(){
@@ -36,7 +36,7 @@ return {
   "argumentDefinitions": [],
   "kind": "Fragment",
   "metadata": null,
-  "name": "DashboardGroupFragment",
+  "name": "GroupBoxFragment",
   "selections": [
     (v0/*: any*/),
     {
@@ -69,6 +69,6 @@ return {
 };
 })();
 
-(node as any).hash = "c6a8830dc15723f09c10d6f33a3d4b65";
+(node as any).hash = "860a83ae574aaa0f7473736791fc0d52";
 
 export default node;

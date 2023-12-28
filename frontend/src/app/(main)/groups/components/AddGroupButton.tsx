@@ -1,4 +1,4 @@
-import { NewGroupForm } from "@/components/group/NewGroupForm";
+import { NewGroupForm } from "@/app/(main)/groups/components/NewGroupForm";
 import { Button } from "@/components/ui/button";
 import {
     Dialog,

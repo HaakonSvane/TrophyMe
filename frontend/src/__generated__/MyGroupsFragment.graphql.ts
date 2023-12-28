@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<1d0e2c27b65eef9836d289aadd7c7bef>>
+ * @generated SignedSource<<d55f93506390bf0126ba389314ba07a3>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -10,21 +10,22 @@
 
 import { Fragment, ReaderFragment } from 'relay-runtime';
 import { FragmentRefs } from "relay-runtime";
-export type GroupSectionFragment$data = {
+export type MyGroupsFragment$data = {
   readonly groups: {
     readonly __id: string;
     readonly edges: ReadonlyArray<{
       readonly node: {
         readonly id: string;
-        readonly " $fragmentSpreads": FragmentRefs<"DashboardGroupFragment">;
+        readonly " $fragmentSpreads": FragmentRefs<"GroupBoxFragment">;
       };
     }> | null | undefined;
+    readonly totalCount: number;
   } | null | undefined;
-  readonly " $fragmentType": "GroupSectionFragment";
+  readonly " $fragmentType": "MyGroupsFragment";
 };
-export type GroupSectionFragment$key = {
-  readonly " $data"?: GroupSectionFragment$data;
-  readonly " $fragmentSpreads": FragmentRefs<"GroupSectionFragment">;
+export type MyGroupsFragment$key = {
+  readonly " $data"?: MyGroupsFragment$data;
+  readonly " $fragmentSpreads": FragmentRefs<"MyGroupsFragment">;
 };
 
 const node: ReaderFragment = {
@@ -42,16 +43,23 @@ const node: ReaderFragment = {
       }
     ]
   },
-  "name": "GroupSectionFragment",
+  "name": "MyGroupsFragment",
   "selections": [
     {
       "alias": "groups",
       "args": null,
       "concreteType": "GroupsConnection",
       "kind": "LinkedField",
-      "name": "__GroupSectionFragment_groups_connection",
+      "name": "__GroupsFragment_groups_connection",
       "plural": false,
       "selections": [
+        {
+          "alias": null,
+          "args": null,
+          "kind": "ScalarField",
+          "name": "totalCount",
+          "storageKey": null
+        },
         {
           "alias": null,
           "args": null,
@@ -78,7 +86,7 @@ const node: ReaderFragment = {
                 {
                   "args": null,
                   "kind": "FragmentSpread",
-                  "name": "DashboardGroupFragment"
+                  "name": "GroupBoxFragment"
                 },
                 {
                   "alias": null,
@@ -145,6 +153,6 @@ const node: ReaderFragment = {
   "abstractKey": null
 };
 
-(node as any).hash = "3f7503feb1488fdb98206bd9399b6d53";
+(node as any).hash = "d6b4d8f7f66dd2686c29504784c74f72";
 
 export default node;

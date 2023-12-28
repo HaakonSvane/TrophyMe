@@ -4,14 +4,24 @@ import { Container } from "./Container";
 import { Navigator } from "./Navigator";
 import { UserButton } from "@/components/buttons/UserButton";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from "../ui/dropdown-menu";
-import { PreloadedQuery } from "react-relay";
-import { pageDashboardQuery } from "@/__generated__/pageDashboardQuery.graphql";
+import { PreloadedQuery, graphql, usePreloadedQuery } from "react-relay";
+import { HeaderQuery } from "@/generated/HeaderQuery.graphql";
+
+const HeaderQuery = graphql`
+    query HeaderQuery {
+        me {
+            ...UserMenuFragment
+        }
+    }
+`;
 
 type HeaderProps = {
-    queryRef: PreloadedQuery<pageDashboardQuery>;
+    queryRef: PreloadedQuery<HeaderQuery>;
 };
 
 export const Header = ({ queryRef }: HeaderProps) => {
+    const data = usePreloadedQuery(HeaderQuery, queryRef);
+
     return (
         <Container logo={<Logo />}>
             <div className="flex flex-1">
@@ -22,7 +32,7 @@ export const Header = ({ queryRef }: HeaderProps) => {
                     <UserButton />
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
-                    <UserMenu />
+                    <UserMenu fragmentKey={data.me} />
                 </DropdownMenuContent>
             </DropdownMenu>
         </Container>

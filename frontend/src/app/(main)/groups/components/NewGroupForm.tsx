@@ -31,7 +31,7 @@ const NewGroupMutation = graphql`
     mutation NewGroupFormMutation($input: CreateGroupInput!, $connections: [ID!]!) {
         createGroup(input: $input) {
             group @appendNode(connections: $connections, edgeTypeName: "GroupsEdge") {
-                ...DashboardGroupFragment
+                ...GroupBoxFragment
             }
         }
     }
