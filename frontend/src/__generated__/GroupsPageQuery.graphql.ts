@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<8e6498c12bd428407c83dc0545399fdf>>
+ * @generated SignedSource<<e923f774476d88e590fdfb015224e8b9>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -117,6 +117,13 @@ return {
                     "selections": [
                       (v1/*: any*/),
                       (v2/*: any*/),
+                      {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "description",
+                        "storageKey": null
+                      },
                       {
                         "alias": null,
                         "args": null,
@@ -283,12 +290,12 @@ return {
     ]
   },
   "params": {
-    "cacheID": "80c4ff3fabdd9fa47e16723a5cbfc0a1",
+    "cacheID": "12ccad617da948eb2183fd2faf41cbdd",
     "id": null,
     "metadata": {},
     "name": "GroupsPageQuery",
     "operationKind": "query",
-    "text": "query GroupsPageQuery {\n  me {\n    ...MyGroupsFragment\n    id\n  }\n}\n\nfragment GroupBoxFragment on Group {\n  id\n  name\n  members {\n    id\n    ...MemberRowFragment\n  }\n}\n\nfragment MemberRowFragment on User {\n  username\n  userProfile {\n    firstName\n    lastName\n  }\n  ...TrophyStackFragment\n}\n\nfragment MyGroupsFragment on User {\n  groups(first: 10) {\n    totalCount\n    edges {\n      node {\n        id\n        ...GroupBoxFragment\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n\nfragment TrophyAvatarFragment on Trophy {\n  game {\n    symbol\n    name\n    id\n  }\n}\n\nfragment TrophyStackFragment on User {\n  trophies {\n    id\n    awardedDate\n    game {\n      groupId\n      id\n    }\n    ...TrophyAvatarFragment\n  }\n}\n"
+    "text": "query GroupsPageQuery {\n  me {\n    ...MyGroupsFragment\n    id\n  }\n}\n\nfragment GroupBoxFragment on Group {\n  id\n  name\n  description\n  members {\n    id\n    ...MemberRowFragment\n  }\n}\n\nfragment MemberRowFragment on User {\n  username\n  userProfile {\n    firstName\n    lastName\n  }\n  ...TrophyStackFragment\n}\n\nfragment MyGroupsFragment on User {\n  groups(first: 10) {\n    totalCount\n    edges {\n      node {\n        id\n        ...GroupBoxFragment\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n\nfragment TrophyAvatarFragment on Trophy {\n  game {\n    symbol\n    name\n    id\n  }\n}\n\nfragment TrophyStackFragment on User {\n  trophies {\n    id\n    awardedDate\n    game {\n      groupId\n      id\n    }\n    ...TrophyAvatarFragment\n  }\n}\n"
   }
 };
 })();

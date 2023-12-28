@@ -4,11 +4,13 @@ import { cn } from "@/lib/utils";
 
 type OutlinedBoxProps = {
     title?: string;
+    description?: string;
     windowed?: boolean;
 };
 
 export const OutlinedBox = ({
     title,
+    description,
     children,
     className,
 }: PropsWithChildren<OutlinedBoxProps> & React.HTMLProps<HTMLDivElement>) => {
@@ -17,7 +19,7 @@ export const OutlinedBox = ({
             {title && (
                 <CardHeader>
                     <CardTitle>{title}</CardTitle>
-                    <CardDescription>noe her</CardDescription>
+                    <CardDescription>{description}</CardDescription>
                 </CardHeader>
             )}
             <CardContent>{children}</CardContent>

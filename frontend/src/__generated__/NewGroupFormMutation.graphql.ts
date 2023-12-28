@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<2733f3b65f678d109547b062ae95a8cf>>
+ * @generated SignedSource<<6bba1a5454015d1eb0e0cc76c8e808ff>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -135,6 +135,13 @@ return {
               {
                 "alias": null,
                 "args": null,
+                "kind": "ScalarField",
+                "name": "description",
+                "storageKey": null
+              },
+              {
+                "alias": null,
+                "args": null,
                 "concreteType": "User",
                 "kind": "LinkedField",
                 "name": "members",
@@ -252,12 +259,12 @@ return {
     ]
   },
   "params": {
-    "cacheID": "55ee52c5009bca1242553f95b5422f77",
+    "cacheID": "552ea28f04a6c747ee23766fdb058ba4",
     "id": null,
     "metadata": {},
     "name": "NewGroupFormMutation",
     "operationKind": "mutation",
-    "text": "mutation NewGroupFormMutation(\n  $input: CreateGroupInput!\n) {\n  createGroup(input: $input) {\n    group {\n      ...GroupBoxFragment\n      id\n    }\n  }\n}\n\nfragment GroupBoxFragment on Group {\n  id\n  name\n  members {\n    id\n    ...MemberRowFragment\n  }\n}\n\nfragment MemberRowFragment on User {\n  username\n  userProfile {\n    firstName\n    lastName\n  }\n  ...TrophyStackFragment\n}\n\nfragment TrophyAvatarFragment on Trophy {\n  game {\n    symbol\n    name\n    id\n  }\n}\n\nfragment TrophyStackFragment on User {\n  trophies {\n    id\n    awardedDate\n    game {\n      groupId\n      id\n    }\n    ...TrophyAvatarFragment\n  }\n}\n"
+    "text": "mutation NewGroupFormMutation(\n  $input: CreateGroupInput!\n) {\n  createGroup(input: $input) {\n    group {\n      ...GroupBoxFragment\n      id\n    }\n  }\n}\n\nfragment GroupBoxFragment on Group {\n  id\n  name\n  description\n  members {\n    id\n    ...MemberRowFragment\n  }\n}\n\nfragment MemberRowFragment on User {\n  username\n  userProfile {\n    firstName\n    lastName\n  }\n  ...TrophyStackFragment\n}\n\nfragment TrophyAvatarFragment on Trophy {\n  game {\n    symbol\n    name\n    id\n  }\n}\n\nfragment TrophyStackFragment on User {\n  trophies {\n    id\n    awardedDate\n    game {\n      groupId\n      id\n    }\n    ...TrophyAvatarFragment\n  }\n}\n"
   }
 };
 })();

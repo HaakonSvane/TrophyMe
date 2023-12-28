@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<062a0b1f46e6d21e80a8d921a561c2a2>>
+ * @generated SignedSource<<2fc0a8981fe96ee7b72f535b566d08bd>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -11,6 +11,7 @@
 import { Fragment, ReaderFragment } from 'relay-runtime';
 import { FragmentRefs } from "relay-runtime";
 export type GroupBoxFragment$data = {
+  readonly description: string | null | undefined;
   readonly id: string;
   readonly members: ReadonlyArray<{
     readonly id: string;
@@ -49,6 +50,13 @@ return {
     {
       "alias": null,
       "args": null,
+      "kind": "ScalarField",
+      "name": "description",
+      "storageKey": null
+    },
+    {
+      "alias": null,
+      "args": null,
       "concreteType": "User",
       "kind": "LinkedField",
       "name": "members",
@@ -69,6 +77,6 @@ return {
 };
 })();
 
-(node as any).hash = "860a83ae574aaa0f7473736791fc0d52";
+(node as any).hash = "7d6abcf05b06641001dd5d24200f1137";
 
 export default node;
