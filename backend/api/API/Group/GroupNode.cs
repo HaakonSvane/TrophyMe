@@ -19,6 +19,7 @@ public static class GroupNode
         return await dataLoader.LoadAsync(group.Id, cancellationToken);
     }
     
+    [UsePaging(IncludeTotalCount = true)]
     public static async Task<IReadOnlyList<Game>> GetGamesAsync(
         [Parent] Database.Models.Group group,
         IGamesByGroupIdsDataLoader dataLoader,
@@ -35,6 +36,7 @@ public static class GroupNode
         return await dataLoader.LoadAsync(group.Id, cancellationToken);
     } 
     
+    [UsePaging(IncludeTotalCount = true)]
     public static async Task<IEnumerable<User>> GetMembersAsync(
         [Parent] Database.Models.Group group,
         IUsersByGroupIdsDataLoader dataloader,
