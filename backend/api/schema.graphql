@@ -60,6 +60,26 @@ type Game implements Node {
   groupId: String!
 }
 
+"A connection to a list of items."
+type GamesConnection {
+  "Information to aid in pagination."
+  pageInfo: PageInfo!
+  "A list of edges."
+  edges: [GamesEdge!]
+  "A flattened list of the nodes."
+  nodes: [Game!]
+  "Identifies the total count of items in the connection."
+  totalCount: Int!
+}
+
+"An edge in a connection."
+type GamesEdge {
+  "A cursor for use in pagination."
+  cursor: String!
+  "The item at the end of the edge."
+  node: Game!
+}
+
 type Group implements Node @authorize(policy: "IsGroupMember", apply: AFTER_RESOLVER) {
   id: ID!
   name: String!
@@ -69,10 +89,10 @@ type Group implements Node @authorize(policy: "IsGroupMember", apply: AFTER_RESO
   invite: Invite
   decisionModel: RuleType!
   admin: User!
-  games: [Game!]!
+  games("Returns the first _n_ elements from the list." first: Int "Returns the elements in the list that come after the specified cursor." after: String "Returns the last _n_ elements from the list." last: Int "Returns the elements in the list that come before the specified cursor." before: String): GamesConnection
   createdDate: DateTime!
   trophies: [Trophy!]!
-  members: [User!]!
+  members("Returns the first _n_ elements from the list." first: Int "Returns the elements in the list that come after the specified cursor." after: String "Returns the last _n_ elements from the list." last: Int "Returns the elements in the list that come before the specified cursor." before: String): MembersConnection
 }
 
 type GroupNotFoundError implements Error {
@@ -119,6 +139,26 @@ type JoinGroupPayload {
   group: Group
   errors: [JoinGroupError!]
   query: Query!
+}
+
+"A connection to a list of items."
+type MembersConnection {
+  "Information to aid in pagination."
+  pageInfo: PageInfo!
+  "A list of edges."
+  edges: [MembersEdge!]
+  "A flattened list of the nodes."
+  nodes: [User!]
+  "Identifies the total count of items in the connection."
+  totalCount: Int!
+}
+
+"An edge in a connection."
+type MembersEdge {
+  "A cursor for use in pagination."
+  cursor: String!
+  "The item at the end of the edge."
+  node: User!
 }
 
 type Mutation {
