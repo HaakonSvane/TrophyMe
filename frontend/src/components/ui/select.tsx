@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import * as SelectPrimitive from "@radix-ui/react-select";
-import { Check, ChevronDown, ChevronUp } from "lucide-react";
+import { LucideIcon, Check, ChevronDown, ChevronUp } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
@@ -107,9 +107,9 @@ SelectLabel.displayName = SelectPrimitive.Label.displayName;
 const SelectItem = React.forwardRef<
     React.ElementRef<typeof SelectPrimitive.Item>,
     React.ComponentPropsWithoutRef<typeof SelectPrimitive.Item> & {
-        leadingIcon?: React.ReactNode;
+        leadingIcon?: LucideIcon;
     }
->(({ className, children, leadingIcon, ...props }, ref) => (
+>(({ className, children, leadingIcon: LeadingIcon, ...props }, ref) => (
     <SelectPrimitive.Item
         ref={ref}
         className={cn(
@@ -123,7 +123,11 @@ const SelectItem = React.forwardRef<
                 <Check className="h-4 w-4" />
             </SelectPrimitive.ItemIndicator>
         </span>
-        <span className="mr-4">{leadingIcon}</span>
+        {LeadingIcon && (
+            <span className="mr-4">
+                <LeadingIcon />
+            </span>
+        )}
         <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
     </SelectPrimitive.Item>
 ));

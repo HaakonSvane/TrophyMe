@@ -1,5 +1,4 @@
 import { graphql, useFragment } from "react-relay";
-import { OutlinedBox } from "@/components/containers/OutlinedBox";
 import { Suspense } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { MemberRow } from "./MemberRow";

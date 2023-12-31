@@ -3,6 +3,8 @@ import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
 
 import { cn } from "@/lib/utils";
+import { LucideIcon } from "lucide-react";
+import { Spinner } from "./spinner";
 
 const buttonVariants = cva(
     "inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
@@ -38,11 +40,13 @@ export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> &
               asChild: true;
               leadingIcon?: undefined;
               trailingIcon?: undefined;
+              busy?: undefined;
           }
         | {
               asChild?: false;
-              leadingIcon?: React.ReactNode;
-              trailingIcon?: React.ReactNode;
+              leadingIcon?: LucideIcon;
+              trailingIcon?: LucideIcon;
+              busy?: boolean;
           }
     );
 
@@ -53,9 +57,10 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             variant,
             size,
             asChild = false,
-            leadingIcon,
-            trailingIcon,
+            leadingIcon: LeadingIcon,
+            trailingIcon: TrailingIcon,
             children,
+            busy,
             ...props
         },
         ref,
@@ -78,9 +83,17 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
                 ref={ref}
                 {...props}
             >
-                {leadingIcon && <div className={cn("pr-4")}>{leadingIcon}</div>}
-                {children}
-                {trailingIcon && <div className={cn("pl-4")}>{trailingIcon}</div>}
+                {LeadingIcon && (
+                    <div className={cn("pr-4")}>
+                        <LeadingIcon />
+                    </div>
+                )}
+                {busy ? <Spinner /> : children}
+                {TrailingIcon && (
+                    <div className={cn("pl-4")}>
+                        <TrailingIcon />
+                    </div>
+                )}
             </button>
         );
     },

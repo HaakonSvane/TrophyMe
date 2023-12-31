@@ -8,7 +8,7 @@ export const PageTitle = ({ ...props }: React.HTMLAttributes<HTMLDivElement>) =>
     const headingRef = useRef<HTMLHeadingElement>(null);
     const gradientColors = useGradient(headingRef, ["#ffd597", "#e77d8d", "#110b57"]);
     return (
-        <h2
+        <h1
             ref={headingRef}
             style={{
                 background: `linear-gradient(0deg, ${gradientColors})`,
@@ -16,7 +16,7 @@ export const PageTitle = ({ ...props }: React.HTMLAttributes<HTMLDivElement>) =>
                 transition: "all ease-in-out 0.2s",
             }}
             className={cn(
-                "inline-block text-transparent !bg-clip-text text-3xl font-bold tracking-tight",
+                "inline-block text-transparent !bg-clip-text text-3xl sm:text-4xl font-bold tracking-tight",
                 props.className,
             )}
             {...props}

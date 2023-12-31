@@ -29,7 +29,7 @@ export const AddGroupButton = ({ groupsConnectionId }: AddGroupButtonProps) => {
             <DialogTrigger asChild>
                 <Button
                     variant="outline"
-                    leadingIcon={<Plus />}
+                    leadingIcon={Plus}
                     onClick={() => setIsShowingDialog(true)}
                 >
                     Add

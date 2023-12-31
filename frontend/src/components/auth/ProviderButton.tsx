@@ -1,22 +1,16 @@
 import { signIn, type ClientSafeProvider } from "next-auth/react";
 import { Button, ButtonProps } from "@/components/ui/button";
 import { AiOutlineGoogle, AiOutlineQuestion } from "react-icons/ai";
-import { HTMLProps } from "react";
+import { LucideIcon } from "lucide-react";
 
-const getIconForProviderName = (name: string) => {
-    switch (name) {
+const getIconForProviderName = (name: string): LucideIcon => {
+    const normalizedName = name.toLowerCase();
+    switch (normalizedName) {
         case "google":
             return AiOutlineGoogle;
         default:
-            AiOutlineQuestion;
+            return AiOutlineQuestion;
     }
-};
-type ProviderIconProps = {
-    name: string;
-};
-const ProviderIcon = ({ name }: ProviderIconProps) => {
-    const Icon = getIconForProviderName(name.toLowerCase());
-    return <Icon />;
 };
 
 export type ProviderButtonProps = {
@@ -35,7 +29,7 @@ export const ProviderButton = ({
             variant="secondary"
             aria-label={`Sign in with ${provider.name}`}
             onClick={() => signIn(provider.id, { callbackUrl })}
-            leadingIcon={<ProviderIcon name={provider.name} />}
+            leadingIcon={getIconForProviderName(provider.name)}
         >
             {`Sign in with ${provider.name}`}
         </Button>
