@@ -1,14 +1,13 @@
 using api.API.Group;
 using api.Database.Models;
 using api.Repository;
-using HotChocolate.Authorization;
 
 namespace api.API.Account;
 
-[Authorize]
 [ExtendObjectType(typeof(User))]
 public static class UserNode
 {
+    [UsePaging(IncludeTotalCount = true)]
     public static async Task<IEnumerable<Database.Models.Group>> GetGroupsAsync([Parent] User user,
         IGroupsByUserIdsDataLoader dataLoader,
         CancellationToken cancellationToken)

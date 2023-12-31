@@ -8,7 +8,7 @@ public class Group
     public enum RuleType
     {
         Democracy,
-        Dictatoriship
+        Dictatorship
     }
     
     [Key] public int Id { get; set; }

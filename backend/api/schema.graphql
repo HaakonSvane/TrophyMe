@@ -79,6 +79,26 @@ type GroupNotFoundError implements Error {
   message: String!
 }
 
+"A connection to a list of items."
+type GroupsConnection {
+  "Information to aid in pagination."
+  pageInfo: PageInfo!
+  "A list of edges."
+  edges: [GroupsEdge!]
+  "A flattened list of the nodes."
+  nodes: [Group!]
+  "Identifies the total count of items in the connection."
+  totalCount: Int!
+}
+
+"An edge in a connection."
+type GroupsEdge {
+  "A cursor for use in pagination."
+  cursor: String!
+  "The item at the end of the edge."
+  node: Group!
+}
+
 type Invite {
   groupId: Int!
   group: Group!
@@ -135,6 +155,18 @@ type NoUserError implements Error {
   message: String!
 }
 
+"Information about pagination in a connection."
+type PageInfo {
+  "Indicates whether more edges exist following the set defined by the clients arguments."
+  hasNextPage: Boolean!
+  "Indicates whether more edges exist prior the set defined by the clients arguments."
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+}
+
 type Query {
   "Fetches an object given its ID."
   node("ID of the object." id: ID!): Node
@@ -174,12 +206,12 @@ type TrophyRequestApproval {
   isApproved: Boolean!
 }
 
-type User implements Node @authorize {
+type User implements Node {
   id: ID!
   username: String!
   trophies: [Trophy!]!
   userProfile: UserProfile
-  groups: [Group!]!
+  groups("Returns the first _n_ elements from the list." first: Int "Returns the elements in the list that come after the specified cursor." after: String "Returns the last _n_ elements from the list." last: Int "Returns the elements in the list that come before the specified cursor." before: String): GroupsConnection
 }
 
 type UserProfile {
@@ -216,7 +248,7 @@ input CreateGameInput {
 
 input CreateGroupInput {
   name: String!
-  description: String!
+  description: String
   decisionModel: RuleType
 }
 
@@ -248,7 +280,7 @@ enum ApplyPolicy {
 
 enum RuleType {
   DEMOCRACY
-  DICTATORISHIP
+  DICTATORSHIP
 }
 
 directive @allowAnonymous repeatable on FIELD_DEFINITION

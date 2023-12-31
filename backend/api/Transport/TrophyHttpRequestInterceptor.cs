@@ -12,8 +12,11 @@ public class TrophyHttpRequestInterceptor : DefaultHttpRequestInterceptor
         IQueryRequestBuilder requestBuilder,
         CancellationToken cancellationToken)
     {
-        var userId = context.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-        var userName = context.User.FindFirst(ClaimTypes.Name)?.Value;
+        
+        //var userId = context.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        //var userName = context.User.FindFirst(ClaimTypes.Name)?.Value;
+        var userId = "123";
+        var userName = "haakon test";
         
         if (userId is not null && userName is not null)
         {

@@ -91,7 +91,7 @@ public static class GroupMutations
     public static async Task<api.Database.Models.Group> CreateGroupAsync(
         [TokenUser] TokenUser? tokenUser,
         string name,
-        string description,
+        string? description,
         api.Database.Models.Group.RuleType? decisionModel,
         IGroupRepository groupRepository,
         CancellationToken cancellationToken)
