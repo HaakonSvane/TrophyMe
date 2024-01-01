@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<d55f93506390bf0126ba389314ba07a3>>
+ * @generated SignedSource<<ed21d3d3a792e9f4ae255b9102a32c89>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -47,7 +47,17 @@ const node: ReaderFragment = {
   "selections": [
     {
       "alias": "groups",
-      "args": null,
+      "args": [
+        {
+          "kind": "Literal",
+          "name": "order",
+          "value": [
+            {
+              "createdDate": "DESC"
+            }
+          ]
+        }
+      ],
       "concreteType": "GroupsConnection",
       "kind": "LinkedField",
       "name": "__GroupsFragment_groups_connection",
@@ -146,13 +156,13 @@ const node: ReaderFragment = {
           ]
         }
       ],
-      "storageKey": null
+      "storageKey": "__GroupsFragment_groups_connection(order:[{\"createdDate\":\"DESC\"}])"
     }
   ],
   "type": "User",
   "abstractKey": null
 };
 
-(node as any).hash = "d6b4d8f7f66dd2686c29504784c74f72";
+(node as any).hash = "2ae5a496f2d10696fb71c359fb6655c1";
 
 export default node;

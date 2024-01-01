@@ -12,8 +12,15 @@ import { graphql, useFragment } from "react-relay";
 
 const GroupGamesPanelFragment = graphql`
     fragment GroupGamesPanelFragment on Group {
-        games {
-            id
+        games(first: 10) @connection(key: "GroupGamesPanel_games") {
+            edges {
+                node {
+                    id
+                    symbol
+                    name
+                    description
+                }
+            }
         }
     }
 `;
@@ -37,12 +44,15 @@ export const GroupGamesPanel = ({ fragmentKey }: GroupGamesPanelProps) => {
                 </TableRow>
             </TableHeader>
             <TableBody>
-                <TableRow>
-                    <TableCell className="font-medium">INV001</TableCell>
-                    <TableCell>Paid</TableCell>
-                    <TableCell>Credit Card</TableCell>
-                    <TableCell className="text-right">$250.00</TableCell>
-                </TableRow>
+                {data.games?.edges?.map(game => (
+                    <TableRow key={game.node.id}>
+                        <TableCell className="text-center">{game.node.symbol}</TableCell>
+                        <TableCell className="font-medium">{game.node.name}</TableCell>
+                        <TableCell>{game.node.description}</TableCell>
+                        <TableCell>{"[IMPL]"}</TableCell>
+                        <TableCell className="text-right">{"[IMPL]"}</TableCell>
+                    </TableRow>
+                ))}
             </TableBody>
         </Table>
     );

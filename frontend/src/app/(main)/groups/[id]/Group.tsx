@@ -15,6 +15,7 @@ const GroupPageQuery = graphql`
         groupById(id: $groupId) {
             id
             name
+            adminId
             ...GroupSocialCardFragment
             ...GroupGamesPanelFragment
         }

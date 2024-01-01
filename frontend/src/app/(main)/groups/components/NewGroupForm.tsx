@@ -30,7 +30,7 @@ import { NewGroupFormMutation } from "@/__generated__/NewGroupFormMutation.graph
 const NewGroupMutation = graphql`
     mutation NewGroupFormMutation($input: CreateGroupInput!, $connections: [ID!]!) {
         createGroup(input: $input) {
-            group @appendNode(connections: $connections, edgeTypeName: "GroupsEdge") {
+            group @prependNode(connections: $connections, edgeTypeName: "GroupsEdge") {
                 ...GroupBoxFragment
             }
         }
@@ -92,10 +92,10 @@ export const NewGroupForm = ({ connectionId, onSuccess }: NewGroupFormProps) => 
                                     </SelectTrigger>
                                 </FormControl>
                                 <SelectContent>
-                                    <SelectItem value="DEMOCRACY" leadingIcon={<Users />}>
+                                    <SelectItem value="DEMOCRACY" leadingIcon={Users}>
                                         Democracy
                                     </SelectItem>
-                                    <SelectItem value="DICTATORSHIP" leadingIcon={<Crown />}>
+                                    <SelectItem value="DICTATORSHIP" leadingIcon={Crown}>
                                         Dictatorship
                                     </SelectItem>
                                 </SelectContent>

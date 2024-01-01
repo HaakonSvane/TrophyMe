@@ -13,8 +13,12 @@ const GroupBoxFragment = graphql`
         name
         description
         members {
-            id
-            ...MemberRowFragment
+            edges {
+                node {
+                    id
+                    ...MemberRowFragment
+                }
+            }
         }
     }
 `;
@@ -50,11 +54,11 @@ export const GroupBox = ({ queryReference }: GroupBoxProps) => {
                     <div className="flex flex-row">
                         <div className="flex flex-col">
                             <Suspense fallback={renderGroupsSeleton()}>
-                                {data.members.map(member => (
+                                {data.members?.edges?.map(member => (
                                     <MemberRow
                                         groupId={data.id}
-                                        key={member.id}
-                                        queryReference={member}
+                                        key={member.node.id}
+                                        queryReference={member.node}
                                     />
                                 ))}
                             </Suspense>

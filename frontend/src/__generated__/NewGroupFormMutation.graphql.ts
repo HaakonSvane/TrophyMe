@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<6bba1a5454015d1eb0e0cc76c8e808ff>>
+ * @generated SignedSource<<a4021c226db4dc3398bcee02d1576529>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -142,84 +142,106 @@ return {
               {
                 "alias": null,
                 "args": null,
-                "concreteType": "User",
+                "concreteType": "MembersConnection",
                 "kind": "LinkedField",
                 "name": "members",
-                "plural": true,
+                "plural": false,
                 "selections": [
-                  (v3/*: any*/),
                   {
                     "alias": null,
                     "args": null,
-                    "kind": "ScalarField",
-                    "name": "username",
-                    "storageKey": null
-                  },
-                  {
-                    "alias": null,
-                    "args": null,
-                    "concreteType": "UserProfile",
+                    "concreteType": "MembersEdge",
                     "kind": "LinkedField",
-                    "name": "userProfile",
-                    "plural": false,
-                    "selections": [
-                      {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "firstName",
-                        "storageKey": null
-                      },
-                      {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "lastName",
-                        "storageKey": null
-                      }
-                    ],
-                    "storageKey": null
-                  },
-                  {
-                    "alias": null,
-                    "args": null,
-                    "concreteType": "Trophy",
-                    "kind": "LinkedField",
-                    "name": "trophies",
+                    "name": "edges",
                     "plural": true,
                     "selections": [
-                      (v3/*: any*/),
                       {
                         "alias": null,
                         "args": null,
-                        "kind": "ScalarField",
-                        "name": "awardedDate",
-                        "storageKey": null
-                      },
-                      {
-                        "alias": null,
-                        "args": null,
-                        "concreteType": "Game",
+                        "concreteType": "User",
                         "kind": "LinkedField",
-                        "name": "game",
+                        "name": "node",
                         "plural": false,
                         "selections": [
-                          {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "groupId",
-                            "storageKey": null
-                          },
                           (v3/*: any*/),
                           {
                             "alias": null,
                             "args": null,
                             "kind": "ScalarField",
-                            "name": "symbol",
+                            "name": "username",
                             "storageKey": null
                           },
-                          (v4/*: any*/)
+                          {
+                            "alias": null,
+                            "args": null,
+                            "concreteType": "UserProfile",
+                            "kind": "LinkedField",
+                            "name": "userProfile",
+                            "plural": false,
+                            "selections": [
+                              {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "firstName",
+                                "storageKey": null
+                              },
+                              {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "lastName",
+                                "storageKey": null
+                              }
+                            ],
+                            "storageKey": null
+                          },
+                          {
+                            "alias": null,
+                            "args": null,
+                            "concreteType": "Trophy",
+                            "kind": "LinkedField",
+                            "name": "trophies",
+                            "plural": true,
+                            "selections": [
+                              (v3/*: any*/),
+                              {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "awardedDate",
+                                "storageKey": null
+                              },
+                              {
+                                "alias": null,
+                                "args": null,
+                                "concreteType": "Game",
+                                "kind": "LinkedField",
+                                "name": "game",
+                                "plural": false,
+                                "selections": [
+                                  {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "groupId",
+                                    "storageKey": null
+                                  },
+                                  (v3/*: any*/),
+                                  {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "symbol",
+                                    "storageKey": null
+                                  },
+                                  (v4/*: any*/)
+                                ],
+                                "storageKey": null
+                              }
+                            ],
+                            "storageKey": null
+                          }
                         ],
                         "storageKey": null
                       }
@@ -236,7 +258,7 @@ return {
             "alias": null,
             "args": null,
             "filters": null,
-            "handle": "appendNode",
+            "handle": "prependNode",
             "key": "",
             "kind": "LinkedHandle",
             "name": "group",
@@ -259,16 +281,16 @@ return {
     ]
   },
   "params": {
-    "cacheID": "552ea28f04a6c747ee23766fdb058ba4",
+    "cacheID": "0ac306b335908d4bc71b17b686d2f9e8",
     "id": null,
     "metadata": {},
     "name": "NewGroupFormMutation",
     "operationKind": "mutation",
-    "text": "mutation NewGroupFormMutation(\n  $input: CreateGroupInput!\n) {\n  createGroup(input: $input) {\n    group {\n      ...GroupBoxFragment\n      id\n    }\n  }\n}\n\nfragment GroupBoxFragment on Group {\n  id\n  name\n  description\n  members {\n    id\n    ...MemberRowFragment\n  }\n}\n\nfragment MemberRowFragment on User {\n  username\n  userProfile {\n    firstName\n    lastName\n  }\n  ...TrophyStackFragment\n}\n\nfragment TrophyAvatarFragment on Trophy {\n  game {\n    symbol\n    name\n    id\n  }\n}\n\nfragment TrophyStackFragment on User {\n  trophies {\n    id\n    awardedDate\n    game {\n      groupId\n      id\n    }\n    ...TrophyAvatarFragment\n  }\n}\n"
+    "text": "mutation NewGroupFormMutation(\n  $input: CreateGroupInput!\n) {\n  createGroup(input: $input) {\n    group {\n      ...GroupBoxFragment\n      id\n    }\n  }\n}\n\nfragment GroupBoxFragment on Group {\n  id\n  name\n  description\n  members {\n    edges {\n      node {\n        id\n        ...MemberRowFragment\n      }\n    }\n  }\n}\n\nfragment MemberRowFragment on User {\n  username\n  userProfile {\n    firstName\n    lastName\n  }\n  ...TrophyStackFragment\n}\n\nfragment TrophyAvatarFragment on Trophy {\n  game {\n    symbol\n    name\n    id\n  }\n}\n\nfragment TrophyStackFragment on User {\n  trophies {\n    id\n    awardedDate\n    game {\n      groupId\n      id\n    }\n    ...TrophyAvatarFragment\n  }\n}\n"
   }
 };
 })();
 
-(node as any).hash = "523d9eeec230c8985951b8ab849be715";
+(node as any).hash = "a8eaf8d9f36b3771a204168444533d44";
 
 export default node;

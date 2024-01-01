@@ -4,7 +4,8 @@ import { GroupBox } from "./GroupBox";
 
 const MyGroupsFragment = graphql`
     fragment MyGroupsFragment on User {
-        groups(first: 10) @connection(key: "GroupsFragment_groups") {
+        groups(order: [{ createdDate: DESC }], first: 12)
+            @connection(key: "GroupsFragment_groups") {
             __id
             totalCount
             edges {

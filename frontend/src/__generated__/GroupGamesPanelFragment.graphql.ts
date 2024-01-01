@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<1fab85a14a8acb45c040d328f692384f>>
+ * @generated SignedSource<<99284ef32dd0df3efa0ac3f8e9fc2eb3>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -11,9 +11,16 @@
 import { Fragment, ReaderFragment } from 'relay-runtime';
 import { FragmentRefs } from "relay-runtime";
 export type GroupGamesPanelFragment$data = {
-  readonly games: ReadonlyArray<{
-    readonly id: string;
-  }>;
+  readonly games: {
+    readonly edges: ReadonlyArray<{
+      readonly node: {
+        readonly description: string | null | undefined;
+        readonly id: string;
+        readonly name: string;
+        readonly symbol: string;
+      };
+    }> | null | undefined;
+  } | null | undefined;
   readonly " $fragmentType": "GroupGamesPanelFragment";
 };
 export type GroupGamesPanelFragment$key = {
@@ -24,22 +31,115 @@ export type GroupGamesPanelFragment$key = {
 const node: ReaderFragment = {
   "argumentDefinitions": [],
   "kind": "Fragment",
-  "metadata": null,
+  "metadata": {
+    "connection": [
+      {
+        "count": null,
+        "cursor": null,
+        "direction": "forward",
+        "path": [
+          "games"
+        ]
+      }
+    ]
+  },
   "name": "GroupGamesPanelFragment",
   "selections": [
     {
-      "alias": null,
+      "alias": "games",
       "args": null,
-      "concreteType": "Game",
+      "concreteType": "GamesConnection",
       "kind": "LinkedField",
-      "name": "games",
-      "plural": true,
+      "name": "__GroupGamesPanel_games_connection",
+      "plural": false,
       "selections": [
         {
           "alias": null,
           "args": null,
-          "kind": "ScalarField",
-          "name": "id",
+          "concreteType": "GamesEdge",
+          "kind": "LinkedField",
+          "name": "edges",
+          "plural": true,
+          "selections": [
+            {
+              "alias": null,
+              "args": null,
+              "concreteType": "Game",
+              "kind": "LinkedField",
+              "name": "node",
+              "plural": false,
+              "selections": [
+                {
+                  "alias": null,
+                  "args": null,
+                  "kind": "ScalarField",
+                  "name": "id",
+                  "storageKey": null
+                },
+                {
+                  "alias": null,
+                  "args": null,
+                  "kind": "ScalarField",
+                  "name": "symbol",
+                  "storageKey": null
+                },
+                {
+                  "alias": null,
+                  "args": null,
+                  "kind": "ScalarField",
+                  "name": "name",
+                  "storageKey": null
+                },
+                {
+                  "alias": null,
+                  "args": null,
+                  "kind": "ScalarField",
+                  "name": "description",
+                  "storageKey": null
+                },
+                {
+                  "alias": null,
+                  "args": null,
+                  "kind": "ScalarField",
+                  "name": "__typename",
+                  "storageKey": null
+                }
+              ],
+              "storageKey": null
+            },
+            {
+              "alias": null,
+              "args": null,
+              "kind": "ScalarField",
+              "name": "cursor",
+              "storageKey": null
+            }
+          ],
+          "storageKey": null
+        },
+        {
+          "alias": null,
+          "args": null,
+          "concreteType": "PageInfo",
+          "kind": "LinkedField",
+          "name": "pageInfo",
+          "plural": false,
+          "selections": [
+            {
+              "alias": null,
+              "args": null,
+              "kind": "ScalarField",
+              "name": "endCursor",
+              "storageKey": null
+            },
+            {
+              "alias": null,
+              "args": null,
+              "kind": "ScalarField",
+              "name": "hasNextPage",
+              "storageKey": null
+            }
+          ],
           "storageKey": null
         }
       ],
@@ -50,6 +150,6 @@ const node: ReaderFragment = {
   "abstractKey": null
 };
 
-(node as any).hash = "d87fa2ba187990acc004a7631477a010";
+(node as any).hash = "c2c05e4020a67249fd5cd8f7d90693cb";
 
 export default node;

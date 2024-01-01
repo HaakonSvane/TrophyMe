@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<2fc0a8981fe96ee7b72f535b566d08bd>>
+ * @generated SignedSource<<0c941acfe61367cc473efe1612a4ee8c>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -13,10 +13,14 @@ import { FragmentRefs } from "relay-runtime";
 export type GroupBoxFragment$data = {
   readonly description: string | null | undefined;
   readonly id: string;
-  readonly members: ReadonlyArray<{
-    readonly id: string;
-    readonly " $fragmentSpreads": FragmentRefs<"MemberRowFragment">;
-  }>;
+  readonly members: {
+    readonly edges: ReadonlyArray<{
+      readonly node: {
+        readonly id: string;
+        readonly " $fragmentSpreads": FragmentRefs<"MemberRowFragment">;
+      };
+    }> | null | undefined;
+  } | null | undefined;
   readonly name: string;
   readonly " $fragmentType": "GroupBoxFragment";
 };
@@ -57,16 +61,38 @@ return {
     {
       "alias": null,
       "args": null,
-      "concreteType": "User",
+      "concreteType": "MembersConnection",
       "kind": "LinkedField",
       "name": "members",
-      "plural": true,
+      "plural": false,
       "selections": [
-        (v0/*: any*/),
         {
+          "alias": null,
           "args": null,
-          "kind": "FragmentSpread",
-          "name": "MemberRowFragment"
+          "concreteType": "MembersEdge",
+          "kind": "LinkedField",
+          "name": "edges",
+          "plural": true,
+          "selections": [
+            {
+              "alias": null,
+              "args": null,
+              "concreteType": "User",
+              "kind": "LinkedField",
+              "name": "node",
+              "plural": false,
+              "selections": [
+                (v0/*: any*/),
+                {
+                  "args": null,
+                  "kind": "FragmentSpread",
+                  "name": "MemberRowFragment"
+                }
+              ],
+              "storageKey": null
+            }
+          ],
+          "storageKey": null
         }
       ],
       "storageKey": null
@@ -77,6 +103,6 @@ return {
 };
 })();
 
-(node as any).hash = "7d6abcf05b06641001dd5d24200f1137";
+(node as any).hash = "26fbd4b899c2b0d406f24e8797cc9904";
 
 export default node;

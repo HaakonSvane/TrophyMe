@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<e923f774476d88e590fdfb015224e8b9>>
+ * @generated SignedSource<<10b94a4f60f634c74e42485afb2e02d9>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -13,6 +13,14 @@ import { FragmentRefs } from "relay-runtime";
 export type GroupsPageQuery$variables = Record<PropertyKey, never>;
 export type GroupsPageQuery$data = {
   readonly me: {
+    readonly groups: {
+      readonly __id: string;
+      readonly edges: ReadonlyArray<{
+        readonly node: {
+          readonly id: string;
+        };
+      }> | null | undefined;
+    } | null | undefined;
     readonly " $fragmentSpreads": FragmentRefs<"MyGroupsFragment">;
   };
 };
@@ -22,13 +30,15 @@ export type GroupsPageQuery = {
 };
 
 const node: ConcreteRequest = (function(){
-var v0 = [
-  {
-    "kind": "Literal",
-    "name": "first",
-    "value": 10
-  }
-],
+var v0 = {
+  "kind": "Literal",
+  "name": "order",
+  "value": [
+    {
+      "createdDate": "DESC"
+    }
+  ]
+},
 v1 = {
   "alias": null,
   "args": null,
@@ -37,6 +47,65 @@ v1 = {
   "storageKey": null
 },
 v2 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "__typename",
+  "storageKey": null
+},
+v3 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "cursor",
+  "storageKey": null
+},
+v4 = {
+  "alias": null,
+  "args": null,
+  "concreteType": "PageInfo",
+  "kind": "LinkedField",
+  "name": "pageInfo",
+  "plural": false,
+  "selections": [
+    {
+      "alias": null,
+      "args": null,
+      "kind": "ScalarField",
+      "name": "endCursor",
+      "storageKey": null
+    },
+    {
+      "alias": null,
+      "args": null,
+      "kind": "ScalarField",
+      "name": "hasNextPage",
+      "storageKey": null
+    }
+  ],
+  "storageKey": null
+},
+v5 = {
+  "kind": "ClientExtension",
+  "selections": [
+    {
+      "alias": null,
+      "args": null,
+      "kind": "ScalarField",
+      "name": "__id",
+      "storageKey": null
+    }
+  ]
+},
+v6 = [
+  {
+    "kind": "Literal",
+    "name": "first",
+    "value": 12
+  },
+  (v0/*: any*/)
+],
+v7 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
@@ -58,6 +127,46 @@ return {
         "name": "me",
         "plural": false,
         "selections": [
+          {
+            "alias": "groups",
+            "args": [
+              (v0/*: any*/)
+            ],
+            "concreteType": "GroupsConnection",
+            "kind": "LinkedField",
+            "name": "__GroupsFragment_groups_connection",
+            "plural": false,
+            "selections": [
+              {
+                "alias": null,
+                "args": null,
+                "concreteType": "GroupsEdge",
+                "kind": "LinkedField",
+                "name": "edges",
+                "plural": true,
+                "selections": [
+                  {
+                    "alias": null,
+                    "args": null,
+                    "concreteType": "Group",
+                    "kind": "LinkedField",
+                    "name": "node",
+                    "plural": false,
+                    "selections": [
+                      (v1/*: any*/),
+                      (v2/*: any*/)
+                    ],
+                    "storageKey": null
+                  },
+                  (v3/*: any*/)
+                ],
+                "storageKey": null
+              },
+              (v4/*: any*/),
+              (v5/*: any*/)
+            ],
+            "storageKey": "__GroupsFragment_groups_connection(order:[{\"createdDate\":\"DESC\"}])"
+          },
           {
             "args": null,
             "kind": "FragmentSpread",
@@ -86,19 +195,12 @@ return {
         "selections": [
           {
             "alias": null,
-            "args": (v0/*: any*/),
+            "args": (v6/*: any*/),
             "concreteType": "GroupsConnection",
             "kind": "LinkedField",
             "name": "groups",
             "plural": false,
             "selections": [
-              {
-                "alias": null,
-                "args": null,
-                "kind": "ScalarField",
-                "name": "totalCount",
-                "storageKey": null
-              },
               {
                 "alias": null,
                 "args": null,
@@ -117,6 +219,7 @@ return {
                     "selections": [
                       (v1/*: any*/),
                       (v2/*: any*/),
+                      (v7/*: any*/),
                       {
                         "alias": null,
                         "args": null,
@@ -127,84 +230,106 @@ return {
                       {
                         "alias": null,
                         "args": null,
-                        "concreteType": "User",
+                        "concreteType": "MembersConnection",
                         "kind": "LinkedField",
                         "name": "members",
-                        "plural": true,
+                        "plural": false,
                         "selections": [
-                          (v1/*: any*/),
                           {
                             "alias": null,
                             "args": null,
-                            "kind": "ScalarField",
-                            "name": "username",
-                            "storageKey": null
-                          },
-                          {
-                            "alias": null,
-                            "args": null,
-                            "concreteType": "UserProfile",
+                            "concreteType": "MembersEdge",
                             "kind": "LinkedField",
-                            "name": "userProfile",
-                            "plural": false,
-                            "selections": [
-                              {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "firstName",
-                                "storageKey": null
-                              },
-                              {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "lastName",
-                                "storageKey": null
-                              }
-                            ],
-                            "storageKey": null
-                          },
-                          {
-                            "alias": null,
-                            "args": null,
-                            "concreteType": "Trophy",
-                            "kind": "LinkedField",
-                            "name": "trophies",
+                            "name": "edges",
                             "plural": true,
                             "selections": [
-                              (v1/*: any*/),
                               {
                                 "alias": null,
                                 "args": null,
-                                "kind": "ScalarField",
-                                "name": "awardedDate",
-                                "storageKey": null
-                              },
-                              {
-                                "alias": null,
-                                "args": null,
-                                "concreteType": "Game",
+                                "concreteType": "User",
                                 "kind": "LinkedField",
-                                "name": "game",
+                                "name": "node",
                                 "plural": false,
                                 "selections": [
-                                  {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "groupId",
-                                    "storageKey": null
-                                  },
                                   (v1/*: any*/),
                                   {
                                     "alias": null,
                                     "args": null,
                                     "kind": "ScalarField",
-                                    "name": "symbol",
+                                    "name": "username",
                                     "storageKey": null
                                   },
-                                  (v2/*: any*/)
+                                  {
+                                    "alias": null,
+                                    "args": null,
+                                    "concreteType": "UserProfile",
+                                    "kind": "LinkedField",
+                                    "name": "userProfile",
+                                    "plural": false,
+                                    "selections": [
+                                      {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "firstName",
+                                        "storageKey": null
+                                      },
+                                      {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "lastName",
+                                        "storageKey": null
+                                      }
+                                    ],
+                                    "storageKey": null
+                                  },
+                                  {
+                                    "alias": null,
+                                    "args": null,
+                                    "concreteType": "Trophy",
+                                    "kind": "LinkedField",
+                                    "name": "trophies",
+                                    "plural": true,
+                                    "selections": [
+                                      (v1/*: any*/),
+                                      {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "awardedDate",
+                                        "storageKey": null
+                                      },
+                                      {
+                                        "alias": null,
+                                        "args": null,
+                                        "concreteType": "Game",
+                                        "kind": "LinkedField",
+                                        "name": "game",
+                                        "plural": false,
+                                        "selections": [
+                                          {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "groupId",
+                                            "storageKey": null
+                                          },
+                                          (v1/*: any*/),
+                                          {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "symbol",
+                                            "storageKey": null
+                                          },
+                                          (v7/*: any*/)
+                                        ],
+                                        "storageKey": null
+                                      }
+                                    ],
+                                    "storageKey": null
+                                  }
                                 ],
                                 "storageKey": null
                               }
@@ -213,71 +338,32 @@ return {
                           }
                         ],
                         "storageKey": null
-                      },
-                      {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "__typename",
-                        "storageKey": null
                       }
                     ],
                     "storageKey": null
                   },
-                  {
-                    "alias": null,
-                    "args": null,
-                    "kind": "ScalarField",
-                    "name": "cursor",
-                    "storageKey": null
-                  }
+                  (v3/*: any*/)
                 ],
                 "storageKey": null
               },
+              (v4/*: any*/),
+              (v5/*: any*/),
               {
                 "alias": null,
                 "args": null,
-                "concreteType": "PageInfo",
-                "kind": "LinkedField",
-                "name": "pageInfo",
-                "plural": false,
-                "selections": [
-                  {
-                    "alias": null,
-                    "args": null,
-                    "kind": "ScalarField",
-                    "name": "endCursor",
-                    "storageKey": null
-                  },
-                  {
-                    "alias": null,
-                    "args": null,
-                    "kind": "ScalarField",
-                    "name": "hasNextPage",
-                    "storageKey": null
-                  }
-                ],
+                "kind": "ScalarField",
+                "name": "totalCount",
                 "storageKey": null
-              },
-              {
-                "kind": "ClientExtension",
-                "selections": [
-                  {
-                    "alias": null,
-                    "args": null,
-                    "kind": "ScalarField",
-                    "name": "__id",
-                    "storageKey": null
-                  }
-                ]
               }
             ],
-            "storageKey": "groups(first:10)"
+            "storageKey": "groups(first:12,order:[{\"createdDate\":\"DESC\"}])"
           },
           {
             "alias": null,
-            "args": (v0/*: any*/),
-            "filters": null,
+            "args": (v6/*: any*/),
+            "filters": [
+              "order"
+            ],
             "handle": "connection",
             "key": "GroupsFragment_groups",
             "kind": "LinkedHandle",
@@ -290,16 +376,28 @@ return {
     ]
   },
   "params": {
-    "cacheID": "12ccad617da948eb2183fd2faf41cbdd",
+    "cacheID": "c7d00c82154b10456c8b2ec8aedb26ce",
     "id": null,
-    "metadata": {},
+    "metadata": {
+      "connection": [
+        {
+          "count": null,
+          "cursor": null,
+          "direction": "forward",
+          "path": [
+            "me",
+            "groups"
+          ]
+        }
+      ]
+    },
     "name": "GroupsPageQuery",
     "operationKind": "query",
-    "text": "query GroupsPageQuery {\n  me {\n    ...MyGroupsFragment\n    id\n  }\n}\n\nfragment GroupBoxFragment on Group {\n  id\n  name\n  description\n  members {\n    id\n    ...MemberRowFragment\n  }\n}\n\nfragment MemberRowFragment on User {\n  username\n  userProfile {\n    firstName\n    lastName\n  }\n  ...TrophyStackFragment\n}\n\nfragment MyGroupsFragment on User {\n  groups(first: 10) {\n    totalCount\n    edges {\n      node {\n        id\n        ...GroupBoxFragment\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n\nfragment TrophyAvatarFragment on Trophy {\n  game {\n    symbol\n    name\n    id\n  }\n}\n\nfragment TrophyStackFragment on User {\n  trophies {\n    id\n    awardedDate\n    game {\n      groupId\n      id\n    }\n    ...TrophyAvatarFragment\n  }\n}\n"
+    "text": "query GroupsPageQuery {\n  me {\n    groups(order: [{createdDate: DESC}], first: 12) {\n      edges {\n        node {\n          id\n          __typename\n        }\n        cursor\n      }\n      pageInfo {\n        endCursor\n        hasNextPage\n      }\n    }\n    ...MyGroupsFragment\n    id\n  }\n}\n\nfragment GroupBoxFragment on Group {\n  id\n  name\n  description\n  members {\n    edges {\n      node {\n        id\n        ...MemberRowFragment\n      }\n    }\n  }\n}\n\nfragment MemberRowFragment on User {\n  username\n  userProfile {\n    firstName\n    lastName\n  }\n  ...TrophyStackFragment\n}\n\nfragment MyGroupsFragment on User {\n  groups(order: [{createdDate: DESC}], first: 12) {\n    totalCount\n    edges {\n      node {\n        id\n        ...GroupBoxFragment\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n\nfragment TrophyAvatarFragment on Trophy {\n  game {\n    symbol\n    name\n    id\n  }\n}\n\nfragment TrophyStackFragment on User {\n  trophies {\n    id\n    awardedDate\n    game {\n      groupId\n      id\n    }\n    ...TrophyAvatarFragment\n  }\n}\n"
   }
 };
 })();
 
-(node as any).hash = "22dd25d1ba1e45040504e87b11a4f8d4";
+(node as any).hash = "84e1a419215a0754d0dee33b1afcffc1";
 
 export default node;
