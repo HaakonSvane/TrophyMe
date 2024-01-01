@@ -81,7 +81,8 @@ public class Program
             .AddQueryFieldToMutationPayloads()
             .AddHttpRequestInterceptor<TrophyHttpRequestInterceptor>()
             .UseRequest<UserMiddleware>()
-            .UseDefaultPipeline();
+            .UseDefaultPipeline()
+            .AddSorting();
 
         var app = builder.Build();
 

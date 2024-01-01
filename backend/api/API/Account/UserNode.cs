@@ -7,7 +7,9 @@ namespace api.API.Account;
 [ExtendObjectType(typeof(User))]
 public static class UserNode
 {
+    
     [UsePaging(IncludeTotalCount = true)]
+    [UseSorting]    
     public static async Task<IEnumerable<Database.Models.Group>> GetGroupsAsync([Parent] User user,
         IGroupsByUserIdsDataLoader dataLoader,
         CancellationToken cancellationToken)
