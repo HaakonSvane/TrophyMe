@@ -15,8 +15,8 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 8.0.x
-    - name: Restore dependencies
-      run: 📦 dotnet restore
+    - name: 📦 Restore dependencies
+      run: dotnet restore
     - name: 🏭 Generate schema
       run: dotnet run --project /backend/api schema export --output schema.graphql
     - name: 🛜 Upload schema
