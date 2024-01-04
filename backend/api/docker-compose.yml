@@ -18,6 +18,6 @@ services:
     build:
       dockerfile: "./Dockerfile"
     ports:
-      - "8080:80"
+      - "8080:8080"
     environment:
       CONNECTION_STRING: "${CONNECTION_STRING}"
