@@ -653,4 +653,8 @@ FodyWeavers.xsd
 # End of 
 https://www.toptal.com/developers/gitignore/api/rider,dotnetcore,aspnetcore,visualstudio,visualstudiocode
 
+# Dev only stuff
 .env
+graphql.schema
+
+
