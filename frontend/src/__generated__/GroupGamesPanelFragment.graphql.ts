@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<99284ef32dd0df3efa0ac3f8e9fc2eb3>>
+ * @generated SignedSource<<3cf001068c9c72febe5a51b45f4a053c>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -12,6 +12,7 @@ import { Fragment, ReaderFragment } from 'relay-runtime';
 import { FragmentRefs } from "relay-runtime";
 export type GroupGamesPanelFragment$data = {
   readonly games: {
+    readonly __id: string;
     readonly edges: ReadonlyArray<{
       readonly node: {
         readonly description: string | null | undefined;
@@ -21,6 +22,7 @@ export type GroupGamesPanelFragment$data = {
       };
     }> | null | undefined;
   } | null | undefined;
+  readonly id: string;
   readonly " $fragmentType": "GroupGamesPanelFragment";
 };
 export type GroupGamesPanelFragment$key = {
@@ -28,7 +30,15 @@ export type GroupGamesPanelFragment$key = {
   readonly " $fragmentSpreads": FragmentRefs<"GroupGamesPanelFragment">;
 };
 
-const node: ReaderFragment = {
+const node: ReaderFragment = (function(){
+var v0 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "id",
+  "storageKey": null
+};
+return {
   "argumentDefinitions": [],
   "kind": "Fragment",
   "metadata": {
@@ -45,6 +55,7 @@ const node: ReaderFragment = {
   },
   "name": "GroupGamesPanelFragment",
   "selections": [
+    (v0/*: any*/),
     {
       "alias": "games",
       "args": null,
@@ -69,13 +80,7 @@ const node: ReaderFragment = {
               "name": "node",
               "plural": false,
               "selections": [
-                {
-                  "alias": null,
-                  "args": null,
-                  "kind": "ScalarField",
-                  "name": "id",
-                  "storageKey": null
-                },
+                (v0/*: any*/),
                 {
                   "alias": null,
                   "args": null,
@@ -141,6 +146,18 @@ const node: ReaderFragment = {
             }
           ],
           "storageKey": null
+        },
+        {
+          "kind": "ClientExtension",
+          "selections": [
+            {
+              "alias": null,
+              "args": null,
+              "kind": "ScalarField",
+              "name": "__id",
+              "storageKey": null
+            }
+          ]
         }
       ],
       "storageKey": null
@@ -149,7 +166,8 @@ const node: ReaderFragment = {
   "type": "Group",
   "abstractKey": null
 };
+})();
 
-(node as any).hash = "c2c05e4020a67249fd5cd8f7d90693cb";
+(node as any).hash = "8bf7308bc7f3082f9d43db0e3a779fda";
 
 export default node;

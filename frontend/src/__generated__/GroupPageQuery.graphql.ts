@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<fc0018409c0386f733268df112ec70cc>>
+ * @generated SignedSource<<76afedb0ae523a21778001e5f3299bbd>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -232,6 +232,18 @@ return {
                   }
                 ],
                 "storageKey": null
+              },
+              {
+                "kind": "ClientExtension",
+                "selections": [
+                  {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "__id",
+                    "storageKey": null
+                  }
+                ]
               }
             ],
             "storageKey": "games(first:10)"
@@ -251,12 +263,12 @@ return {
     ]
   },
   "params": {
-    "cacheID": "9512bda276458626114b922bf828bb3e",
+    "cacheID": "288d1169de7a58c24c847a4755a91837",
     "id": null,
     "metadata": {},
     "name": "GroupPageQuery",
     "operationKind": "query",
-    "text": "query GroupPageQuery(\n  $groupId: ID!\n) {\n  groupById(id: $groupId) {\n    id\n    name\n    adminId\n    ...GroupSocialCardFragment\n    ...GroupGamesPanelFragment\n  }\n}\n\nfragment GroupGamesPanelFragment on Group {\n  games(first: 10) {\n    edges {\n      node {\n        id\n        symbol\n        name\n        description\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n\nfragment GroupInviteFragment on Group {\n  id\n  invite {\n    inviteCode\n    expirationDate\n  }\n}\n\nfragment GroupSocialCardFragment on Group {\n  name\n  description\n  ...GroupInviteFragment\n}\n"
+    "text": "query GroupPageQuery(\n  $groupId: ID!\n) {\n  groupById(id: $groupId) {\n    id\n    name\n    adminId\n    ...GroupSocialCardFragment\n    ...GroupGamesPanelFragment\n  }\n}\n\nfragment GroupGamesPanelFragment on Group {\n  id\n  games(first: 10) {\n    edges {\n      node {\n        id\n        symbol\n        name\n        description\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n\nfragment GroupInviteFragment on Group {\n  id\n  invite {\n    inviteCode\n    expirationDate\n  }\n}\n\nfragment GroupSocialCardFragment on Group {\n  name\n  description\n  ...GroupInviteFragment\n}\n"
   }
 };
 })();
