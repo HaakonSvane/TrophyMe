@@ -1,0 +1,28 @@
+name: Generate graphQL schema
+
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+    - backend 
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: 👨🏻‍🔧 Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 6.0.x
+    - name: Restore dependencies
+      run: 📦 dotnet restore
+    - name: 🏭 Generate schema
+      run: dotnet run --project /backend/api schema export --output schema.graphql
+    - name: 🛜 Upload schema
+      uses: actions/upload-artifact@v4
+      with:
+        name: graphql-schema
+        path: schema.graphql
+    
