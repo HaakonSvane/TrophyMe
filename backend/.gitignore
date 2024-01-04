@@ -655,6 +655,6 @@ https://www.toptal.com/developers/gitignore/api/rider,dotnetcore,aspnetcore,visu
 
 # Dev only stuff
 .env
-graphql.schema
+schema.graphql
 
 
