@@ -9,7 +9,6 @@
 
     <ItemGroup>
         <PackageReference Include="FlexLabs.EntityFrameworkCore.Upsert" Version="8.0.0" />
-        <PackageReference Include="Google.Apis.Auth" Version="1.62.1" />
         <PackageReference Include="HotChocolate.AspNetCore" Version="13.8.1" />
         <PackageReference Include="HotChocolate.AspNetCore.Authorization" Version="13.8.1" />
         <PackageReference Include="HotChocolate.AspNetCore.CommandLine" Version="13.8.1" />

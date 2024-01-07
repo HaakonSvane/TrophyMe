@@ -1,13 +1,11 @@
 using System.Reflection;
 using api.API.Middleware;
-using api.Auth;
 using api.Auth.Handlers;
 using api.Auth.Requirements;
 using api.Database;
 using api.Repository;
 using api.Transport;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Npgsql;
 
@@ -36,27 +34,19 @@ public class Program
         builder.Services.AddDbContextPool<TrophyDbContext>(options =>
             options
                 .UseNpgsql(connectionStringBuilder.ConnectionString));
-        
+
         var authBuilder = builder.Services.AddAuthentication(options =>
         {
-            options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-            options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-            options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            options.DefaultScheme = FakeAuthHandler.AuthenticationScheme;
         });
-        
-        authBuilder.AddJwtBearer(jwtOptions =>
-        {
-            
-            jwtOptions.IncludeErrorDetails = true;
-            jwtOptions.SecurityTokenValidators.Clear();
-            jwtOptions.SecurityTokenValidators.Add(new GoogleSecurityTokenValidator(config));
-        });
+        authBuilder
+            .AddJwtBearer();
 
-        // if (builder.Environment.IsDevelopment())
-        // {
-        //     authBuilder.AddScheme<FakeAuthHandlerOptions, FakeAuthHandler>(FakeAuthHandler.AuthenticationScheme,
-        //         _ => { });
-        // }
+        if (builder.Environment.IsDevelopment())
+        {
+            authBuilder.AddScheme<FakeAuthHandlerOptions, FakeAuthHandler>(FakeAuthHandler.AuthenticationScheme,
+                _ => { });
+        }
         
         builder.Services.AddAuthorization(cfg => 
             cfg.AddPolicy("IsGroupMember", policy => policy.Requirements.Add(new GroupMemberRequirement()))
@@ -94,6 +84,7 @@ public class Program
         {
             app.MapBananaCakePop("/dev");
         }
+        
         app.MapGraphQLHttp().RequireAuthorization();
         app.MapGraphQLWebSocket();
         app.MapGraphQLSchema();
