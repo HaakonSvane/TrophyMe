@@ -1,8 +1,8 @@
-import { authOptions } from "@/lib/authOptions";
-import { getServerSession } from "next-auth";
+import { auth } from "@/lib/auth/config";
 
 export async function graphQlQuery(requestBody: string) {
-    const session = await getServerSession(authOptions);
+    const session = await auth();
+
     const idToken = session?.idToken;
     if (!idToken) {
         return new Response("Unauthorized", { status: 401 });
@@ -14,7 +14,6 @@ export async function graphQlQuery(requestBody: string) {
     const r = await fetch(baseUrl, {
         method: "POST",
         headers: {
-            Authorization: `Bearer ${idToken}`,
             Accept: "application/graphql-response+json; charset=utf-8, application/json; charset=utf-8",
             "Content-Type": "application/json",
         },
