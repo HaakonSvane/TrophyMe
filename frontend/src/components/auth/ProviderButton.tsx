@@ -1,7 +1,9 @@
-import { signIn, type ClientSafeProvider } from "next-auth/react";
+"use client";
+import { signIn } from "next-auth/react";
 import { Button, ButtonProps } from "@/components/ui/button";
 import { AiOutlineGoogle, AiOutlineQuestion } from "react-icons/ai";
 import { LucideIcon } from "lucide-react";
+import { AuthProvider } from "@/types/auth";
 
 const getIconForProviderName = (name: string): LucideIcon => {
     const normalizedName = name.toLowerCase();
@@ -14,7 +16,7 @@ const getIconForProviderName = (name: string): LucideIcon => {
 };
 
 export type ProviderButtonProps = {
-    provider: ClientSafeProvider;
+    provider: AuthProvider;
     callbackUrl?: string;
 };
 
@@ -23,6 +25,7 @@ export const ProviderButton = ({
     callbackUrl,
     ...rest
 }: ProviderButtonProps & ButtonProps) => {
+    console.log("callbackurl", callbackUrl);
     return (
         <Button
             {...rest}

@@ -1,21 +1,13 @@
-"use client";
+import { AuthProvider } from "@/types/auth";
+import { useSuspendablePromise } from "@/hooks/useSuspendablePromise";
 
-import { suspendablePromise } from "../suspendablePromise";
-
-type ProviderInfo = {
-    id: string;
-    name: string;
-    type: string;
-    signinUrl: string;
-    callbackUrl: string;
-};
 const getProviders = async () => {
-    const response = await fetch("api/auth/providers");
+    const response = await fetch("/api/auth/providers");
     if (!response.ok) throw new Error("Could not fetch providers from server side!");
-    return (await response.json()) as Record<string, ProviderInfo>;
+    return (await response.json()) as Record<string, AuthProvider>;
 };
-const providerResource = suspendablePromise(getProviders());
 
 export const useProviders = () => {
-    return providerResource.read();
+    const providerResource = useSuspendablePromise(getProviders);
+    return providerResource?.read();
 };
