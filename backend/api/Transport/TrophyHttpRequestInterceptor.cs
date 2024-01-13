@@ -14,11 +14,10 @@ public class TrophyHttpRequestInterceptor : DefaultHttpRequestInterceptor
     {
         
         var userId = context.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-        var userName = context.User.FindFirst(ClaimTypes.Name)?.Value;
         
-        if (userId is not null && userName is not null)
+        if (userId is not null)
         {
-            requestBuilder.SetGlobalState("User", new TokenUser(userName, userId));
+            requestBuilder.SetGlobalState("User", new TokenUser(userId));
         }
         await base.OnCreateAsync(context, requestExecutor, requestBuilder, cancellationToken);
     }

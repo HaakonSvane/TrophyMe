@@ -1,3 +1,3 @@
 namespace api.Transport;
 
-public record TokenUser(string Name, string Id);
+public record TokenUser(string Id);

@@ -1,1 +1,7 @@
-export { auth as default } from "@/lib/auth/config";
+import { withMiddlewareAuthRequired } from "@auth0/nextjs-auth0/edge";
+
+export default withMiddlewareAuthRequired();
+
+export const config = {
+    matcher: ["/dashboard/:path*", "/groups/:path*", "/stats/:path*"],
+};

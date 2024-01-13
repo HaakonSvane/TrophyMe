@@ -22,5 +22,5 @@ jobs:
       - name: 🛜 Upload schema
         uses: actions/upload-artifact@v4
         with:
-          name: backend/api/graphql-schema
-          path: schema.graphql
+          name: schema.graphql
+          path: backend/api/graphql-schema

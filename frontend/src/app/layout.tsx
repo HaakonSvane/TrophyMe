@@ -5,6 +5,7 @@ import { MainComponent } from "./MainComponent";
 import { cn } from "@/lib/utils";
 import { Poppins } from "next/font/google";
 import { Toaster } from "sonner";
+import { UserProvider } from "@auth0/nextjs-auth0/client";
 
 export const metadata: Metadata = {
     title: "troji",
@@ -20,12 +21,17 @@ const poppins = Poppins({
 const RootLayout = ({ children }: PropsWithChildren) => {
     return (
         <html lang="en" suppressHydrationWarning>
-            <body
-                className={cn("min-h-screen bg-background font-sans antialiased", poppins.variable)}
-            >
-                <Toaster richColors />
-                <MainComponent>{children}</MainComponent>
-            </body>
+            <UserProvider>
+                <body
+                    className={cn(
+                        "min-h-screen bg-background font-sans antialiased",
+                        poppins.variable,
+                    )}
+                >
+                    <Toaster richColors />
+                    <MainComponent>{children}</MainComponent>
+                </body>
+            </UserProvider>
         </html>
     );
 };

@@ -8,7 +8,6 @@ import {
 } from "../ui/dropdown-menu";
 import { User, LogOut, MessageSquarePlus } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { signOut } from "next-auth/react";
 import { graphql, useFragment } from "react-relay";
 import { UserMenuFragment$key } from "@/__generated__/UserMenuFragment.graphql";
 
@@ -40,9 +39,11 @@ export const UserMenu = ({ fragmentKey }: UserMenuProps) => {
                     <User className={cn("mr-4")} />
                     <span>Profile</span>
                 </DropdownMenuItem>
-                <DropdownMenuItem className={cn("text-destructive")} onClick={() => signOut()}>
-                    <LogOut className={cn("mr-4")} />
-                    <span>Sign out</span>
+                <DropdownMenuItem className={cn("text-destructive")} asChild>
+                    <a href="/api/auth/logout">
+                        <LogOut className={cn("mr-4")} />
+                        <span>Sign out</span>
+                    </a>
                 </DropdownMenuItem>
             </DropdownMenuGroup>
 

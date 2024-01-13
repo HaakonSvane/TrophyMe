@@ -11,6 +11,7 @@
         "generate-schema": "dotnet run --project ../backend/api schema export --output schema.graphql"
     },
     "dependencies": {
+        "@auth0/nextjs-auth0": "^3.5.0",
         "@hookform/resolvers": "^3.3.2",
         "@radix-ui/react-avatar": "^1.0.4",
         "@radix-ui/react-dialog": "^1.0.5",
@@ -33,7 +34,6 @@
         "eslint-config-next": "^14.0.4",
         "lucide-react": "^0.292.0",
         "next": "^14.0.4",
-        "next-auth": "^5.0.0-beta.4",
         "next-themes": "^0.2.1",
         "postcss": "8.4.31",
         "react": "^18.2.0",

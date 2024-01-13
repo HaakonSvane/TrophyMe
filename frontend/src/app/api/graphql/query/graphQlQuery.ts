@@ -1,10 +1,10 @@
-import { auth } from "@/lib/auth/config";
+"use server";
+
+import { getAccessToken } from "@auth0/nextjs-auth0";
 
 export async function graphQlQuery(requestBody: string) {
-    const session = await auth();
-
-    const idToken = session?.idToken;
-    if (!idToken) {
+    const { accessToken } = await getAccessToken();
+    if (!accessToken) {
         return new Response("Unauthorized", { status: 401 });
     }
     const baseUrl = process.env.BASE_URL;
@@ -16,6 +16,7 @@ export async function graphQlQuery(requestBody: string) {
         headers: {
             Accept: "application/graphql-response+json; charset=utf-8, application/json; charset=utf-8",
             "Content-Type": "application/json",
+            Authorization: `Bearer ${accessToken}`,
         },
         body: requestBody,
     });
