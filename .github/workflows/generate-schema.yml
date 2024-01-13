@@ -18,7 +18,7 @@ jobs:
       - name: 📦 Restore dependencies
         run: dotnet restore backend/api
       - name: 🏭 Generate schema
-        run: dotnet run --project /backend/api schema export --output schema.graphql
+        run: dotnet run --project backend/api schema export --output schema.graphql
       - name: 🛜 Upload schema
         uses: actions/upload-artifact@v4
         with:
