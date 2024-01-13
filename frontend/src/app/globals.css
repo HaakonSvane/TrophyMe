@@ -2,16 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-    --foreground-white: 210 40% 98%;
-    --buff: 21 69% 73%;
-    --light-coral: 358 70% 66%;
-    --china-rose: 347 35% 55%;
-    --chinese-violet: 276 16% 41%;
-    --ylnmn-blue: 213 36% 32%;
-}
-
-
 @layer base {
     :root {
       --background: 0 0% 100%;

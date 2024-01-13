@@ -5,6 +5,7 @@ using api.Auth.Requirements;
 using api.Database;
 using api.Repository;
 using api.Transport;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
 using Npgsql;
@@ -37,16 +38,15 @@ public class Program
 
         var authBuilder = builder.Services.AddAuthentication(options =>
         {
-            options.DefaultScheme = FakeAuthHandler.AuthenticationScheme;
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;   
         });
         authBuilder
-            .AddJwtBearer();
-
-        if (builder.Environment.IsDevelopment())
-        {
-            authBuilder.AddScheme<FakeAuthHandlerOptions, FakeAuthHandler>(FakeAuthHandler.AuthenticationScheme,
-                _ => { });
-        }
+            .AddJwtBearer(options =>
+            {
+                options.Authority = config["Auth:Authority"];
+                options.Audience = config["Auth:Audience"];
+            });
         
         builder.Services.AddAuthorization(cfg => 
             cfg.AddPolicy("IsGroupMember", policy => policy.Requirements.Add(new GroupMemberRequirement()))
