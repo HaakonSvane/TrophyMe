@@ -11,12 +11,13 @@ public class Game
 
     public string? Description { get; set; }
     
-    public string? AdditionalInfo { get; set; }
-
     [GraphQLName("symbol")]
+    [MaxLength(4)]
     public required string Emoji { get; set; }
     
     public int ParentGroupId { get; set; }
+    
+    public DateTimeOffset CreatedDate { get; set; }
     
     [GraphQLIgnore]
     [ForeignKey("ParentGroupId")] public Group ParentGroup { get; set; }

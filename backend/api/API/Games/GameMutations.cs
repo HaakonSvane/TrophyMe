@@ -17,7 +17,6 @@ public static class GameMutations
         string name,
         string symbol,
         string? description,
-        string? additionalInfo,
         IGroupsByIdsDataLoader groupsByIdsDataLoader,
         IGameRepository gameRepository,
         [Service] IIdSerializer serializer,
@@ -40,7 +39,7 @@ public static class GameMutations
             Name = name,
             Emoji = symbol,
             Description = description,
-            AdditionalInfo = additionalInfo,
+            CreatedDate = DateTimeOffset.UtcNow,
         };
         
         return await gameRepository.CreateGameAsync(newGame, group, cancellationToken);

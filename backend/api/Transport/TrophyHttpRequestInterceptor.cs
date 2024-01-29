@@ -1,6 +1,4 @@
 using System.Security.Claims;
-using api.Database.Models;
-using api.Repository;
 using HotChocolate.AspNetCore;
 using HotChocolate.Execution;
 

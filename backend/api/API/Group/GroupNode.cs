@@ -39,10 +39,10 @@ public static class GroupNode
     [UsePaging(IncludeTotalCount = true)]
     public static async Task<IEnumerable<User>> GetMembersAsync(
         [Parent] Database.Models.Group group,
-        IUsersByGroupIdsDataLoader dataloader,
+        IUsersByGroupIdsDataLoader dataLoader,
         CancellationToken cancellationToken)
     {
-        return await dataloader.LoadAsync(group.Id, cancellationToken);
+        return await dataLoader.LoadAsync(group.Id, cancellationToken);
     }
     
     [DataLoader]
