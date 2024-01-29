@@ -28,7 +28,7 @@ import { NewGameForm } from "./NewGameForm";
 const GroupGamesPanelFragment = graphql`
     fragment GroupGamesPanelFragment on Group {
         id
-        games(first: 10) @connection(key: "GroupGamesPanel_games") {
+        games(first: 10, order: [{ createdDate: DESC }]) @connection(key: "GroupGamesPanel_games") {
             __id
             edges {
                 node {
@@ -51,7 +51,7 @@ export const GroupGamesPanel = ({ fragmentKey }: GroupGamesPanelProps) => {
     const [isCreateGameDialogOpen, setIsCreateGameDialogOpen] = useState<boolean>(false);
 
     const onCreateNewGameSuccess = () => {
-        setIsCreateGameDialogOpen(true);
+        setIsCreateGameDialogOpen(false);
         toast.success("Successfully created a new game!");
     };
 

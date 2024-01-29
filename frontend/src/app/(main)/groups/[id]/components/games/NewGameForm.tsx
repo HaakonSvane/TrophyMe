@@ -84,7 +84,13 @@ export const NewGameForm = ({ groupId, connectionId, onSuccess }: NewGameFormPro
                     render={({ field }) => (
                         <FormItem>
                             <FormLabel>Trophy</FormLabel>
-                            <EmojiPicker onSelect={field.onChange} />
+                            <EmojiPicker
+                                onSelect={newEmoji => {
+                                    field.onBlur();
+                                    field.onChange(newEmoji);
+                                }}
+                                portal={false}
+                            />
                             {/* <Select onValueChange={field.onChange} defaultValue={field.value}>
                                 <FormControl>
                                     <SelectTrigger>

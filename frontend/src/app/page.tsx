@@ -1,7 +1,6 @@
 import { MidScreenContent } from "@/components/containers/MidScreenContent";
 import { SectionHeader } from "@/components/labels/SectionHeader";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
 
 const LandingPage = async () => {
     return (
@@ -14,7 +13,7 @@ const LandingPage = async () => {
                 </p>
                 <p>To begin, please sign in. It's free!</p>
                 <Button asChild>
-                    <Link href={"/auth/signin"}>Sign in</Link>
+                    <a href={"/api/auth/login"}>Sign in</a>
                 </Button>
             </div>
         </MidScreenContent>
