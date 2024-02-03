@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<3cf001068c9c72febe5a51b45f4a053c>>
+ * @generated SignedSource<<c34282bb8dd0b878220e6fc34952ea7f>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -19,6 +19,16 @@ export type GroupGamesPanelFragment$data = {
         readonly id: string;
         readonly name: string;
         readonly symbol: string;
+        readonly topPlayers: {
+          readonly edges: ReadonlyArray<{
+            readonly node: {
+              readonly username: string;
+            };
+          }> | null | undefined;
+        } | null | undefined;
+        readonly trophies: ReadonlyArray<{
+          readonly id: string;
+        }>;
       };
     }> | null | undefined;
   } | null | undefined;
@@ -58,7 +68,17 @@ return {
     (v0/*: any*/),
     {
       "alias": "games",
-      "args": null,
+      "args": [
+        {
+          "kind": "Literal",
+          "name": "order",
+          "value": [
+            {
+              "createdDate": "DESC"
+            }
+          ]
+        }
+      ],
       "concreteType": "GamesConnection",
       "kind": "LinkedField",
       "name": "__GroupGamesPanel_games_connection",
@@ -101,6 +121,64 @@ return {
                   "kind": "ScalarField",
                   "name": "description",
                   "storageKey": null
+                },
+                {
+                  "alias": null,
+                  "args": null,
+                  "concreteType": "Trophy",
+                  "kind": "LinkedField",
+                  "name": "trophies",
+                  "plural": true,
+                  "selections": [
+                    (v0/*: any*/)
+                  ],
+                  "storageKey": null
+                },
+                {
+                  "alias": null,
+                  "args": [
+                    {
+                      "kind": "Literal",
+                      "name": "first",
+                      "value": 1
+                    }
+                  ],
+                  "concreteType": "TopPlayersConnection",
+                  "kind": "LinkedField",
+                  "name": "topPlayers",
+                  "plural": false,
+                  "selections": [
+                    {
+                      "alias": null,
+                      "args": null,
+                      "concreteType": "TopPlayersEdge",
+                      "kind": "LinkedField",
+                      "name": "edges",
+                      "plural": true,
+                      "selections": [
+                        {
+                          "alias": null,
+                          "args": null,
+                          "concreteType": "User",
+                          "kind": "LinkedField",
+                          "name": "node",
+                          "plural": false,
+                          "selections": [
+                            {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "username",
+                              "storageKey": null
+                            }
+                          ],
+                          "storageKey": null
+                        }
+                      ],
+                      "storageKey": null
+                    }
+                  ],
+                  "storageKey": "topPlayers(first:1)"
                 },
                 {
                   "alias": null,
@@ -160,7 +238,7 @@ return {
           ]
         }
       ],
-      "storageKey": null
+      "storageKey": "__GroupGamesPanel_games_connection(order:[{\"createdDate\":\"DESC\"}])"
     }
   ],
   "type": "Group",
@@ -168,6 +246,6 @@ return {
 };
 })();
 
-(node as any).hash = "8bf7308bc7f3082f9d43db0e3a779fda";
+(node as any).hash = "f71ed6b8c7138480865f853d5f091937";
 
 export default node;

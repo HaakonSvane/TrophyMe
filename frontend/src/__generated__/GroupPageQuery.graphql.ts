@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<76afedb0ae523a21778001e5f3299bbd>>
+ * @generated SignedSource<<fd851f5a94feb87272b044fae9603d34>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -74,6 +74,15 @@ v6 = [
     "kind": "Literal",
     "name": "first",
     "value": 10
+  },
+  {
+    "kind": "Literal",
+    "name": "order",
+    "value": [
+      {
+        "createdDate": "DESC"
+      }
+    ]
   }
 ];
 return {
@@ -191,6 +200,65 @@ return {
                       {
                         "alias": null,
                         "args": null,
+                        "concreteType": "Trophy",
+                        "kind": "LinkedField",
+                        "name": "trophies",
+                        "plural": true,
+                        "selections": [
+                          (v2/*: any*/)
+                        ],
+                        "storageKey": null
+                      },
+                      {
+                        "alias": null,
+                        "args": [
+                          {
+                            "kind": "Literal",
+                            "name": "first",
+                            "value": 1
+                          }
+                        ],
+                        "concreteType": "TopPlayersConnection",
+                        "kind": "LinkedField",
+                        "name": "topPlayers",
+                        "plural": false,
+                        "selections": [
+                          {
+                            "alias": null,
+                            "args": null,
+                            "concreteType": "TopPlayersEdge",
+                            "kind": "LinkedField",
+                            "name": "edges",
+                            "plural": true,
+                            "selections": [
+                              {
+                                "alias": null,
+                                "args": null,
+                                "concreteType": "User",
+                                "kind": "LinkedField",
+                                "name": "node",
+                                "plural": false,
+                                "selections": [
+                                  {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "username",
+                                    "storageKey": null
+                                  },
+                                  (v2/*: any*/)
+                                ],
+                                "storageKey": null
+                              }
+                            ],
+                            "storageKey": null
+                          }
+                        ],
+                        "storageKey": "topPlayers(first:1)"
+                      },
+                      {
+                        "alias": null,
+                        "args": null,
                         "kind": "ScalarField",
                         "name": "__typename",
                         "storageKey": null
@@ -246,12 +314,14 @@ return {
                 ]
               }
             ],
-            "storageKey": "games(first:10)"
+            "storageKey": "games(first:10,order:[{\"createdDate\":\"DESC\"}])"
           },
           {
             "alias": null,
             "args": (v6/*: any*/),
-            "filters": null,
+            "filters": [
+              "order"
+            ],
             "handle": "connection",
             "key": "GroupGamesPanel_games",
             "kind": "LinkedHandle",
@@ -263,12 +333,12 @@ return {
     ]
   },
   "params": {
-    "cacheID": "288d1169de7a58c24c847a4755a91837",
+    "cacheID": "38236798ec40d0a2c9b3f421450333d1",
     "id": null,
     "metadata": {},
     "name": "GroupPageQuery",
     "operationKind": "query",
-    "text": "query GroupPageQuery(\n  $groupId: ID!\n) {\n  groupById(id: $groupId) {\n    id\n    name\n    adminId\n    ...GroupSocialCardFragment\n    ...GroupGamesPanelFragment\n  }\n}\n\nfragment GroupGamesPanelFragment on Group {\n  id\n  games(first: 10) {\n    edges {\n      node {\n        id\n        symbol\n        name\n        description\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n\nfragment GroupInviteFragment on Group {\n  id\n  invite {\n    inviteCode\n    expirationDate\n  }\n}\n\nfragment GroupSocialCardFragment on Group {\n  name\n  description\n  ...GroupInviteFragment\n}\n"
+    "text": "query GroupPageQuery(\n  $groupId: ID!\n) {\n  groupById(id: $groupId) {\n    id\n    name\n    adminId\n    ...GroupSocialCardFragment\n    ...GroupGamesPanelFragment\n  }\n}\n\nfragment GroupGamesPanelFragment on Group {\n  id\n  games(first: 10, order: [{createdDate: DESC}]) {\n    edges {\n      node {\n        id\n        symbol\n        name\n        description\n        trophies {\n          id\n        }\n        topPlayers(first: 1) {\n          edges {\n            node {\n              username\n              id\n            }\n          }\n        }\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n\nfragment GroupInviteFragment on Group {\n  id\n  invite {\n    inviteCode\n    expirationDate\n  }\n}\n\nfragment GroupSocialCardFragment on Group {\n  name\n  description\n  ...GroupInviteFragment\n}\n"
   }
 };
 })();

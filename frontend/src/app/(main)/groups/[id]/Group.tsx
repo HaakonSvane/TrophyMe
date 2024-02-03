@@ -9,6 +9,9 @@ import { PageHeader, PageTitle } from "@/components/labels/PageHeader";
 import { GroupSocialCard } from "./components/GroupSocialCard";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { GroupGamesPanel } from "./components/games/GroupGamesPanel";
+import { useRouter } from "next/navigation";
+import { useCallback } from "react";
+import { usePathname, useSearchParams } from "next/navigation";
 
 const GroupPageQuery = graphql`
     query GroupPageQuery($groupId: ID!) {
@@ -30,6 +33,20 @@ export const GroupQuery = ({ preloadedQuery }: GroupQueryProps) => {
     const environment = getCurrentEnvironment();
     const queryRef = useSerializablePreloadedQuery(environment, preloadedQuery);
     const data = usePreloadedQuery(GroupPageQuery, queryRef);
+
+    const pathname = usePathname();
+    const router = useRouter();
+    const searchParams = useSearchParams();
+
+    const createTabBarString = useCallback(
+        (tabName: string) => {
+            const params = new URLSearchParams(searchParams.toString());
+            params.set("tab", tabName);
+            return params.toString();
+        },
+        [searchParams],
+    );
+
     if (!data.groupById) return null;
     return (
         <div className="flex flex-col gap-8">
@@ -43,7 +60,10 @@ export const GroupQuery = ({ preloadedQuery }: GroupQueryProps) => {
                     </div>
                 </aside>
                 <div className="flex flex-col flex-1">
-                    <Tabs defaultValue="home">
+                    <Tabs
+                        defaultValue={searchParams.get("tab") ?? "home"}
+                        onValueChange={tab => router.push(pathname + "?" + createTabBarString(tab))}
+                    >
                         <TabsList>
                             <TabsTrigger value="home">Home</TabsTrigger>
                             <TabsTrigger value="games">Games</TabsTrigger>

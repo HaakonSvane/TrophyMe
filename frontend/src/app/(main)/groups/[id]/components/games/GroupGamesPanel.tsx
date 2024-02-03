@@ -36,6 +36,16 @@ const GroupGamesPanelFragment = graphql`
                     symbol
                     name
                     description
+                    trophies {
+                        id
+                    }
+                    topPlayers(first: 1) {
+                        edges {
+                            node {
+                                username
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -106,9 +116,13 @@ export const GroupGamesPanel = ({ fragmentKey }: GroupGamesPanelProps) => {
                         <TableRow key={game.node.id}>
                             <TableCell className="text-center">{game.node.symbol}</TableCell>
                             <TableCell className="font-medium">{game.node.name}</TableCell>
-                            <TableCell>{game.node.description}</TableCell>
-                            <TableCell>{"[IMPL]"}</TableCell>
-                            <TableCell className="text-right">{"[IMPL]"}</TableCell>
+                            <TableCell className="text-muted">{game.node.description}</TableCell>
+                            <TableCell className="text-right">
+                                {game.node.trophies.length}
+                            </TableCell>
+                            <TableCell className="text-center">
+                                {game.node.topPlayers?.edges?.at(0)?.node.username ?? "None"}
+                            </TableCell>
                         </TableRow>
                     ))}
                 </TableBody>

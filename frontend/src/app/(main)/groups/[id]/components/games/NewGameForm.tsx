@@ -24,9 +24,19 @@ const NewGameFormMutation = graphql`
             @prependNode(connections: $connections, edgeTypeName: "GamesEdge") {
             game {
                 id
-                symbol
                 name
+                symbol
                 description
+                topPlayers {
+                    edges {
+                        node {
+                            username
+                        }
+                    }
+                }
+                trophies {
+                    id
+                }
             }
         }
     }
@@ -67,12 +77,13 @@ export const NewGameForm = ({ groupId, connectionId, onSuccess }: NewGameFormPro
                     name="name"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>Group name</FormLabel>
+                            <FormLabel>Trophy name</FormLabel>
                             <FormControl>
                                 <Input {...field} />
                             </FormControl>
                             <FormDescription>
-                                This is your group's name. It will be displayed to other users.
+                                This is the name of the game that you will be competing with your
+                                friends in.
                             </FormDescription>
                             <FormMessage />
                         </FormItem>
@@ -82,30 +93,17 @@ export const NewGameForm = ({ groupId, connectionId, onSuccess }: NewGameFormPro
                     control={form.control}
                     name="symbol"
                     render={({ field }) => (
-                        <FormItem>
+                        <FormItem className="flex flex-col">
                             <FormLabel>Trophy</FormLabel>
-                            <EmojiPicker
-                                onSelect={newEmoji => {
-                                    field.onBlur();
-                                    field.onChange(newEmoji);
-                                }}
-                                portal={false}
-                            />
-                            {/* <Select onValueChange={field.onChange} defaultValue={field.value}>
-                                <FormControl>
-                                    <SelectTrigger>
-                                        <SelectValue placeholder="Select model..." />
-                                    </SelectTrigger>
-                                </FormControl>
-                                <SelectContent>
-                                    <SelectItem value="DEMOCRACY" leadingIcon={Users}>
-                                        Democracy
-                                    </SelectItem>
-                                    <SelectItem value="DICTATORSHIP" leadingIcon={Crown}>
-                                        Dictatorship
-                                    </SelectItem>
-                                </SelectContent>
-                            </Select> */}
+                            <FormControl>
+                                <EmojiPicker
+                                    onSelect={newEmoji => {
+                                        field.onBlur();
+                                        field.onChange(newEmoji);
+                                    }}
+                                    portal={false}
+                                />
+                            </FormControl>
                             <FormDescription className={"flex flex-1 flex-row"}>
                                 Select the emoji that will be awarded winners of this game
                             </FormDescription>
@@ -123,7 +121,9 @@ export const NewGameForm = ({ groupId, connectionId, onSuccess }: NewGameFormPro
                                 <Textarea {...field} />
                             </FormControl>
                             <FormDescription>
-                                Enter something descriptive to make inviting your friends easier.
+                                Enter any specific rules or details about the game here. This will
+                                make it easier for both you and your friends to remember the
+                                specifics around this game.
                             </FormDescription>
                             <FormMessage />
                         </FormItem>
