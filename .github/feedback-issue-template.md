@@ -1,5 +1,5 @@
 ---
-title: [FB] {{ env.TITLE }}
+title: "[FB] {{ env.TITLE }}"
 labels: feedback
 ---
 ## User text
