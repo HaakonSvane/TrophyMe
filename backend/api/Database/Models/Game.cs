@@ -15,9 +15,11 @@ public class Game
     [MaxLength(4)]
     public required string Emoji { get; set; }
     
-    public int ParentGroupId { get; set; }
-    
     public DateTimeOffset CreatedDate { get; set; }
+    
+    public ICollection<Trophy> Trophies { get; set; } = new List<Trophy>();
+    
+    public int ParentGroupId { get; set; }
     
     [GraphQLIgnore]
     [ForeignKey("ParentGroupId")] public Group ParentGroup { get; set; }

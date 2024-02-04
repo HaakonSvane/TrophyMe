@@ -1,0 +1,13 @@
+{
+    "include-component-in-tag": true,
+    "packages": {
+        "./frontend/": {
+            "release-type": "node",
+            "package-name": "troji frontend"
+        },
+        "./backend/api": {
+            "release-type": "dotnet-yoshi",
+            "package-name": "troji backend"
+        }
+    }
+}

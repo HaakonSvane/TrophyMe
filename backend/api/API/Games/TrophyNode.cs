@@ -40,4 +40,10 @@ public static class TrophyNode
     {
         return await repository.GetTrophiesByIdsAsync(ids, cancellationToken);
     }
+    
+    [DataLoader]
+    internal static async Task<ILookup<int, Trophy>> GetTrophiesByGameIdsAsync(IReadOnlyList<int> ids, IGameRepository repository, CancellationToken cancellationToken)
+    {
+        return await repository.GetTrophiesByGameIdsAsync(ids, cancellationToken);
+    }
 }

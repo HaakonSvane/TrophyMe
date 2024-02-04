@@ -14,6 +14,37 @@ public static class GameNode
         var serializedId = idSerializer.Serialize(null,nameof(Group), game.ParentGroupId);
         return serializedId ?? "";
     }
+    
+    public static async Task<IReadOnlyCollection<Trophy>> GetTrophiesAsync(
+        [Parent] Game game,
+        ITrophiesByGameIdsDataLoader dataLoader,
+        CancellationToken cancellationToken)
+    {
+        return await dataLoader.LoadAsync(game.Id, cancellationToken);
+    }
+    
+    [UsePaging(DefaultPageSize = 3)]
+    public static async Task<IReadOnlyCollection<User>> GetTopPlayersAsync(
+        [Parent] Game game,
+        IUsersByGameIdsDataLoader dataLoader,
+        CancellationToken cancellationToken)
+    {
+        var users = await dataLoader.LoadAsync(game.Id, cancellationToken);
+        return users
+            .GroupBy(user => user.Id)
+            .Select(group => new { User = group.First(), Count = group.Count() })
+            .OrderByDescending(item => item.Count)
+            .Select(item => item.User)
+            .ToList();
+    }
+    
+    [DataLoader]
+    internal static Task<ILookup<int, User>> GetUsersByGameIdsAsync(
+        IReadOnlyList<int> groupIds,
+        IUserRepository repository)
+    {
+        return Task.FromResult(repository.GetUsersByGameIdsAsync(groupIds));
+    }
 
     [DataLoader]
     internal static async Task<ILookup<int, Database.Models.Game>> GetGamesByGroupIdsAsync(

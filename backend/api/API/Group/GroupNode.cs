@@ -20,6 +20,7 @@ public static class GroupNode
     }
     
     [UsePaging(IncludeTotalCount = true)]
+    [UseSorting] 
     public static async Task<IReadOnlyList<Game>> GetGamesAsync(
         [Parent] Database.Models.Group group,
         IGamesByGroupIdsDataLoader dataLoader,

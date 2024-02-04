@@ -72,4 +72,13 @@ public sealed class UserRepository : IUserRepository
             .ToListAsync(cancellationToken);
         return userGroups.ToLookup(userGroup => userGroup.GroupId, userGroup => userGroup.User);
     }
+    
+    public ILookup<int, User> GetUsersByGameIdsAsync(IReadOnlyList<int> ids)
+    {
+        return _context.Trophies
+            .Where(trophy => ids.Contains(trophy.GameId))
+            .Include(trophy => trophy.Receiver)
+            .ToLookup(trophy => trophy.GameId, trophy => trophy.Receiver);
+    }
+    
 }
