@@ -1,4 +1,5 @@
 {
+    "bootstrap-sha": "07e155a596ec61519cec7efb21dd25957ba958cd",
     "include-component-in-tag": true,
     "packages": {
         "frontend": {
