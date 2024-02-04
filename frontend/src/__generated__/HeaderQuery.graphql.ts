@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<95535aaa63134e8c653c1f2f9b2ba28a>>
+ * @generated SignedSource<<bb6c88bfc785ce7db58aa41ba79f920b>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -13,7 +13,7 @@ import { FragmentRefs } from "relay-runtime";
 export type HeaderQuery$variables = Record<PropertyKey, never>;
 export type HeaderQuery$data = {
   readonly me: {
-    readonly " $fragmentSpreads": FragmentRefs<"UserMenuFragment">;
+    readonly " $fragmentSpreads": FragmentRefs<"UserMenuContentFragment">;
   };
 };
 export type HeaderQuery = {
@@ -39,7 +39,7 @@ const node: ConcreteRequest = {
           {
             "args": null,
             "kind": "FragmentSpread",
-            "name": "UserMenuFragment"
+            "name": "UserMenuContentFragment"
           }
         ],
         "storageKey": null
@@ -107,15 +107,15 @@ const node: ConcreteRequest = {
     ]
   },
   "params": {
-    "cacheID": "6dd549e5145804c92858989106f5c2c5",
+    "cacheID": "7a16e42b72c4f20d495f484255492f70",
     "id": null,
     "metadata": {},
     "name": "HeaderQuery",
     "operationKind": "query",
-    "text": "query HeaderQuery {\n  me {\n    ...UserMenuFragment\n    id\n  }\n}\n\nfragment UserMenuFragment on User {\n  username\n  userProfile {\n    firstName\n    lastName\n  }\n}\n"
+    "text": "query HeaderQuery {\n  me {\n    ...UserMenuContentFragment\n    id\n  }\n}\n\nfragment UserMenuContentFragment on User {\n  username\n  userProfile {\n    firstName\n    lastName\n  }\n}\n"
   }
 };
 
-(node as any).hash = "f392ffb7db8df45468687f10afb5c6e4";
+(node as any).hash = "c3d705ace5cc09b43e11f26bddd0b835";
 
 export default node;

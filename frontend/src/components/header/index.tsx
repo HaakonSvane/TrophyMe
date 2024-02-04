@@ -1,16 +1,16 @@
-import { UserMenu } from "./UserMenu";
-import { Logo } from "./Logo";
-import { Container } from "./Container";
-import { Navigator } from "./Navigator";
 import { UserButton } from "@/components/buttons/UserButton";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from "../ui/dropdown-menu";
-import { PreloadedQuery, graphql, usePreloadedQuery } from "react-relay";
 import { HeaderQuery } from "@/generated/HeaderQuery.graphql";
+import { PreloadedQuery, graphql, usePreloadedQuery } from "react-relay";
+import { DropdownMenu, DropdownMenuTrigger } from "../ui/dropdown-menu";
+import { Container } from "./Container";
+import { Logo } from "./Logo";
+import { Navigator } from "./Navigator";
+import { UserMenuContent } from "./UserMenuContent";
 
 const HeaderQuery = graphql`
     query HeaderQuery {
         me {
-            ...UserMenuFragment
+            ...UserMenuContentFragment
         }
     }
 `;
@@ -31,9 +31,7 @@ export const Header = ({ queryRef }: HeaderProps) => {
                 <DropdownMenuTrigger asChild>
                     <UserButton />
                 </DropdownMenuTrigger>
-                <DropdownMenuContent>
-                    <UserMenu fragmentKey={data.me} />
-                </DropdownMenuContent>
+                <UserMenuContent fragmentKey={data.me} />
             </DropdownMenu>
         </Container>
     );
