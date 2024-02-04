@@ -1,12 +1,12 @@
 ---
-title: {{env.TITLE}}
+title: [FB] {{ env.TITLE }}
 labels: feedback
 ---
 ## User text
-{{env.BODY}}
+{{ env.BODY }}
 
 ## User Info
-__Name:__ {{env.NAME}}
-__Email:__ {{env.EMAIL}}
+__Name:__ {{ env.NAME }}
+__Email:__ {{ env.EMAIL }}
 
 
