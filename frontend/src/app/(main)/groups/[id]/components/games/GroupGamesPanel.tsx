@@ -84,10 +84,11 @@ export const GroupGamesPanel = ({ fragmentKey }: GroupGamesPanelProps) => {
                     </DrawerDialogTrigger>
                     <DrawerDialogContent>
                         <DrawerDialogHeader>
-                            <DrawerDialogTitle>Create a new group</DrawerDialogTitle>
+                            <DrawerDialogTitle>Create a new game</DrawerDialogTitle>
                             <DrawerDialogDescription>
-                                You can create new groups and invite all your friends to join and
-                                compete.
+                                Create a new game for all members of this group to compete in. The
+                                rules of the game is up for you to decide, but make sure to give the
+                                game a fitting trophy for future winners!
                             </DrawerDialogDescription>
                         </DrawerDialogHeader>
                         <DrawerDialogBody>
