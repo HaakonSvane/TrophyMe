@@ -8,6 +8,9 @@ export const POST = withApiAuthRequired(async function query(request, res) {
             Accept: "application/vnd.github.v3+json",
             Authorization: `Bearer ${process.env.GITHUB_FEEDBACK_PAT}`,
         },
-        body: request.body,
+        body: JSON.stringify({
+            event_type: "submit_feedback",
+            client_payload: request.body,
+        }),
     });
 });
