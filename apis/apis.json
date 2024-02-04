@@ -1,7 +1,9 @@
-[
-    {
-        "id": "backend",
-        "version": "0.0.0",
-        "shortName": "TBE"
-    }
-]
+{
+    "apis": [
+        {
+            "id": "backend",
+            "version": "0.0.0",
+            "shortName": "TBE"
+        }
+    ]
+}
