@@ -1,34 +1,42 @@
 import { feedbackSchema } from "@/schemas/feedbackSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Form, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { z } from "zod";
 import {
+    Form,
     FormControl,
     FormDescription,
     FormField,
     FormItem,
     FormLabel,
     FormMessage,
-} from "../ui/form";
-import { Input } from "../ui/input";
-import { Textarea } from "../ui/textarea";
-import { Button } from "../ui/button";
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/button";
+import { submitFeedback } from "@/lib/server-actions/submitFeedback";
 
 type NewFeedbackFormProps = {
     onSuccess?: () => void;
+    onError?: (error: Error) => void;
 };
 
-export const NewFeedbackForm = ({ onSuccess }: NewFeedbackFormProps) => {
+export const NewFeedbackForm = ({ onSuccess, onError }: NewFeedbackFormProps) => {
     const form = useForm<z.infer<typeof feedbackSchema>>({
         resolver: zodResolver(feedbackSchema),
     });
 
-    const onSubmit = async (data: z.infer<typeof feedbackSchema>) => {
-        const result = await fetch("/api/feedback", {
-            body: JSON.stringify(data),
-        });
-        onSuccess?.();
-    };
+    async function onSubmit(data: z.infer<typeof feedbackSchema>) {
+        try {
+            await submitFeedback(data);
+            onSuccess?.();
+        } catch (error) {
+            if (error instanceof Error) {
+                return onError?.(error);
+            }
+            onError?.(new Error("An unknown error occurred"));
+        }
+    }
 
     return (
         <Form {...form}>
@@ -49,6 +57,7 @@ export const NewFeedbackForm = ({ onSuccess }: NewFeedbackFormProps) => {
                         </FormItem>
                     )}
                 />
+
                 <FormField
                     control={form.control}
                     name="body"
@@ -98,7 +107,7 @@ export const NewFeedbackForm = ({ onSuccess }: NewFeedbackFormProps) => {
                         </FormItem>
                     )}
                 />
-                <Button type="submit">Create game</Button>
+                <Button type="submit">Submit</Button>
             </form>
         </Form>
     );
