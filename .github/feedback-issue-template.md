@@ -1,6 +1,6 @@
 ---
 title: {{ENV.TITLE}}
-label: feedback
+labels: feedback
 ---
 ## User text
 {{ENV.BODY}}
